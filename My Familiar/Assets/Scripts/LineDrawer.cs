@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CharacterCreation : MonoBehaviour {
+public class LineDrawer : MonoBehaviour {
 
-    Vector3[] VectorArrayHead = new Vector3[1000];
     private Vector3 FirstTouchPos;   // First touch position
     private Vector3 LastTouchPos;   // Last touch position
 
@@ -15,10 +13,8 @@ public class CharacterCreation : MonoBehaviour {
     public float LineWidth = 0.2f;
     public Material LineMat;
 
-    public Toggle ResetToggle;
 
-
-    void Start ()
+    void Start()
     {
         lineRend = gameObject.AddComponent<LineRenderer>();
         lineRend.material = LineMat;
@@ -27,9 +23,9 @@ public class CharacterCreation : MonoBehaviour {
         lineRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
     }
 
-	void Update ()
+    void Update()
     {
-        if(Input.touchCount >= 1) // user is touching the screen with a touch
+        if (Input.touchCount >= 1) // user is touching the screen with a touch
         {
             Touch touch = Input.GetTouch(0); // get the touch
             if (touch.phase == TouchPhase.Began) // check for the first touch
@@ -56,28 +52,20 @@ public class CharacterCreation : MonoBehaviour {
                     LinePointCount++;
                     lineRend.positionCount = LinePointCount; // Increase line size
                     lineRend.SetPosition(LinePointCount - 1, new Vector3(LastTouchPos.x, LastTouchPos.y, 0f)); // set pos of new line segment
-                    
+
                 }
-                
+
             }
             else if (touch.phase == TouchPhase.Ended) // check if the finger is removed from the screen
             {
+                // Last touch position
+                LastTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
                 // End of line
                 lineRend.positionCount = LinePointCount; // Set line size
-                lineRend.SetPosition(LinePointCount - 1, new Vector3(FirstTouchPos.x, FirstTouchPos.y, 0f));
+                lineRend.SetPosition(LinePointCount - 1, new Vector3(LastTouchPos.x, LastTouchPos.y, 0f));
                 LinePointCount = 1;
             }
         }
-    }
-
-    public void ClearLine(bool ClearIt)
-    {
-        if (ClearIt)
-        {
-            LinePointCount = 1;
-            lineRend.positionCount = LinePointCount;
-            ResetToggle.isOn = false;
-        }
-        
     }
 }
