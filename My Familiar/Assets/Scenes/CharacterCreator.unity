@@ -143,7 +143,16 @@ MonoBehaviour:
   MinDistanceBetweenPoints: 0.01
   LineWidth: 0.2
   LineMat: {fileID: 2100000, guid: 37a75a5614ebd4e4b8a2bd9eb75f742d, type: 2}
+  FaceMaterial: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
   ResetToggle: {fileID: 2000544356}
+  testVert:
+  - {x: 4, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 3, y: 1, z: 0}
+  - {x: 1, y: 2, z: 0}
+  - {x: 1, y: 3, z: 0}
+  - {x: 4, y: 3, z: 0}
 --- !u!4 &118838910
 Transform:
   m_ObjectHideFlags: 0
@@ -189,7 +198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -28.9, y: 47.179993}
+  m_AnchoredPosition: {x: -28.9, y: 47.180054}
   m_SizeDelta: {x: 116.56, y: 45.200012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512213596
@@ -707,7 +716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 62.16, y: 47.179993}
+  m_AnchoredPosition: {x: 62.16, y: 47.180054}
   m_SizeDelta: {x: 20, y: 19.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2000544356
