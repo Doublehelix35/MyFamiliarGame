@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CharacterCreation : MonoBehaviour {
 
-    Vector3[] VectorArrayHead = new Vector3[1000];
     private Vector3 FirstTouchPos;   // First touch position
     private Vector3 LastTouchPos;   // Last touch position
 
@@ -14,13 +13,20 @@ public class CharacterCreation : MonoBehaviour {
     public float MinDistanceBetweenPoints = 0.2f;
     public float LineWidth = 0.2f;
     public Material LineMat;
+    bool LineIsActive = false;
 
+    public string PartName;
+    public Material PartMaterial;
     GameObject ActiveMeshObject;
-    public Material FaceMaterial;
+    bool ActiveMeshObjectIsBuilt = false;
 
     public Toggle ResetToggle;
+    public Toggle CompleteToggle;
+
 
     public Vector3[] testVert;
+
+    public Save_Character SaveRef;
 
 
     void Start()
@@ -36,7 +42,7 @@ public class CharacterCreation : MonoBehaviour {
 
 	void Update ()
     {
-        if(Input.touchCount >= 1) // user is touching the screen with a touch
+        if(Input.touchCount >= 1 && !LineIsActive) // user is touching the screen with a touch
         {
             Touch touch = Input.GetTouch(0); // get the touch
             if (touch.phase == TouchPhase.Began) // check for the first touch
@@ -71,33 +77,26 @@ public class CharacterCreation : MonoBehaviour {
             {
                 // End of line
                 lineRend.positionCount = LinePointCount; // Set line size
-                lineRend.SetPosition(LinePointCount - 1, new Vector3(FirstTouchPos.x, FirstTouchPos.y, 0f));
-                LinePointCount = 1;
-
+                
                 // Convert into mesh
                 Vector3[] LineVerts = new Vector3[lineRend.positionCount];
                 lineRend.GetPositions(LineVerts);
-                ActiveMeshObject = CreateMesh("Face", LineVerts);
+                ActiveMeshObject = CreateMesh(PartName, LineVerts);
+                ActiveMeshObjectIsBuilt = true;
 
-                // Destroy and reset
-                Destroy(ActiveMeshObject, 3f);
-                ActiveMeshObject = new GameObject();
+                // Draw rest of line
+                lineRend.SetPosition(LinePointCount - 1, new Vector3(FirstTouchPos.x, FirstTouchPos.y, 0f));
+
+                // Dont draw another line until reset
+                if(LinePointCount > 4)
+                {
+                    LineIsActive = true;
+                }
             }
         }
     }
-
-    public void ClearLine(bool ClearIt)
-    {
-        if (ClearIt)
-        {
-            LinePointCount = 1;
-            lineRend.positionCount = LinePointCount;
-            ResetToggle.isOn = false;
-        }
-        
-    }
-
-    GameObject CreateMesh(string meshName, Vector3[] newVerts)
+    
+    GameObject CreateMesh(string meshPartName, Vector3[] newVerts)
     {
         // Convert from 3d to 2d
         Vector2[] newVerts2D = new Vector2[newVerts.Length];
@@ -117,21 +116,21 @@ public class CharacterCreation : MonoBehaviour {
             vertices[i] = new Vector3(newVerts2D[i].x, newVerts2D[i].y, 0f);
         }
 
+        // Create the mesh
         Mesh newMesh = new Mesh();
-
         newMesh.vertices = vertices;
         newMesh.triangles = indices;
         newMesh.RecalculateNormals();
         newMesh.RecalculateBounds();
 
-        GameObject MeshObject = new GameObject(meshName, typeof(MeshFilter), typeof(MeshRenderer));
-
+        // Setup gameobject with mesh
+        GameObject MeshObject = new GameObject(meshPartName, typeof(MeshFilter), typeof(MeshRenderer));
         MeshObject.GetComponent<MeshFilter>().mesh = newMesh;
-        MeshObject.GetComponent<MeshRenderer>().material = FaceMaterial;
+        MeshObject.GetComponent<MeshRenderer>().material = PartMaterial;
 
         return MeshObject;
 
-        // Fan techinque
+        // Fan technique
 
         //Vector3[] vertices = newVerts;
         //Vector2[] uv = new Vector2[newVerts.Length];
@@ -173,5 +172,34 @@ public class CharacterCreation : MonoBehaviour {
         //MeshObject.GetComponent<MeshRenderer>().material = FaceMaterial;
 
         //return MeshObject;
+    }
+
+    public void Clear(bool clearIt)
+    {
+        if (clearIt)
+        {
+            LinePointCount = 1;
+            lineRend.positionCount = LinePointCount;
+            ResetToggle.isOn = false;
+            LineIsActive = false;
+
+            // Destroy and reset
+            Destroy(ActiveMeshObject, 0.01f);
+            ActiveMeshObject = new GameObject();
+            ActiveMeshObjectIsBuilt = false;
+        }
+    }
+
+    public void Complete(bool isComplete)
+    {
+        if (isComplete && ActiveMeshObjectIsBuilt)
+        {
+            // Save and load new scene
+            SaveRef.Save("Bob", PartName, ActiveMeshObject);
+        }
+        else
+        {
+            CompleteToggle.isOn = false;
+        }
     }
 }
