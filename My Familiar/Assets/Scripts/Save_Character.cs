@@ -40,9 +40,30 @@ public class Save_Character : MonoBehaviour {
 
         // Save vertices
 
+        // Init arrays
+        Vector3[] VertsTemp = new Vector3[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
+        data.Vertices_x = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
+        data.Vertices_y = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
+        data.Vertices_z = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
+
+        VertsTemp = GameObjectToSave.GetComponent<MeshFilter>().mesh.vertices;
+
+        for (int i = 0; i < VertsTemp.Length; i++)
+        {
+            data.Vertices_x[i] = VertsTemp[i].x;
+            data.Vertices_y[i] = VertsTemp[i].y;
+            data.Vertices_z[i] = VertsTemp[i].z;
+        }
+
         // Save Triangles
+        data.Triangles = GameObjectToSave.GetComponent<MeshFilter>().mesh.triangles;
 
         // Save Material
+        data.MaterialName = "Yellow";
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
     }
 }
 
@@ -54,6 +75,6 @@ class CharacterData
 
     public string MaterialName;
 
-    public Vector3[] Vertices;
+    public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;
 }

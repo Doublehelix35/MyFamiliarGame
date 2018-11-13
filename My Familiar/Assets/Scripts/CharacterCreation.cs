@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterCreation : MonoBehaviour {
 
@@ -15,23 +16,25 @@ public class CharacterCreation : MonoBehaviour {
     public Material LineMat;
     bool LineIsActive = false;
 
+    public string CharacterName;
     public string PartName;
     public Material PartMaterial;
     GameObject ActiveMeshObject;
     bool ActiveMeshObjectIsBuilt = false;
 
     public Toggle ResetToggle;
-    public Toggle CompleteToggle;
-
 
     public Vector3[] testVert;
 
     public Save_Character SaveRef;
 
+    public string NextSceneName;
+
 
     void Start()
     {
         //ActiveMeshObject = CreateMesh("Face", testVert);
+        //ActiveMeshObjectIsBuilt = true;
 
         lineRend = gameObject.AddComponent<LineRenderer>();
         lineRend.material = LineMat;
@@ -194,12 +197,12 @@ public class CharacterCreation : MonoBehaviour {
     {
         if (isComplete && ActiveMeshObjectIsBuilt)
         {
-            // Save and load new scene
-            SaveRef.Save("Bob", PartName, ActiveMeshObject);
+            // Save part
+            SaveRef.Save(CharacterName, PartName, ActiveMeshObject);
+
+            // Load next scene
+            SceneManager.LoadScene(NextSceneName);
         }
-        else
-        {
-            CompleteToggle.isOn = false;
-        }
+        Debug.Log(isComplete + "" + ActiveMeshObjectIsBuilt);
     }
 }
