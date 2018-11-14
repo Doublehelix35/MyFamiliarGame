@@ -11,7 +11,8 @@ public class Load_Character : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        Load("Bob", "Face");
+        
+        Load(Load(LoadCurrentSlot()));
 	}
 	
 	// Update is called once per frame
@@ -19,22 +20,71 @@ public class Load_Character : MonoBehaviour {
 		
 	}
 
-    // Load save slot
-    internal void Load(int SaveFileSlot)
+    internal int LoadCurrentSlot()
     {
-        // Load data from file slot
+        // Create a binary formatter and open the save file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat", FileMode.Open);
+
+        // Create an object to store information from the file in and then close the file
+        CharacterData data = (CharacterData)bf.Deserialize(file);
+        file.Close();
+
+        return data.SaveSlotInUse;
+    }
+
+    // Load save slot
+    internal string Load(int SaveFileSlot)
+    {
+        // Create a binary formatter and open the save file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/" + "SaveSlot" + SaveFileSlot + ".dat", FileMode.Open);
+
+        // Create an object to store information from the file in and then close the file
+        CharacterData data = (CharacterData)bf.Deserialize(file);
+        file.Close();
+
+        return data.CharacterName;
     }
 
     // Load whole character
-    internal void Load(string CharacterName)
+    internal GameObject Load(string CharacterName)
     {
-        // Load character
+        // Load character from parts        
+        GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
+        
+        // Load Face
+        GameObject Face = Load(CharacterName, "Face");
+        Face.transform.parent = CharacterToReturn.transform;
+
+        // Load Body
+        GameObject Body = Load(CharacterName, "Body");
+        Body.transform.parent = CharacterToReturn.transform;
+
+        // Load Arm1
+        GameObject Arm1 = Load(CharacterName, "Arm1");
+        Arm1.transform.parent = CharacterToReturn.transform;
+
+        // Load Arm2
+        GameObject Arm2 = Load(CharacterName, "Arm2");
+        Arm2.transform.parent = CharacterToReturn.transform;
+
+        // Load Leg1
+        GameObject Leg1 = Load(CharacterName, "Leg1");
+        Leg1.transform.parent = CharacterToReturn.transform;
+
+        // Load Leg2
+        GameObject Leg2 = Load(CharacterName, "Leg2");
+        Leg2.transform.parent = CharacterToReturn.transform;
+
+        return CharacterToReturn;
+        
     }
 
     // Load only part selected
-    internal void Load(string CharacterName, string CharacterPart)
+    internal GameObject Load(string CharacterName, string CharacterPart)
     {
-        // Load a character part
+        GameObject GameObjectToReturn;
         
         // Check file exists
         if(File.Exists(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat"))
@@ -70,17 +120,21 @@ public class Load_Character : MonoBehaviour {
             newMesh.RecalculateBounds();
 
             // Set mesh to game object
-            GameObject MeshObject = new GameObject(CharacterPart, typeof(MeshFilter), typeof(MeshRenderer));
-            MeshObject.GetComponent<MeshFilter>().mesh = newMesh;
+            GameObjectToReturn = new GameObject(CharacterPart, typeof(MeshFilter), typeof(MeshRenderer));
+            GameObjectToReturn.GetComponent<MeshFilter>().mesh = newMesh;
 
             // Load material
-            MeshObject.GetComponent<MeshRenderer>().material = FaceMat;
+            GameObjectToReturn.GetComponent<MeshRenderer>().material = FaceMat;
 
         }
         else // File not found
         {
-            Debug.Log("CHARACTER PART FILE NOT FOUND!");    
+            Debug.Log("CHARACTER PART FILE NOT FOUND!");
+
+            // Set GO to empty GO
+            GameObjectToReturn = new GameObject();
         }
 
+        return GameObjectToReturn;
     }
 }

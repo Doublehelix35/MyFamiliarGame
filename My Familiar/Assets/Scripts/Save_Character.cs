@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.UI;
 
 public class Save_Character : MonoBehaviour {
+
+    public Text[] SaveSlotInputs;
 
 	// Use this for initialization
 	void Start () {
@@ -16,13 +19,47 @@ public class Save_Character : MonoBehaviour {
 		
 	}
 
-    // Save to a save slot
-    internal void Save(int SaveFileSlot)
+    // Save current slot
+    public void SaveCurrentSlot(int SlotNumber)
     {
-        // Save data to slot
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat");
+
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+
+        // Save slot in use
+        data.SaveSlotInUse = SlotNumber;      
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
     }
 
-    // Save a whole character
+    // Save to a save slot
+    public void Save(int SaveFileSlot)
+    {
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + "SaveSlot" + SaveFileSlot + ".dat");
+
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+
+        // Save Name
+        if(SaveSlotInputs.Length >= SaveFileSlot)
+        {
+            data.CharacterName = SaveSlotInputs[SaveFileSlot - 1].text;
+        }
+        
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    // Save character stats
     internal void Save(string CharacterName, GameObject GameObjectToSave)
     {
 
@@ -72,6 +109,7 @@ class CharacterData
 {
     public string CharacterName;
     public string CharacterPart;
+    public int SaveSlotInUse;
 
     public string MaterialName;
 
