@@ -16,7 +16,7 @@ public class CharacterCreation : MonoBehaviour {
     public Material LineMat;
     bool LineIsActive = false;
 
-    public string CharacterName;
+    string CharacterName;
     public string PartName;
     public Material PartMaterial;
     GameObject ActiveMeshObject;
@@ -27,13 +27,14 @@ public class CharacterCreation : MonoBehaviour {
     public Vector3[] testVert;
 
     public Save_Character SaveRef;
+    public Load_Character LoadRef;
 
     public string NextSceneName;
 
 
     void Start()
     {
-        //ActiveMeshObject = CreateMesh("Face", testVert);
+        //ActiveMeshObject = CreateMesh(PartName, testVert);
         //ActiveMeshObjectIsBuilt = true;
 
         lineRend = gameObject.AddComponent<LineRenderer>();
@@ -197,6 +198,9 @@ public class CharacterCreation : MonoBehaviour {
     {
         if (isComplete && ActiveMeshObjectIsBuilt)
         {
+            // Load name from current save slot
+            CharacterName = LoadRef.Load(LoadRef.LoadCurrentSlot()); 
+
             // Save part
             SaveRef.Save(CharacterName, PartName, ActiveMeshObject);
 

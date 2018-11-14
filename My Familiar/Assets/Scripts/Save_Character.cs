@@ -71,6 +71,7 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat");
+        Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();

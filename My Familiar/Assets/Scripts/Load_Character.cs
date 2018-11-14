@@ -12,7 +12,6 @@ public class Load_Character : MonoBehaviour {
 	void Start ()
     {
         
-        Load(Load(LoadCurrentSlot()));
 	}
 	
 	// Update is called once per frame
@@ -52,6 +51,10 @@ public class Load_Character : MonoBehaviour {
     {
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
+        if(CharacterToReturn.name == "")
+        {
+            CharacterToReturn.name = "NO NAME FOUND";
+        }
         
         // Load Face
         GameObject Face = Load(CharacterName, "Face");
@@ -92,6 +95,7 @@ public class Load_Character : MonoBehaviour {
             // Create a binary formatter and open the save file
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat", FileMode.Open);
+            Debug.Log("(Load char)" + "/" + CharacterName + CharacterPart + ".dat");
 
             // Create an object to store information from the file in and then close the file
             CharacterData data = (CharacterData)bf.Deserialize(file);

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 118838910}
   - component: {fileID: 118838909}
   - component: {fileID: 118838911}
+  - component: {fileID: 118838912}
   m_Layer: 0
   m_Name: CharacterCreator
   m_TagString: Untagged
@@ -144,7 +145,6 @@ MonoBehaviour:
   MinDistanceBetweenPoints: 0.01
   LineWidth: 0.2
   LineMat: {fileID: 2100000, guid: 37a75a5614ebd4e4b8a2bd9eb75f742d, type: 2}
-  CharacterName: Bob
   PartName: Leg2
   PartMaterial: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
   ResetToggle: {fileID: 2000544356}
@@ -158,6 +158,7 @@ MonoBehaviour:
   - {x: 4, y: 3, z: 0}
   - {x: 5, y: 4, z: 0}
   SaveRef: {fileID: 118838911}
+  LoadRef: {fileID: 118838912}
   NextSceneName: Sandbox
 --- !u!4 &118838910
 Transform:
@@ -183,6 +184,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5820acf7f9e806b4b853865878d06730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveSlotInputs: []
+--- !u!114 &118838912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 118838908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbce003165ecd2247b04738eb037ec4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FaceMat: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
 --- !u!1 &512213594
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038147, y: 189}
+  m_AnchoredPosition: {x: 0.0000038147, y: 196}
   m_SizeDelta: {x: 473.4, y: 41.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632257109
