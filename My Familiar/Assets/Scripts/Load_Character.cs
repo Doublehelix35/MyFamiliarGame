@@ -8,6 +8,8 @@ public class Load_Character : MonoBehaviour {
 
     public Material FaceMat;
 
+    float PartSeperationOffset = 1.0f;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -58,26 +60,42 @@ public class Load_Character : MonoBehaviour {
         
         // Load Face
         GameObject Face = Load(CharacterName, "Face");
+        // Move face up
+        Face.transform.position = new Vector3(Face.transform.position.x, Face.transform.position.y + (2 * PartSeperationOffset), Face.transform.position.z);
+        // Set parent
         Face.transform.parent = CharacterToReturn.transform;
 
         // Load Body
         GameObject Body = Load(CharacterName, "Body");
+        // Set parent
         Body.transform.parent = CharacterToReturn.transform;
 
         // Load Arm1
         GameObject Arm1 = Load(CharacterName, "Arm1");
+        // Move arm left and up
+        Arm1.transform.position = new Vector3(Arm1.transform.position.x - (2 * PartSeperationOffset), Arm1.transform.position.y + (2 * PartSeperationOffset), Arm1.transform.position.z);
+        // Set parent
         Arm1.transform.parent = CharacterToReturn.transform;
 
         // Load Arm2
         GameObject Arm2 = Load(CharacterName, "Arm2");
+        // Move arm right and up
+        Arm2.transform.position = new Vector3(Arm2.transform.position.x + (2 * PartSeperationOffset), Arm2.transform.position.y + (2 * PartSeperationOffset), Arm2.transform.position.z);
+        // Set parent
         Arm2.transform.parent = CharacterToReturn.transform;
 
         // Load Leg1
         GameObject Leg1 = Load(CharacterName, "Leg1");
+        // Move leg left and down
+        Leg1.transform.position = new Vector3(Leg1.transform.position.x - PartSeperationOffset, Leg1.transform.position.y - (2 * PartSeperationOffset), Leg1.transform.position.z);
+        // Set parent
         Leg1.transform.parent = CharacterToReturn.transform;
 
         // Load Leg2
         GameObject Leg2 = Load(CharacterName, "Leg2");
+        // Move leg right and down
+        Leg2.transform.position = new Vector3(Leg2.transform.position.x + PartSeperationOffset, Leg2.transform.position.y - (2 * PartSeperationOffset), Leg2.transform.position.z);
+        // Set parent
         Leg2.transform.parent = CharacterToReturn.transform;
 
         return CharacterToReturn;
