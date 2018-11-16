@@ -8,7 +8,8 @@ public class Load_Character : MonoBehaviour {
 
     public Material FaceMat;
 
-    float PartSeperationOffset = 1.0f;
+    float SeperationMultipler = 0.03f;
+    float ScaleMultiplier = 0.2f;
 
 	// Use this for initialization
 	void Start ()
@@ -56,22 +57,36 @@ public class Load_Character : MonoBehaviour {
         if(CharacterToReturn.name == "")
         {
             CharacterToReturn.name = "NO NAME FOUND";
-        }
-        
-        // Load Face
-        GameObject Face = Load(CharacterName, "Face");
-        // Move face up
-        Face.transform.position = new Vector3(Face.transform.position.x, Face.transform.position.y + (2 * PartSeperationOffset), Face.transform.position.z);
-        // Set parent
-        Face.transform.parent = CharacterToReturn.transform;
+        }        
 
         // Load Body
         GameObject Body = Load(CharacterName, "Body");
+
+        // Define Part seperation offset
+        Vector3 baseSize = Body.GetComponent<Renderer>().bounds.size;
+        float PartSeperationOffset = (((baseSize.x * baseSize.y) / 2) * SeperationMultipler); // Get average of x and y axis then * by scale multipler
+
+        // Scale Body size down
+        Body.transform.localScale *= (2 * ScaleMultiplier);
+        // Move body left
+        //Body.transform.position = new Vector3(Body.transform.position.x - PartSeperationOffset, Body.transform.position.y, Body.transform.position.z);
         // Set parent
         Body.transform.parent = CharacterToReturn.transform;
 
+        // Load Face
+        GameObject Face = Load(CharacterName, "Face");
+        // Scale size down
+        Face.transform.localScale *= ScaleMultiplier;
+        // Move face up
+        Face.transform.position = new Vector3(Face.transform.position.x, Face.transform.position.y + (4 * PartSeperationOffset), Face.transform.position.z);
+        // Set parent
+        Face.transform.parent = CharacterToReturn.transform;
+        
+
         // Load Arm1
         GameObject Arm1 = Load(CharacterName, "Arm1");
+        // Scale size down
+        Arm1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm left and up
         Arm1.transform.position = new Vector3(Arm1.transform.position.x - (2 * PartSeperationOffset), Arm1.transform.position.y + (2 * PartSeperationOffset), Arm1.transform.position.z);
         // Set parent
@@ -79,6 +94,8 @@ public class Load_Character : MonoBehaviour {
 
         // Load Arm2
         GameObject Arm2 = Load(CharacterName, "Arm2");
+        // Scale size down
+        Arm2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm right and up
         Arm2.transform.position = new Vector3(Arm2.transform.position.x + (2 * PartSeperationOffset), Arm2.transform.position.y + (2 * PartSeperationOffset), Arm2.transform.position.z);
         // Set parent
@@ -86,6 +103,8 @@ public class Load_Character : MonoBehaviour {
 
         // Load Leg1
         GameObject Leg1 = Load(CharacterName, "Leg1");
+        // Scale size down
+        Leg1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg left and down
         Leg1.transform.position = new Vector3(Leg1.transform.position.x - PartSeperationOffset, Leg1.transform.position.y - (2 * PartSeperationOffset), Leg1.transform.position.z);
         // Set parent
@@ -93,6 +112,8 @@ public class Load_Character : MonoBehaviour {
 
         // Load Leg2
         GameObject Leg2 = Load(CharacterName, "Leg2");
+        // Scale size down
+        Leg2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg right and down
         Leg2.transform.position = new Vector3(Leg2.transform.position.x + PartSeperationOffset, Leg2.transform.position.y - (2 * PartSeperationOffset), Leg2.transform.position.z);
         // Set parent
@@ -158,5 +179,41 @@ public class Load_Character : MonoBehaviour {
         }
 
         return GameObjectToReturn;
+    }
+
+    void SetUpCharacterComponents(GameObject body, GameObject face, GameObject arm1, GameObject arm2, GameObject leg1, GameObject leg2)
+    {
+        // Set up rigidbodies
+        body.AddComponent<Rigidbody>();
+        face.AddComponent<Rigidbody>();
+        arm1.AddComponent<Rigidbody>();
+        arm2.AddComponent<Rigidbody>();
+        leg1.AddComponent<Rigidbody>();
+        leg2.AddComponent<Rigidbody>();
+
+        // Character joints (All starting from body and going out to other parts)
+        body.AddComponent<CharacterJoint>();
+        body.AddComponent<CharacterJoint>();
+        body.AddComponent<CharacterJoint>();
+        body.AddComponent<CharacterJoint>();
+        body.AddComponent<CharacterJoint>();
+
+        CharacterJoint[] CharacterJoints = GetComponents<CharacterJoint>();
+
+        // Body to face
+        CharacterJoints[0].connectedBody = face.GetComponent<Rigidbody>();
+
+        // Body to arm1
+        CharacterJoints[1].connectedBody = arm1.GetComponent<Rigidbody>();
+
+        // Body to arm2
+        CharacterJoints[2].connectedBody = arm2.GetComponent<Rigidbody>();
+
+        // Body to leg1
+        CharacterJoints[3].connectedBody = leg1.GetComponent<Rigidbody>();
+
+        // Body to leg2
+        CharacterJoints[4].connectedBody = leg2.GetComponent<Rigidbody>();
+
     }
 }

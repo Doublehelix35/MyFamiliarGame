@@ -662,8 +662,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SaveSlotInputs:
   - {fileID: 1268097543}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1372166162}
+  - {fileID: 790816791}
 --- !u!1 &642923140
 GameObject:
   m_ObjectHideFlags: 0
