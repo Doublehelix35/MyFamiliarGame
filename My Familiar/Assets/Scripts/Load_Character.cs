@@ -54,10 +54,7 @@ public class Load_Character : MonoBehaviour {
     {
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
-        if(CharacterToReturn.name == "")
-        {
-            CharacterToReturn.name = "NO NAME FOUND";
-        }        
+        if(CharacterToReturn.name == "") { CharacterToReturn.name = "NO NAME FOUND"; }
 
         // Load Body
         GameObject Body = Load(CharacterName, "Body");
@@ -73,10 +70,17 @@ public class Load_Character : MonoBehaviour {
         // Set parent
         Body.transform.parent = CharacterToReturn.transform;
 
+        // Add capsule collider to body
+        Body.AddComponent<CapsuleCollider>();
+        Body.GetComponent<CapsuleCollider>().radius = baseSize.x / 4;
+        Body.GetComponent<CapsuleCollider>().height = baseSize.y * 2;
+
         // Load Face
         GameObject Face = Load(CharacterName, "Face");
         // Scale size down
         Face.transform.localScale *= ScaleMultiplier;
+        // Add cube collider
+        Face.AddComponent<BoxCollider>();
         // Move face up
         Face.transform.position = new Vector3(Face.transform.position.x, Face.transform.position.y + (4 * PartSeperationOffset), Face.transform.position.z);
         // Set parent
@@ -118,6 +122,9 @@ public class Load_Character : MonoBehaviour {
         Leg2.transform.position = new Vector3(Leg2.transform.position.x + PartSeperationOffset, Leg2.transform.position.y - (2 * PartSeperationOffset), Leg2.transform.position.z);
         // Set parent
         Leg2.transform.parent = CharacterToReturn.transform;
+
+        // Set up rididbodies and character joints
+        SetUpCharacterAsRagdoll(Body, Face, Arm1, Arm2, Leg1, Leg2);
 
         return CharacterToReturn;
         
@@ -181,7 +188,7 @@ public class Load_Character : MonoBehaviour {
         return GameObjectToReturn;
     }
 
-    void SetUpCharacterComponents(GameObject body, GameObject face, GameObject arm1, GameObject arm2, GameObject leg1, GameObject leg2)
+    void SetUpCharacterAsRagdoll(GameObject body, GameObject face, GameObject arm1, GameObject arm2, GameObject leg1, GameObject leg2)
     {
         // Set up rigidbodies
         body.AddComponent<Rigidbody>();
@@ -191,6 +198,14 @@ public class Load_Character : MonoBehaviour {
         leg1.AddComponent<Rigidbody>();
         leg2.AddComponent<Rigidbody>();
 
+        // Set rigidbody contraints
+        body.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+
+        // Set parts to character layer
+        body.layer = 9; face.layer = 9;
+        arm1.layer = 9; arm2.layer = 9;
+        leg1.layer = 9; leg2.layer = 9;
+
         // Character joints (All starting from body and going out to other parts)
         body.AddComponent<CharacterJoint>();
         body.AddComponent<CharacterJoint>();
@@ -198,22 +213,44 @@ public class Load_Character : MonoBehaviour {
         body.AddComponent<CharacterJoint>();
         body.AddComponent<CharacterJoint>();
 
-        CharacterJoint[] CharacterJoints = GetComponents<CharacterJoint>();
+        CharacterJoint[] CharacterJoints = body.GetComponents<CharacterJoint>();
+
+        // Anchor offsets based on body size
+        float bodySizeX = body.GetComponent<Renderer>().bounds.size.x;
+        float bodySizeY = body.GetComponent<Renderer>().bounds.size.x;
 
         // Body to face
-        CharacterJoints[0].connectedBody = face.GetComponent<Rigidbody>();
+        CharacterJoints[0].connectedBody = face.GetComponent<Rigidbody>(); // Connect body to face
+        CharacterJoints[0].axis = new Vector3(1, 0, 0); // Set axis
+        // Set joint anchor y
+        CharacterJoints[0].anchor = new Vector3(0f, bodySizeY / 2, 0f);
 
-        // Body to arm1
-        CharacterJoints[1].connectedBody = arm1.GetComponent<Rigidbody>();
+        // Body to arm1 (left)
+        CharacterJoints[1].connectedBody = arm1.GetComponent<Rigidbody>(); // Connect body to arm1
+        CharacterJoints[1].axis = new Vector3(0, 1, 0); // Set axis
+        // Set joint anchor x and y
+        CharacterJoints[1].anchor = new Vector3(-bodySizeX / 3, bodySizeY / 3, 0f);
 
-        // Body to arm2
-        CharacterJoints[2].connectedBody = arm2.GetComponent<Rigidbody>();
+        // Body to arm2 (right)
+        CharacterJoints[2].connectedBody = arm2.GetComponent<Rigidbody>(); // Connect body to arm2
+        CharacterJoints[2].axis = new Vector3(0, -1, 0); // Set axis
+        // Set joint anchor x and y
+        CharacterJoints[2].anchor = new Vector3(bodySizeX / 3, bodySizeY / 3, 0f);
 
-        // Body to leg1
-        CharacterJoints[3].connectedBody = leg1.GetComponent<Rigidbody>();
+        // Body to leg1 (left)
+        CharacterJoints[3].connectedBody = leg1.GetComponent<Rigidbody>(); // Connect body to leg1
+        CharacterJoints[3].axis = new Vector3(1, 0, 0); // Set axis
+        // Set joint anchor x and y
+        CharacterJoints[3].anchor = new Vector3(-bodySizeX * 0.4f, -bodySizeY * 0.4f, 0f);
 
-        // Body to leg2
-        CharacterJoints[4].connectedBody = leg2.GetComponent<Rigidbody>();
+        // Body to leg2 (right)
+        CharacterJoints[4].connectedBody = leg2.GetComponent<Rigidbody>(); // Connect body to leg2
+        CharacterJoints[4].axis = new Vector3(1, 0, 0); // Set axis
+        // Set joint anchor x and y
+        CharacterJoints[4].anchor = new Vector3(bodySizeX * 0.4f, -bodySizeY * 0.4f, 0f);
 
+        // Fixed joint from face to body
+        face.AddComponent<FixedJoint>();
+        face.GetComponent<FixedJoint>().connectedBody = body.GetComponent<Rigidbody>();
     }
 }

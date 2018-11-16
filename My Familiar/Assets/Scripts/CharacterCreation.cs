@@ -46,7 +46,7 @@ public class CharacterCreation : MonoBehaviour {
 
 	void Update ()
     {
-        if(Input.touchCount >= 1 && !LineIsActive) // user is touching the screen with a touch
+        if(Input.touchCount >= 1 && !LineIsActive) // user is touching the screen
         {
             Touch touch = Input.GetTouch(0); // get the touch
             if (touch.phase == TouchPhase.Began) // check for the first touch
