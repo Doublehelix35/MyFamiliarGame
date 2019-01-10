@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LineDrawer : MonoBehaviour {
 
+    /// <summary>
+    /// Not currently implemented but considered potentially useful.
+    /// </summary>
+
     private Vector3 FirstTouchPos;   // First touch position
     private Vector3 LastTouchPos;   // Last touch position
 

@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class Item : MonoBehaviour {
+
+    // Parent class for all items
+
+    // Potential stats    
+    protected int Health = 1;
+    protected int Uses = 1;
+    protected int ExpPointsGiven = 0;
+
+    // Consider putting this in a seperate class that handles all element data
+    public enum ElementType { NonElemental, Fire, Earth, Water, Air, Nature }
+
+    // Item type
+    protected ElementType itemType;
+
+    // Constructor
+    protected Item() { }
+
+    public abstract void Interact();
+
+    protected virtual void Destroy()
+    {
+        // Default way to destroy item
+        // Override if a unique destruction is needed
+    }
+
+    public ElementType GetItemType()
+    {
+        return itemType;
+    }
+
+}
