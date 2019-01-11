@@ -8,18 +8,26 @@ public class GameManager : MonoBehaviour {
     public Load_Character LoadRef;
     public Text CharacterNameText;
     GameObject CharacterRef;
+    public GameObject CameraRef;
 
     bool MoveRagdoll = false;
     float DistFromCamera;
     Transform Ragdoll;
     Vector3 DragOffset;
 
-	void Start ()
+    void Awake()
     {
         // Load character based on current save slot in use        
         CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
         CharacterNameText.text = CharacterRef.name;
         CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
+
+        CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef);        
+    }
+
+    void Start ()
+    {
+        
 
     }
 	

@@ -1719,6 +1719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadRef: {fileID: 2106336106}
   CharacterNameText: {fileID: 1651399370}
+  CameraRef: {fileID: 2146963005}
 --- !u!1 &2146963005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,6 +1731,7 @@ GameObject:
   - component: {fileID: 2146963008}
   - component: {fileID: 2146963007}
   - component: {fileID: 2146963006}
+  - component: {fileID: 2146963010}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1800,3 +1802,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2146963010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2146963005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a6404501d3e2a4a9aac9412e402892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1

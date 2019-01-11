@@ -20,7 +20,9 @@ public abstract class Item : MonoBehaviour {
     // Constructor
     protected Item() { }
 
-    public abstract void Interact();
+
+    // Define how the item interacts with the familiar
+    public abstract void Interact(GameObject player);
 
     protected virtual void Destroy()
     {
