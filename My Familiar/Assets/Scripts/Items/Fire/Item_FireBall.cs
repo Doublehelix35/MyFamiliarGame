@@ -19,7 +19,7 @@ public class Item_FireBall :  Item {
         Health = HealthMax;
         Uses = UsesMax;
         ExpPointsGiven = ExpPointsGivenMax;
-        itemType = ElementType.Fire;
+        itemType = Elements.ElementType.Fire;
 
         Destroy(gameObject, lifeSpan);
     }

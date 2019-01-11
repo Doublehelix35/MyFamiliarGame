@@ -11,11 +11,8 @@ public abstract class Item : MonoBehaviour {
     protected int Uses = 1;
     protected int ExpPointsGiven = 0;
 
-    // Consider putting this in a seperate class that handles all element data
-    public enum ElementType { NonElemental, Fire, Earth, Water, Air, Nature }
-
     // Item type
-    protected ElementType itemType;
+    protected Elements.ElementType itemType;
 
     // Constructor
     protected Item() { }
@@ -30,7 +27,7 @@ public abstract class Item : MonoBehaviour {
         // Override if a unique destruction is needed
     }
 
-    public ElementType GetItemType()
+    public Elements.ElementType GetItemType()
     {
         return itemType;
     }
