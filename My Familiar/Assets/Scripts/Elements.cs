@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Elements : MonoBehaviour {
 
-    // For all data and methods relating to elements
-
+    /// For all data and methods relating to elements
 
     // All possible elemental types
     public enum ElementType { NonElemental, Fire, Earth, Water, Air, Nature }
@@ -22,14 +21,4 @@ public class Elements : MonoBehaviour {
         {ElementalMoves.EarthQuake, ElementType.Earth },
         {ElementalMoves.NaturesWrath, ElementType.Nature }
     };
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -6,37 +6,39 @@ using UnityEngine;
 public class Item_FireBall :  Item {
 
     // Stats
-    public float Speed = 1f;
-    public float lifeSpan = 6f;
+    public float lifeSpan = 10f;
     public int Damage = 1;
-    public int HealthMax = 1;
-    public int UsesMax = 1;
     public int ExpPointsGivenMax = 5;
+    public int SpecPointsGivenMax = 1;
+    public int HappinessChangeValueMax = -1;
 
 	void Start ()
     {
         // Init stats
-        Health = HealthMax;
-        Uses = UsesMax;
         ExpPointsGiven = ExpPointsGivenMax;
+        SpecPointsGiven = SpecPointsGivenMax;
+        HappinessChangeValue = HappinessChangeValueMax;
         itemType = Elements.ElementType.Fire;
 
+        // Destroy self after lifespan runs out
         Destroy(gameObject, lifeSpan);
     }
 	
-	void Update ()
-    {
-        if(Health <= 0 || Uses <= 0)
-        {
-            Destroy(gameObject);
-        }		
-	}
 
     // Player calls this when fireball collides with it
     public override void Interact(GameObject player)
     {
         // Deal damage
         player.GetComponent<Character>().ChangeHealth(-Damage);
+
+        // Give Happiness value
+        player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
+
+        // Give spec points
+        player.GetComponent<Character>().GainElementSpecPoints(Elements.ElementType.Fire, SpecPointsGiven);
+
+        // Give exp
+        player.GetComponent<Character>().GainExp(ExpPointsGiven);
 
         // Destroy self
         Destroy(gameObject);

@@ -10,6 +10,8 @@ public abstract class Item : MonoBehaviour {
     protected int Health = 1;
     protected int Uses = 1;
     protected int ExpPointsGiven = 0;
+    protected int SpecPointsGiven = 0;
+    protected int HappinessChangeValue = 0;
 
     // Item type
     protected Elements.ElementType itemType;

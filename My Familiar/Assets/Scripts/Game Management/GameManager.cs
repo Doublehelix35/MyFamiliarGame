@@ -5,10 +5,24 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public Load_Character LoadRef;
-    public Text CharacterNameText;
+    // Object refs
+    public Load_Character LoadRef;    
     GameObject CharacterRef;
     public GameObject CameraRef;
+
+    // Texts
+    public Text CharacterNameText;
+    public Text ExpText;
+    public Text HappinessText;
+    public Text HealthText;
+
+    // Spec point Texts
+    public Text AirText;
+    public Text EarthText;
+    public Text FireText;
+    public Text NatureText;
+    public Text WaterText;
+
 
     bool MoveRagdoll = false;
     float DistFromCamera;
@@ -19,9 +33,9 @@ public class GameManager : MonoBehaviour {
     {
         // Load character based on current save slot in use        
         CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
-        CharacterNameText.text = CharacterRef.name;
+        UpdateText_CharacterName(CharacterRef.name); // Name originally set during loading in above line
         CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
-        CharacterRef.AddComponent<Character>(); // Give it character script
+        
 
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef);        
     }
@@ -73,5 +87,40 @@ public class GameManager : MonoBehaviour {
             }
         }
 
+    }
+
+    // Text update methods
+    /// <summary>
+    /// Could have one updateText method that takes 2 params 1) String value 2) enum TextToChange
+    /// then use a switch
+    /// </summary>
+    public void UpdateText_CharacterName(string name)
+    {
+        CharacterNameText.text = name;
+    } 
+
+    public void UpdateText_Exp(string currentExp)
+    {
+        ExpText.text = currentExp;
+    }
+
+    public void UpdateText_Happiness(string currentHappiness)
+    {
+        HappinessText.text = currentHappiness;
+    }
+
+    public void UpdateText_Health(string currentHealth)
+    {
+        HealthText.text = currentHealth;
+    }
+
+    // Updates element spec texts
+    public void UpdateText_AllElements(string currentAirPoints, string currentEarthPoints, string currentFirePoints, string currentNaturePoints, string currentWaterPoints)
+    {
+        AirText.text = currentAirPoints;
+        EarthText.text = currentEarthPoints;
+        FireText.text = currentFirePoints;
+        NatureText.text = currentNaturePoints;
+        WaterText.text = currentWaterPoints;
     }
 }
