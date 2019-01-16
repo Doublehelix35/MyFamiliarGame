@@ -6,12 +6,12 @@ using UnityEngine;
 public class Item_FireBall :  Item {
 
     // Stats
-    float Speed = 1f;
-    float lifeSpan = 6f;
+    public float Speed = 1f;
+    public float lifeSpan = 6f;
+    public int Damage = 1;
     public int HealthMax = 1;
     public int UsesMax = 1;
     public int ExpPointsGivenMax = 5;
-
 
 	void Start ()
     {
@@ -35,11 +35,10 @@ public class Item_FireBall :  Item {
     // Player calls this when fireball collides with it
     public override void Interact(GameObject player)
     {
-        // Interact code
-
         // Deal damage
+        player.GetComponent<Character>().ChangeHealth(-Damage);
 
-        // Destroy 
+        // Destroy self
         Destroy(gameObject);
     }
 }

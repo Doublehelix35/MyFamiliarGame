@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
         CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
         CharacterNameText.text = CharacterRef.name;
         CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
+        CharacterRef.AddComponent<Character>(); // Give it character script
 
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef);        
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour {
 
     // Stats
+    public int HealthMax;
     int Health = 1;
     int Attack = 1;
     int Defence = 1;
@@ -53,6 +54,31 @@ public class Character : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    // To gain health pass in positive value, to lose health pass in negative value
+    public void ChangeHealth(int value)
+    {
+        Health += value;
+
+        if(Health > HealthMax)
+        {
+            Health = HealthMax;
+        }
+        else if (Health <= 0)
+        {
+            // Player dead or exhausted
+
+            Destroy(gameObject); // Temporary test code
+        }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<Item>())
+        {
+            col.gameObject.GetComponent<Item>().Interact(gameObject);
         }
     }
 }
