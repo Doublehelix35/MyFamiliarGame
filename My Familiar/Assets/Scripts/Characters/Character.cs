@@ -45,7 +45,16 @@ public class Character : MonoBehaviour {
 
     void Start()
     {
+        // Init object refs
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
+
+        // Init stats
+
+        // Init UI texts
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
     }
 
     // Sets move slot equal to the move that is passed in
