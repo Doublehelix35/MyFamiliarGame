@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
                         DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z;
                         Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
                         newPos = Camera.main.ScreenToWorldPoint(newPos); // Set new pos equal to touch
-                        DragOffset = Ragdoll.position - newPos; 
+                        DragOffset = Ragdoll.position - newPos; // offset due character parts setup
 
                     }
                 }

@@ -89,7 +89,7 @@ public class Character : MonoBehaviour {
         {
             // Player dead or exhausted
 
-            Destroy(gameObject); // Temporary test code
+            Destroy(gameObject.transform.parent.gameObject); // Temporary test code
         }
 
         // Update ui

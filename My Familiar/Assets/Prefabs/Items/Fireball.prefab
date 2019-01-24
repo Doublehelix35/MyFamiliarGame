@@ -100,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &114788148662288644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,12 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c06e71c42115ad43a927f10d8561834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
   lifeSpan: 6
   Damage: 1
-  HealthMax: 1
-  UsesMax: 1
   ExpPointsGivenMax: 5
+  SpecPointsGivenMax: 1
+  HappinessChangeValueMax: -1
+  ControlledByPlayer: 0
 --- !u!135 &135659635720485832
 SphereCollider:
   m_ObjectHideFlags: 1

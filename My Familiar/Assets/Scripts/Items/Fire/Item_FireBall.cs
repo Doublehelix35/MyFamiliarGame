@@ -15,6 +15,9 @@ public class Item_FireBall :  Item {
     float DistFromCamera;
     Vector3 DragOffset;
     public bool ControlledByPlayer = false;
+    float FollowSpeed = 1000f;
+    float FollowStopDistance = 0.5f;
+
 
 	void Start ()
     {
@@ -25,10 +28,10 @@ public class Item_FireBall :  Item {
         itemType = Elements.ElementType.Fire;
 
         // Destroy self after lifespan runs out
-        Destroy(gameObject, lifeSpan);
+        //Destroy(gameObject, lifeSpan);
 
         // Temp code
-        GetComponent<Rigidbody>().useGravity = false;
+        //GetComponent<Rigidbody>().useGravity = false;
     }
 
     void Update()
@@ -39,6 +42,7 @@ public class Item_FireBall :  Item {
             Touch touch = Input.GetTouch(0); // get the touch
 
             Vector3 touchPos = touch.position;
+            Vector3 lastPos = new Vector3(0f,0f,0f);
 
             if (touch.phase == TouchPhase.Began) // check for the first touch
             {
@@ -49,12 +53,20 @@ public class Item_FireBall :  Item {
                 {
                     if (hit.transform.gameObject == gameObject) // Ray hits this fireball
                     {
-                        GetComponent<Rigidbody>().useGravity = false; // Turn gravity off
+                        //GetComponent<Rigidbody>().useGravity = false; // Turn gravity off
                         ControlledByPlayer = true; // Fireball is being controlled by player
                         DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z; // Keep z consistant
                         Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
                         newPos = Camera.main.ScreenToWorldPoint(newPos); // Set new pos equal to touch
-                        DragOffset = gameObject.transform.position - newPos;
+
+                        if (Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                        {
+                            GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move fireball
+                        }
+                        else
+                        {
+                            GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        }
                     }
                 }
             }
@@ -65,7 +77,11 @@ public class Item_FireBall :  Item {
                     // Move fireball to touch pos
                     Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
                     newPos = Camera.main.ScreenToWorldPoint(newPos);
-                    gameObject.transform.position = newPos + DragOffset;
+
+                    if(Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                    {
+                        GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move fireball
+                    }                    
                 }
             }
             else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
@@ -73,8 +89,11 @@ public class Item_FireBall :  Item {
                 // Stop moving the fireball
                 ControlledByPlayer = false;
 
+                // Turn kinematic off
+                //ObjectToFollow.GetComponent<Rigidbody>().isKinematic = false;
+                
                 // Turn gravity back on
-                GetComponent<Rigidbody>().useGravity = true;
+                //GetComponent<Rigidbody>().useGravity = true;
             }
         }
     }
