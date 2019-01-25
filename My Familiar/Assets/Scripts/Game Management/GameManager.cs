@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
     float DistFromCamera;
     Transform Ragdoll;
     Vector3 DragOffset;
+    float FollowSpeed = 1000f;
+    float FollowStopDistance = 0.5f;
 
     void Awake()
     {
@@ -48,29 +50,34 @@ public class GameManager : MonoBehaviour {
 	
 	void Update ()
     {
-        // Move character with touch
-        if (Input.touchCount == 1) // user is touching the screen
+        // Move object with touch //
+        if (Input.touchCount == 1) // User is touching the screen
         {
-            Touch touch = Input.GetTouch(0); // get the touch
-
-            Vector3 touchPos = touch.position;
+            Touch touch = Input.GetTouch(0); // get touch
+            Vector3 touchPos = touch.position; // get touch position
 
             if (touch.phase == TouchPhase.Began) // check for the first touch
             {
                 // Cast a ray
                 Ray ray = Camera.main.ScreenPointToRay(touchPos);
                 RaycastHit hit;
-                if(Physics.Raycast(ray, out hit, 100))
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    if(hit.transform.name == "Face") // Ray hits Character's face
+                    if (hit.transform.GetComponent<Rigidbody>() && hit.transform.tag != "NonMoving") // Ray hits a rigidbody thats allowed to be moved
                     {
-                        MoveRagdoll = true; 
-                        Ragdoll = hit.transform; // Set ref to character's face so it can move it
-                        DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z;
-                        Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
+                        MoveRagdoll = true; // Object is being controlled by player
+                        DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z; // Keep z consistant
+                        Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera); // Pos to move to
                         newPos = Camera.main.ScreenToWorldPoint(newPos); // Set new pos equal to touch
-                        DragOffset = Ragdoll.position - newPos; // offset due character parts setup
 
+                        if (Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                        {
+                            GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move object
+                        }
+                        else
+                        {
+                            GetComponent<Rigidbody>().velocity = Vector3.zero; // Stop movement
+                        }
                     }
                 }
             }
@@ -78,19 +85,22 @@ public class GameManager : MonoBehaviour {
             {
                 if (MoveRagdoll)
                 {
-                    // Move ragdoll to touch pos
+                    // Move object to touch pos
                     Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
                     newPos = Camera.main.ScreenToWorldPoint(newPos);
-                    Ragdoll.position = newPos + DragOffset;
+
+                    if (Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                    {
+                        GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move object
+                    }
                 }
             }
-            else if(touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
-                // Stop moving the character
+                // Stop moving the object
                 MoveRagdoll = false;
             }
         }
-
     }
 
     // Text update methods
