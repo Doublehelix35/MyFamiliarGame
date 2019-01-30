@@ -26,10 +26,11 @@ public class GameManager : MonoBehaviour {
 
     bool MoveRagdoll = false;
     float DistFromCamera;
-    Transform Ragdoll;
+    GameObject Ragdoll;
     Vector3 DragOffset;
-    float FollowSpeed = 1000f;
-    float FollowStopDistance = 0.5f;
+    float RagdollMaxVelocity = 1500f;
+    float FollowStopDistance = 0.05f;
+    float RagdollMaxDist = 10f;
 
     void Awake()
     {
@@ -65,18 +66,22 @@ public class GameManager : MonoBehaviour {
                 {
                     if (hit.transform.GetComponent<Rigidbody>() && hit.transform.tag != "NonMoving") // Ray hits a rigidbody thats allowed to be moved
                     {
+                        Ragdoll = hit.transform.gameObject; // Set ragdoll equal to object hit
                         MoveRagdoll = true; // Object is being controlled by player
                         DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z; // Keep z consistant
                         Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera); // Pos to move to
-                        newPos = Camera.main.ScreenToWorldPoint(newPos); // Set new pos equal to touch
+                        newPos = Camera.main.ScreenToWorldPoint(newPos); // Convert new pos to world axis
 
-                        if (Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                        float dist = Vector3.Distance(newPos, Ragdoll.transform.position);
+
+                        if (dist > FollowStopDistance)
                         {
-                            GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move object
+                            // Set velocity. Calc direction. Then times direction by follow speed and time.deltatime and factor in distance from target pos
+                            Ragdoll.GetComponent<Rigidbody>().velocity = (newPos - Ragdoll.transform.position).normalized * (RagdollMaxVelocity * (dist/RagdollMaxDist) * Time.deltaTime); // Move object
                         }
                         else
                         {
-                            GetComponent<Rigidbody>().velocity = Vector3.zero; // Stop movement
+                            Ragdoll.GetComponent<Rigidbody>().velocity = Vector3.zero; // Stop movement
                         }
                     }
                 }
@@ -87,11 +92,14 @@ public class GameManager : MonoBehaviour {
                 {
                     // Move object to touch pos
                     Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
-                    newPos = Camera.main.ScreenToWorldPoint(newPos);
+                    newPos = Camera.main.ScreenToWorldPoint(newPos); // Convert new pos to world axis
 
-                    if (Vector3.Distance(newPos, transform.position) > FollowStopDistance)
+                    float dist = Vector3.Distance(newPos, Ragdoll.transform.position);
+
+                    if (dist > FollowStopDistance)
                     {
-                        GetComponent<Rigidbody>().velocity = (newPos - transform.position).normalized * FollowSpeed * Time.deltaTime; // Move object
+                        // Set velocity. Calc direction. Then times direction by follow speed and time.deltatime and factor in distance from target pos
+                        Ragdoll.GetComponent<Rigidbody>().velocity = (newPos - Ragdoll.transform.position).normalized * (RagdollMaxVelocity * (dist/RagdollMaxDist) * Time.deltaTime); // Move object
                     }
                 }
             }

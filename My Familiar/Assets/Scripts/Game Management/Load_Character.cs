@@ -10,6 +10,7 @@ public class Load_Character : MonoBehaviour {
 
     float SeperationMultipler = 0.03f;
     float ScaleMultiplier = 0.2f;
+    float Drag = 0.3f;
 
 	// Use this for initialization
 	void Start ()
@@ -200,6 +201,14 @@ public class Load_Character : MonoBehaviour {
         arm2.AddComponent<Rigidbody>();
         leg1.AddComponent<Rigidbody>();
         leg2.AddComponent<Rigidbody>();
+
+        // Rigidbody drag
+        body.GetComponent<Rigidbody>().drag = Drag;
+        face.GetComponent<Rigidbody>().drag = Drag;
+        arm1.GetComponent<Rigidbody>().drag = Drag;
+        arm2.GetComponent<Rigidbody>().drag = Drag;
+        leg1.GetComponent<Rigidbody>().drag = Drag;
+        leg2.GetComponent<Rigidbody>().drag = Drag;
 
         // Set rigidbody contraints
         body.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
