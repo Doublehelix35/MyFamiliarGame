@@ -7,11 +7,13 @@ public abstract class Item : MonoBehaviour {
     // Parent class for all items
 
     // Potential stats    
-    protected int Health = 1;
-    protected int Uses = 1;
-    protected int ExpPointsGiven = 0;
-    protected int SpecPointsGiven = 0;
-    protected int HappinessChangeValue = 0;
+    public int Health = 1;
+    public int Uses = 1;
+    public int Damage = 0;
+    public int ExpPointsGiven = 0;
+    public int SpecPointsGiven = 0;
+    public int HappinessChangeValue = 0;
+    public float LifeSpan = 5f;
 
     // Item type
     protected Elements.ElementType itemType;
@@ -19,6 +21,11 @@ public abstract class Item : MonoBehaviour {
     // Constructor
     protected Item() { }
 
+    void Start()
+    {
+        // Destroy self after lifespan runs out
+        //Destroy(gameObject, lifeSpan);
+    }
 
     // Define how the item interacts with the familiar
     public abstract void Interact(GameObject player);

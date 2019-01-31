@@ -15,13 +15,15 @@ public class Character : MonoBehaviour {
     GameObject GameManagerRef;
 
     // Stats
-    public int HealthMax;
-    public int HappinessMax = 50;
-    int Health = 10;
+    internal int HealthMax;
+    internal int HappinessMax = 50;
+    int Health = 0;
     int Attack = 1;
     int Defence = 1;
     int Happiness = 1;
     int Experience = 0;
+    float InvincibilityTimer = 0.5f;
+    float DamageTakenTime;
 
     // Elemental spec points
     int AirPoints = 0;
@@ -49,6 +51,8 @@ public class Character : MonoBehaviour {
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
 
         // Init stats
+        Health = HealthMax;
+        DamageTakenTime = Time.time;
 
         // Init UI texts
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
@@ -79,7 +83,11 @@ public class Character : MonoBehaviour {
     // To gain health pass in positive value, to lose health pass in negative value
     public void ChangeHealth(int value)
     {
-        Health += value;
+        // Exit if invicible
+        if(DamageTakenTime >= Time.time - InvincibilityTimer) { return; }
+
+        // Change health based on value
+        Health += value;        
 
         if(Health > HealthMax)
         {
@@ -88,8 +96,13 @@ public class Character : MonoBehaviour {
         else if (Health <= 0)
         {
             // Player dead or exhausted
+            //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
+        }
 
-            Destroy(gameObject.transform.parent.gameObject); // Temporary test code
+
+        if (value < 0) // Damage was taken
+        {
+            DamageTakenTime = Time.time;
         }
 
         // Update ui
@@ -147,6 +160,9 @@ public class Character : MonoBehaviour {
     public void GainExp(int expPoints)
     {
         Experience += expPoints;
+
+        // Update UI
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
     }
 
     void OnCollisionEnter(Collision col)

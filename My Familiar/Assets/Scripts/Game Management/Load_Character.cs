@@ -12,17 +12,6 @@ public class Load_Character : MonoBehaviour {
     float ScaleMultiplier = 0.2f;
     float Drag = 0.3f;
 
-	// Use this for initialization
-	void Start ()
-    {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     internal int LoadCurrentSlot()
     {
         // Create a binary formatter and open the save file
@@ -210,8 +199,8 @@ public class Load_Character : MonoBehaviour {
         leg1.GetComponent<Rigidbody>().drag = Drag;
         leg2.GetComponent<Rigidbody>().drag = Drag;
 
-        // Set rigidbody contraints
-        body.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+        // Set constrains on body
+        body.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
         // Set parts to character layer
         body.layer = 9; face.layer = 9;
