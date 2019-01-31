@@ -16,8 +16,8 @@ TagManager:
   - 
   - PostProcessing
   - Character
-  - 
-  - 
+  - Item_Throwable
+  - Item_Placeable
   - 
   - 
   - 
