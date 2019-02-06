@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
-
+public class Character : MonoBehaviour
+{
     /// <summary>
     /// Remember most supporting properties like rigidbodies are set up
     /// in the Load_Character script

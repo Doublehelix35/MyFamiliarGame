@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_StormBall : Item
+public class Item_StormOrb : Item
 {
     public float WindMagnitude = 100f;
 

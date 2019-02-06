@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_FireBall :  Item {
-
-    
+public class Item_FireBall :  Item
+{    
     // Player calls this when fireball collides with it
     public override void Interact(GameObject player)
     {

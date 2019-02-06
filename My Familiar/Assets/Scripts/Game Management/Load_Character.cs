@@ -4,7 +4,8 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class Load_Character : MonoBehaviour {
+public class Load_Character : MonoBehaviour
+{
 
     public Material FaceMat;
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour {
-
+public abstract class Item : MonoBehaviour
+{
     // Parent class for all items
 
     // Potential stats    
