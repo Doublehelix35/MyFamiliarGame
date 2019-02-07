@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8964777436287552560
+--- !u!1 &3149020287695644717
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8964777436287552573}
-  - component: {fileID: 8964777436287552572}
-  - component: {fileID: 8964777436287552563}
-  - component: {fileID: 8964777436287552562}
-  - component: {fileID: 8964777436287552574}
-  - component: {fileID: 8964777436287552561}
+  - component: {fileID: 3149020287695644704}
+  - component: {fileID: 3149020287695644705}
+  - component: {fileID: 3149020287695644718}
+  - component: {fileID: 3149020287695644719}
+  - component: {fileID: 3149020287695644707}
+  - component: {fileID: 3149020287695644716}
   m_Layer: 0
-  m_Name: StormOrb
+  m_Name: Trampoline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8964777436287552573
+--- !u!4 &3149020287695644704
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
+  m_GameObject: {fileID: 3149020287695644717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.72, y: 5.05, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: -4.72, y: 0.959, z: 0}
+  m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8964777436287552572
+--- !u!33 &3149020287695644705
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8964777436287552563
+  m_GameObject: {fileID: 3149020287695644717}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3149020287695644718
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
+  m_GameObject: {fileID: 3149020287695644717}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 875d45fccc3033842981f173da954740, type: 2}
+  - {fileID: 2100000, guid: 12bc8512e607dba48a51324b6f9fa653, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,52 +80,52 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8964777436287552562
-SphereCollider:
+--- !u!65 &3149020287695644719
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
-  m_Material: {fileID: 0}
+  m_GameObject: {fileID: 3149020287695644717}
+  m_Material: {fileID: 13400000, guid: 0df7a9e84b928954787ecef7d5ae5bd8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8964777436287552574
+--- !u!54 &3149020287695644707
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
+  m_GameObject: {fileID: 3149020287695644717}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 0.3
-  m_UseGravity: 0
+  m_Drag: 0.2
+  m_AngularDrag: 0.1
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &8964777436287552561
+--- !u!114 &3149020287695644716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964777436287552560}
+  m_GameObject: {fileID: 3149020287695644717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7aa4715b841e69419c0a2d36f158192, type: 3}
+  m_Script: {fileID: 11500000, guid: b5847a5a40574354ba597846f414fe07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
   Uses: 10
-  Damage: 1
-  ExpPointsGiven: 1
-  SpecPointsGiven: 1
-  HappinessChangeValue: -1
+  Damage: 0
+  ExpPointsGiven: 0
+  SpecPointsGiven: 0
+  HappinessChangeValue: 5
   LifeSpan: 5
-  WindMagnitude: 200
+  BounceMagnitude: 100

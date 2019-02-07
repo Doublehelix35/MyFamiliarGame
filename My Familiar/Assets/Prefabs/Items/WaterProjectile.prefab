@@ -126,9 +126,10 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   GunRef: {fileID: 0}
   WaterProjectile: {fileID: 0}
   FirePoint: {fileID: 0}
   ShootFrequency: 1
+  ShootMagnitude: 0

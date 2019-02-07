@@ -129,7 +129,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348130909758939
@@ -296,7 +296,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131095937408
@@ -310,7 +310,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.1000009, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.0999999, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131398353684
@@ -477,7 +477,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -6, y: 4.62, z: 0}
+  m_ConnectedAnchor: {x: -6, y: 4.42, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131416229263
@@ -795,7 +795,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!1 &2158348132360083027
@@ -927,7 +927,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132360083117
@@ -1094,7 +1094,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132466298167
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132787607980
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &3129819639828452136
@@ -1442,7 +1442,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.99999905, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.1000004, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.0999985, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   Damage: 1
   ExpPointsGiven: 1
   SpecPointsGiven: 1
-  HappinessChangeValue: 1
+  HappinessChangeValue: -1
   LifeSpan: 5
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &5484278279955858353
@@ -1608,7 +1608,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.99999905, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.1000004, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.0999985, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
