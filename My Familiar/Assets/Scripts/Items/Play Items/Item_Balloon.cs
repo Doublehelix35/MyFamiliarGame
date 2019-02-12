@@ -15,9 +15,10 @@ public class Item_Balloon : Item
     public GameObject Balloon_Bottom;
     public GameObject Balloon_String;
 
-    // Player calls this when Trampoline collides with it
+    // Player calls this when Balloon collides with it
     public override void Interact(GameObject player)
     {
+        // If player isn't attached then attach it
         if (!IsPlayerAttached)
         {
             Attach(player);
