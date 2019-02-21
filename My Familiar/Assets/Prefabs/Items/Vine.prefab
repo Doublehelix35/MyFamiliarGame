@@ -310,7 +310,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.0999999, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.099998, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -473,11 +473,11 @@ HingeJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158348131398353690}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 2158348131541536089}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -6, y: 4.42, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -0.5000003, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -644,7 +644,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.99999905, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.1000013, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.1000023, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -941,7 +941,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.99999905, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.1000004, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -1.0999994, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
