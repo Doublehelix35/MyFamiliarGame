@@ -6,10 +6,17 @@ public class Item_Swing : Item
 {
     public GameObject SwingParent; // Highest object in parent heirarchy
     public GameObject ConnectionPoint; // Point that connects player to swing
+    bool IsPlayerAttached = false;
 
     // Player calls this when Swing collides with it
     public override void Interact(GameObject player)
     {
+        // If player isn't attached then attach it
+        if (!IsPlayerAttached)
+        {
+            Attach(player);
+        }
+
         // Give Happiness value
         player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
 
@@ -24,45 +31,23 @@ public class Item_Swing : Item
         }
     }
 
-    //void Attach(GameObject objectToAttachTo)
-    //{
-    //    // Attach to Balloon Bottom and set up spring joint
-    //    Balloon_Bottom.AddComponent<SpringJoint>(); // Add joint to balloon bottom
-    //    Balloon_Bottom.GetComponent<SpringJoint>().connectedBody = objectToAttachTo.GetComponent<Rigidbody>(); // Attach bottom to object
-    //    Balloon_Bottom.GetComponent<SpringJoint>().axis = new Vector3(0f, 0f, 1f); // Set axis of joint
+    void Attach(GameObject objectToAttachTo)
+    {
+        // Attach to Balloon Bottom and set up spring joint
+        ConnectionPoint.AddComponent<HingeJoint>(); // Add joint to balloon bottom
+        ConnectionPoint.GetComponent<HingeJoint>().connectedBody = objectToAttachTo.GetComponent<Rigidbody>(); // Attach bottom to object
+        ConnectionPoint.GetComponent<HingeJoint>().axis = new Vector3(0f, 0f, 1f); // Set axis of joint
+        ConnectionPoint.GetComponent<HingeJoint>().enablePreprocessing = false; // Set preprocessing to false
+        
+        // Set is player attached to true
+        IsPlayerAttached = true;
+    }
 
-    //    // Set up Spring joint distances
-    //    Balloon_Bottom.GetComponent<SpringJoint>().minDistance = MinDistFromBalloon;
-    //    Balloon_Bottom.GetComponent<SpringJoint>().maxDistance = MaxDistFromBalloon;
-
-    //    // Turn off string object
-    //    Balloon_String.SetActive(false);
-
-    //    // Set attached object force modifier
-    //    AttachedObjectForceModifier = AttachedObjectForceModifierMax;
-
-    //    // Set is player attached to true
-    //    IsPlayerAttached = true;
-    //}
-
-    //void Detach(GameObject objectToDetachFrom)
-    //{
-    //    // Detach to String
-    //    Destroy(Balloon_Bottom.GetComponent<SpringJoint>()); // Delete joint
-
-    //    // Turn off string line render
-    //    // Set pos 0 to balloon bottom
-    //    Balloon_Bottom.GetComponent<LineRenderer>().SetPosition(0, Balloon_Bottom.transform.position);
-    //    // Set pos 1 to balloon bottom
-    //    Balloon_Bottom.GetComponent<LineRenderer>().SetPosition(1, Balloon_Bottom.transform.position);
-
-    //    // Turn on string object
-    //    Balloon_String.SetActive(true);
-
-    //    // Reset attached object force modifier
-    //    AttachedObjectForceModifier = 1f;
-
-    //    // Set is player attached to false
-    //    IsPlayerAttached = false;
-    //}
+    void Detach(GameObject objectToDetachFrom)
+    {
+        // Detach to String
+        Destroy(ConnectionPoint.GetComponent<HingeJoint>()); // Delete joint
+        // Set is player attached to false
+        IsPlayerAttached = false;
+    }
 }

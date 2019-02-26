@@ -946,9 +946,10 @@ MonoBehaviour:
   Damage: 0
   ExpPointsGiven: 0
   SpecPointsGiven: 0
-  HappinessChangeValue: 0
+  HappinessChangeValue: 5
   LifeSpan: 5
-  SwingParent: {fileID: 0}
+  SwingParent: {fileID: 1905356752}
+  ConnectionPoint: {fileID: 1032464685}
 --- !u!54 &224672544
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3557,7 +3558,6 @@ GameObject:
   - component: {fileID: 1032464690}
   - component: {fileID: 1032464689}
   - component: {fileID: 1032464688}
-  - component: {fileID: 1032464687}
   m_Layer: 11
   m_Name: ConnectionPoint
   m_TagString: Untagged
@@ -3579,41 +3579,6 @@ Transform:
   m_Father: {fileID: 1463969876}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!59 &1032464687
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032464685}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.4999962, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -4, y: 4.83, z: 0}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: -15
-    max: 15
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 0
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!54 &1032464688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5474,9 +5439,10 @@ MonoBehaviour:
   Damage: 0
   ExpPointsGiven: 0
   SpecPointsGiven: 0
-  HappinessChangeValue: 0
+  HappinessChangeValue: 5
   LifeSpan: 5
-  SwingParent: {fileID: 0}
+  SwingParent: {fileID: 1905356752}
+  ConnectionPoint: {fileID: 1032464685}
 --- !u!54 &1463969878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5868,9 +5834,10 @@ MonoBehaviour:
   Damage: 0
   ExpPointsGiven: 0
   SpecPointsGiven: 0
-  HappinessChangeValue: 0
+  HappinessChangeValue: 5
   LifeSpan: 5
-  SwingParent: {fileID: 0}
+  SwingParent: {fileID: 1905356752}
+  ConnectionPoint: {fileID: 1032464685}
 --- !u!54 &1594867070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7352,9 +7319,10 @@ MonoBehaviour:
   Damage: 0
   ExpPointsGiven: 0
   SpecPointsGiven: 0
-  HappinessChangeValue: 0
+  HappinessChangeValue: 5
   LifeSpan: 5
-  SwingParent: {fileID: 0}
+  SwingParent: {fileID: 1905356752}
+  ConnectionPoint: {fileID: 1032464685}
 --- !u!54 &1905356758
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7648,6 +7616,7 @@ GameObject:
   - component: {fileID: 2146963007}
   - component: {fileID: 2146963006}
   - component: {fileID: 2146963010}
+  - component: {fileID: 2146963011}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7740,3 +7709,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
+--- !u!82 &2146963011
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146963005}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3cd4ebbc4bb2444459b0bd1fc17eba01, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
