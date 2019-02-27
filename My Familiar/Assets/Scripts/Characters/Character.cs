@@ -21,9 +21,13 @@ public class Character : MonoBehaviour
     int Attack = 1;
     int Defence = 1;
     int Happiness = 1;
-    int Experience = 0;
     float InvincibilityTimer = 0.5f;
     float DamageTakenTime;
+
+    // Leveling
+    int Level = 1;
+    int Experience = 0;
+    int ExpToLevelUp = 1;
 
     // Elemental spec points
     int AirPoints = 0;
@@ -53,6 +57,7 @@ public class Character : MonoBehaviour
         // Init stats
         Health = HealthMax;
         DamageTakenTime = Time.time;
+        ExpToLevelUp = ExpNeededForNextLevel();
 
         // Init UI texts
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
@@ -127,27 +132,21 @@ public class Character : MonoBehaviour
             case Elements.ElementType.Air:
                 AirPoints += pointValue;
                 break;
-
             case Elements.ElementType.Earth:
                 EarthPoints += pointValue;
                 break;
-
             case Elements.ElementType.Fire:
                 FirePoints += pointValue;
                 break;
-
             case Elements.ElementType.Nature:
                 NaturePoints += pointValue;
                 break;
-
             case Elements.ElementType.Water:
                 WaterPoints += pointValue;
                 break;
-
             case Elements.ElementType.NonElemental:
                 Debug.Log("Cant gain points in non-elemental. This does nothing.");
                 break;
-
             default:
                 Debug.Log("ERROR! Element not recongized");
                 break;
@@ -161,8 +160,25 @@ public class Character : MonoBehaviour
     {
         Experience += expPoints;
 
+        if (Experience >= ExpToLevelUp)
+        {
+            Level++;
+            Experience = Experience - ExpToLevelUp; // Carry over leftover exp
+            ExpToLevelUp = ExpNeededForNextLevel(); // Increase exp needed to lvl up
+        }
+
         // Update UI
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
+    }
+
+    int ExpNeededForNextLevel() // Formula for calculating exp needed to reach the next level
+    {
+        float exponent = 1.5f; // i.e. x^2, 2 would be the exponent
+        int baseExp = 30;
+        int expToReturn = (int)Mathf.Floor(baseExp * (Mathf.Pow(Level, exponent)));
+
+        return expToReturn;
     }
 
     void OnCollisionEnter(Collision col)

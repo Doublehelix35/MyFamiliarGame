@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8964777436287552562}
   - component: {fileID: 8964777436287552574}
   - component: {fileID: 8964777436287552561}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StormOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}

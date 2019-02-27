@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     // Texts
     public Text CharacterNameText;
+    public Text LevelText;
     public Text ExpText;
     public Text HappinessText;
     public Text HealthText;
@@ -120,6 +121,11 @@ public class GameManager : MonoBehaviour
     {
         CharacterNameText.text = name;
     } 
+
+    public void UpdateText_Level(string currentLevel)
+    {
+        LevelText.text = currentLevel;
+    }
 
     public void UpdateText_Exp(string currentExp)
     {
