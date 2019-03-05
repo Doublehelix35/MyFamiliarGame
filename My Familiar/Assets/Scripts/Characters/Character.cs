@@ -34,6 +34,8 @@ public class Character : MonoBehaviour
     int Level = 1;
     int Experience = 0;
     int ExpToLevelUp = 1;
+    int[] LevelsToEvolveAt = { 5, 10, 15 }; // Levels that character evolves at
+    internal int CurrentEvolutionStage = 0; // How many times has it evolved?
 
     // Elemental spec points
     int AirPoints = 0;
@@ -48,7 +50,7 @@ public class Character : MonoBehaviour
     Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.EmptyMoveSlot;
 
     // Elemental typing
-    List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
+    internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
 
     // Constructor
     internal Character()
@@ -178,6 +180,22 @@ public class Character : MonoBehaviour
             Experience = Experience - ExpToLevelUp; // Carry over leftover exp
             ExpToLevelUp = ExpNeededForNextLevel(); // Increase exp needed to lvl up
 
+            // Evolve
+            for(int i = 0; i < LevelsToEvolveAt.Length; i++) // Loop through levels to evolve at to search for a match
+            {
+                if (Level == LevelsToEvolveAt[i])
+                {
+                    CurrentEvolutionStage++; // Increase count of evolutions
+
+                    CharactersElementTypes.Add(Elements.ElementType.Air); // Add new type
+                    if(i == 0) // First evolution
+                    {
+                        CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
+                    }                    
+                    GameManagerRef.GetComponent<GameManager>().EvolveToNextStage();
+                }
+            }            
+
             // Increase stats
             LevelUpStats();
         }
@@ -205,68 +223,71 @@ public class Character : MonoBehaviour
         float statBoostSmall = 1.05f; // 5% increase
         float statBoostMedium = 1.1f; // 10% increase
         float statBoostLarge = 1.15f; // 15% increase
+        
+        foreach(Elements.ElementType type in CharactersElementTypes)
+        {
+            if (type == Elements.ElementType.NonElemental) // Normal stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
 
-        if (CharactersElementTypes.Contains(Elements.ElementType.NonElemental)) // Normal stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
- 
-        }
-        if (CharactersElementTypes.Contains(Elements.ElementType.Air)) // Air stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent and Air bonuses
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-        }
-        if (CharactersElementTypes.Contains(Elements.ElementType.Earth)) // Earth stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent and Earth bonuses
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostLarge;
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-        }
-        if (CharactersElementTypes.Contains(Elements.ElementType.Fire)) // Fire stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent and Fire bonuses
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-        }
-        if (CharactersElementTypes.Contains(Elements.ElementType.Nature)) // Nature stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent and Nature bonuses
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) *statBoostSmall;
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
-        }
-        if (CharactersElementTypes.Contains(Elements.ElementType.Water)) // Water stats
-        {
-            // Increase stats by factoring in magnitude and level^exponent
-            Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
-            DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-            Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
-        }
+            }
+            else if (type == Elements.ElementType.Air) // Air stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent and Air bonuses
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+            }
+            else if (type == Elements.ElementType.Earth) // Earth stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent and Earth bonuses
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostLarge;
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+            }
+            else if (type == Elements.ElementType.Fire) // Fire stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent and Fire bonuses
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+            }
+            else if (type == Elements.ElementType.Nature) // Nature stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent and Nature bonuses
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostSmall;
+            }
+            else if (type == Elements.ElementType.Water) // Water stats
+            {
+                // Increase stats by factoring in magnitude and level^exponent
+                Attack += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Accuracy += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                CritChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                Defence += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent);
+                DodgeChance += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+                Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
+            }
+        }        
     }
 
     void OnCollisionEnter(Collision col)

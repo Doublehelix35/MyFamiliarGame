@@ -112,6 +112,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Evolve character and update save
+    internal void EvolveToNextStage()
+    {
+        // Evolve and save new type
+
+    }
+
     // Text update methods
     /// <summary>
     /// Alternative idea: Could have one updateText method that takes 2 params 1) String value 2) enum TextToChange

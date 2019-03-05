@@ -8,17 +8,7 @@ using UnityEngine.UI;
 public class Save_Character : MonoBehaviour {
 
     public Text[] SaveSlotInputs;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    
     // Save current slot
     public void SaveCurrentSlot(int SlotNumber)
     {
@@ -59,10 +49,52 @@ public class Save_Character : MonoBehaviour {
         file.Close();
     }
 
-    // Save character stats
+    // Save character stats and types
     internal void Save(string CharacterName, GameObject GameObjectToSave)
     {
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + ".dat");
 
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+
+        // Save evolution count
+        data.EvolutionCount = GameObjectToSave.GetComponent<Character>().CurrentEvolutionStage; 
+
+        // Save character types to int array
+        data.CharacterTypes = new int[GameObjectToSave.GetComponent<Character>().CharactersElementTypes.Count];
+        foreach (int i in data.CharacterTypes)
+        {
+            // Convert from Element.ElementType to int for serialization
+            switch (GameObjectToSave.GetComponent<Character>().CharactersElementTypes[i])
+            {
+                case Elements.ElementType.NonElemental:
+                    data.CharacterTypes[i] = 0;
+                    break;
+                case Elements.ElementType.Air:
+                    data.CharacterTypes[i] = 1;
+                    break;
+                case Elements.ElementType.Earth:
+                    data.CharacterTypes[i] = 2;
+                    break;
+                case Elements.ElementType.Fire:
+                    data.CharacterTypes[i] = 3;
+                    break;
+                case Elements.ElementType.Nature:
+                    data.CharacterTypes[i] = 4;
+                    break;
+                case Elements.ElementType.Water:
+                    data.CharacterTypes[i] = 5;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
     }
 
     // Save a character part
@@ -113,6 +145,8 @@ class CharacterData
     public int SaveSlotInUse;
 
     public string MaterialName;
+    public int EvolutionCount; // How many evolutions has it had?
+    public int[] CharacterTypes; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
 
     public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;
