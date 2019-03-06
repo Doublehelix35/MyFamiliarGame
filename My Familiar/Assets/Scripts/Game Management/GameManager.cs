@@ -37,17 +37,15 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // Load character based on current save slot in use        
-        CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
-        UpdateText_CharacterName(CharacterRef.name); // Name originally set during loading in above line
-        CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
-        
-
-        CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef);        
+        //CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
+        //UpdateText_CharacterName(CharacterRef.name); // Name originally set during loading in above line
+        //CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
+        //CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
+        ReloadCharacter();
     }
 
     void Start ()
-    {
-        
+    {       
 
     }
 	
@@ -114,16 +112,31 @@ public class GameManager : MonoBehaviour
     }
 
     // Evolve character and update save
-    internal void EvolveToNextStage()
+    internal void EvolveToNextStage(GameObject ObjectToEvolve)
     {
-        // Evolve and save new type
-        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), CharacterRef); // Load name from current slot to ensure names line up for saving and loading
+        // *********** Problem is with save() ***************
 
+        // Evolve and save new type
+        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToEvolve); // Load name from current slot to ensure names line up for saving and loading
+        
         // Delete old character
-        Destroy(CharacterRef.transform.parent); // Char Ref is the body object so we need to delete the parent
+        CharacterRef = new GameObject();
+        Destroy(ObjectToEvolve.transform.parent.gameObject); // Char Ref is the body object so we need to delete the parent
 
         // Reload character
+        ReloadCharacter();
+    }
+
+    internal void ReloadCharacter()
+    {
+        // Reload character
         CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
+
+        // Update UI and give camera new ref
+        UpdateText_CharacterName(CharacterRef.name);
+
+        CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
+        CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
     }
 
     // Text update methods

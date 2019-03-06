@@ -55,16 +55,20 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + ".dat");
+        Debug.Log("/" + CharacterName + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
 
         // Save evolution count
-        data.EvolutionCount = GameObjectToSave.GetComponent<Character>().CurrentEvolutionStage; 
+        data.EvolutionCount = GameObjectToSave.GetComponent<Character>().CurrentEvolutionStage;
+
+        // Save level
+        data.Level = GameObjectToSave.GetComponent<Character>().Level;
 
         // Save character types to int array
         data.CharacterTypes = new int[GameObjectToSave.GetComponent<Character>().CharactersElementTypes.Count];
-        foreach (int i in data.CharacterTypes)
+        for (int i = 0; i < data.CharacterTypes.Length; i++)
         {
             // Convert from Element.ElementType to int for serialization
             switch (GameObjectToSave.GetComponent<Character>().CharactersElementTypes[i])
@@ -91,6 +95,9 @@ public class Save_Character : MonoBehaviour {
                     break;
             }
         }
+
+        // File is no longer new
+        data.FileIsNew = false;
 
         // Write the object to file and close it
         bf.Serialize(file, data);
@@ -143,10 +150,12 @@ class CharacterData
     public string CharacterName;
     public string CharacterPart;
     public int SaveSlotInUse;
+    public bool FileIsNew = true;
 
     public string MaterialName;
+    public int Level;
     public int EvolutionCount; // How many evolutions has it had?
-    public int[] CharacterTypes; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
+    public int[] CharacterTypes = { 0 }; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
 
     public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;

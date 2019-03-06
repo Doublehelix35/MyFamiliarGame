@@ -11,12 +11,23 @@ public class CameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 dir = new Vector3(PlayerRef.transform.position.x - transform.position.x, 0f, 0f);
-        transform.Translate(dir * Speed * Time.deltaTime);
+        if(PlayerRef != null)
+        {
+            Vector3 dir = new Vector3(PlayerRef.transform.position.x - transform.position.x, 0f, 0f);
+            transform.Translate(dir * Speed * Time.deltaTime);
+        }        
 	}
 
     public void SetPlayerRef(GameObject playerRef)
     {
-        PlayerRef = playerRef;
+        if(playerRef = null)
+        {
+            PlayerRef = playerRef;
+            Debug.Log("Player ref is Null!");
+        }
+        else
+        {
+            PlayerRef = playerRef;
+        }        
     }
 }

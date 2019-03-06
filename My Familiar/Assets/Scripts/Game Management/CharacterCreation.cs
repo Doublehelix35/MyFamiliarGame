@@ -34,7 +34,8 @@ public class CharacterCreation : MonoBehaviour {
 
     void Start()
     {
-        //ActiveMeshObject = CreateMesh(PartName, testVert);
+        // Uncomment below for test parts
+        // = CreateMesh(PartName, testVert);
         //ActiveMeshObjectIsBuilt = true;
 
         lineRend = gameObject.AddComponent<LineRenderer>();

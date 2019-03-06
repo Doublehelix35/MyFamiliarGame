@@ -20,6 +20,8 @@ public class Load_Character : MonoBehaviour
     float ScaleMultiplier = 0.2f;
     float Drag = 0.3f;
 
+    bool IsfileNew = true;
+
     internal int LoadCurrentSlot()
     {
         // Create a binary formatter and open the save file
@@ -28,6 +30,10 @@ public class Load_Character : MonoBehaviour
 
         // Create an object to store information from the file in and then close the file
         CharacterData data = (CharacterData)bf.Deserialize(file);
+
+        // Find out whether save is new or not
+        IsfileNew = data.FileIsNew;
+
         file.Close();
 
         return data.SaveSlotInUse;
@@ -50,13 +56,26 @@ public class Load_Character : MonoBehaviour
     // Load whole character
     internal GameObject Load(string CharacterName)
     {
-        // Create a binary formatter and open the save file
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + ".dat", FileMode.Open);
+        // If existing save file then read data
+        CharacterData data = new CharacterData(); // Store save data
 
-        // Create an object to store information from the file in and then close the file
-        CharacterData data = (CharacterData)bf.Deserialize(file);
-        file.Close();
+        // Check if save is new or not
+        if (IsfileNew == false) // Existing file
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+            file.Close();
+        }
+        else // New file
+        {
+            // Set data thats important for the code that follows
+            data.EvolutionCount = 0;
+            data.Level = 1;
+        }        
 
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
@@ -69,10 +88,10 @@ public class Load_Character : MonoBehaviour
         Body.AddComponent<Character>();
 
         // Load stats
-
+        Body.GetComponent<Character>().Level = data.Level;
 
         // Evolution count
-        Body.GetComponent<Character>().CurrentEvolutionStage = data.EvolutionCount;
+        Body.GetComponent<Character>().CurrentEvolutionStage = data.EvolutionCount;       
 
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if(data.EvolutionCount > 0)
@@ -82,11 +101,10 @@ public class Load_Character : MonoBehaviour
         }
         else // Hasnt evolved yet
         {
-            ScaleMultiplier *= 0.6f;
-            SeperationMultipler *= 0.6f;
+            ScaleMultiplier *= 0.8f;
+            SeperationMultipler *= 0.8f;
         }
-        
-        
+
         // Load character types from the int array
         for(int i = 0; i < data.CharacterTypes.Length; i++)
         {

@@ -31,10 +31,10 @@ public class Character : MonoBehaviour
     float Speed = 1f;
 
     // Leveling
-    int Level = 1;
+    public int Level = 1;
     int Experience = 0;
     int ExpToLevelUp = 1;
-    int[] LevelsToEvolveAt = { 5, 10, 15 }; // Levels that character evolves at
+    int[] LevelsToEvolveAt = { 2, 5, 10, 15 }; // Levels that character evolves at
     internal int CurrentEvolutionStage = 0; // How many times has it evolved?
 
     // Elemental spec points
@@ -71,9 +71,14 @@ public class Character : MonoBehaviour
         ExpToLevelUp = ExpNeededForNextLevel();
 
         // Init Element typing
-        CharactersElementTypes.Add(Elements.ElementType.NonElemental);
+        if(CharactersElementTypes.Count >= 0) // no element type found
+        {
+            CharactersElementTypes.Add(Elements.ElementType.NonElemental);
+        }
+
 
         // Init UI texts
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
@@ -199,7 +204,7 @@ public class Character : MonoBehaviour
     {
         Experience += expPoints;
 
-        if (Experience >= ExpToLevelUp)
+        if (Experience > ExpToLevelUp)
         {
             Level++;
             Experience = Experience - ExpToLevelUp; // Carry over leftover exp
@@ -209,31 +214,35 @@ public class Character : MonoBehaviour
             for(int i = 0; i < LevelsToEvolveAt.Length; i++) // Loop through levels to evolve at to search for a match
             {
                 if (Level == LevelsToEvolveAt[i])
-                {
+                {                    
                     CurrentEvolutionStage++; // Increase count of evolutions
 
-                    CharactersElementTypes.Add(CalculateNewTypeForEvolution()); // Add new type based on spec points
-                    if(i == 0) // First evolution
+                    // Add new type based on spec points
+                    CharactersElementTypes.Add(CalculateNewTypeForEvolution()); 
+                    if(CurrentEvolutionStage == 1) // First evolution
                     {
                         CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
-                    }                    
-                    GameManagerRef.GetComponent<GameManager>().EvolveToNextStage();
+                    }
+                    // Increase stats
+                    LevelUpStats();
+
+                    // Save evolution and reload                
+                    GameManagerRef.GetComponent<GameManager>().EvolveToNextStage(gameObject);
                 }
-            }            
-
-            // Increase stats
-            LevelUpStats();
+            }    
+            
         }
-
         // Update UI
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
+                                                                          NaturePoints.ToString(), WaterPoints.ToString());
     }
 
     int ExpNeededForNextLevel() // Formula for calculating exp needed to reach the next level
     {
         float exponent = 1.5f; // i.e. x^2, 2 would be the exponent
-        int baseExp = 30;
+        int baseExp = 10;
         int expToReturn = (int)Mathf.Floor(baseExp * Mathf.Pow(Level, exponent));
 
         return expToReturn;
