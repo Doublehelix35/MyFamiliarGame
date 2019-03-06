@@ -170,6 +170,31 @@ public class Character : MonoBehaviour
                                                                           NaturePoints.ToString(), WaterPoints.ToString());
     }
 
+    Elements.ElementType CalculateNewTypeForEvolution()
+    {
+        Elements.ElementType typeToReturn = Elements.ElementType.NonElemental;
+
+        // Choose type based on type with highest points       
+        int[] typePoints = { AirPoints, EarthPoints, FirePoints, NaturePoints, WaterPoints };
+        Elements.ElementType[] types = { Elements.ElementType.Air, Elements.ElementType.Earth, Elements.ElementType.Fire, Elements.ElementType.Nature, Elements.ElementType.Water };
+        int highestPoint = 0;
+
+        // Loop through all element points and find biggest
+        for(int i = 0; i < typePoints.Length; i++)
+        {
+            if(typePoints[i] > highestPoint) // Is new point higher than the last?
+            {
+                highestPoint = typePoints[i]; // Update highest point
+                typeToReturn = types[i]; // Set type to return to corresponding type
+            }
+        }
+
+        // Reset all spec points to 0
+        AirPoints = 0; EarthPoints = 0; FirePoints = 0; NaturePoints = 0; WaterPoints = 0;
+
+        return typeToReturn;
+    }
+
     public void GainExp(int expPoints)
     {
         Experience += expPoints;
@@ -187,7 +212,7 @@ public class Character : MonoBehaviour
                 {
                     CurrentEvolutionStage++; // Increase count of evolutions
 
-                    CharactersElementTypes.Add(Elements.ElementType.Air); // Add new type
+                    CharactersElementTypes.Add(CalculateNewTypeForEvolution()); // Add new type based on spec points
                     if(i == 0) // First evolution
                     {
                         CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Object refs
+    public Save_Character SaveRef;
     public Load_Character LoadRef;    
-    GameObject CharacterRef;
+    GameObject CharacterRef; // This is the body object as thats what the character script is on
     public GameObject CameraRef;
 
     // Texts
@@ -116,7 +117,13 @@ public class GameManager : MonoBehaviour
     internal void EvolveToNextStage()
     {
         // Evolve and save new type
+        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), CharacterRef); // Load name from current slot to ensure names line up for saving and loading
 
+        // Delete old character
+        Destroy(CharacterRef.transform.parent); // Char Ref is the body object so we need to delete the parent
+
+        // Reload character
+        CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
     }
 
     // Text update methods

@@ -7,7 +7,14 @@ using System.IO;
 public class Load_Character : MonoBehaviour
 {
 
-    public Material FaceMat;
+    public Material NonElementalMat;
+    public Material AirMat;
+    public Material EarthMat;
+    public Material FireMat;
+    public Material NatureMat;
+    public Material WaterMat;
+
+    Material MatToApply;
 
     float SeperationMultipler = 0.03f;
     float ScaleMultiplier = 0.2f;
@@ -43,6 +50,14 @@ public class Load_Character : MonoBehaviour
     // Load whole character
     internal GameObject Load(string CharacterName)
     {
+        // Create a binary formatter and open the save file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + ".dat", FileMode.Open);
+
+        // Create an object to store information from the file in and then close the file
+        CharacterData data = (CharacterData)bf.Deserialize(file);
+        file.Close();
+
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
         if(CharacterToReturn.name == "") { CharacterToReturn.name = "NO NAME FOUND"; }
@@ -52,6 +67,61 @@ public class Load_Character : MonoBehaviour
 
         // Add character script to body
         Body.AddComponent<Character>();
+
+        // Load stats
+
+
+        // Evolution count
+        Body.GetComponent<Character>().CurrentEvolutionStage = data.EvolutionCount;
+
+        // Adjust scale multiplier and seperation multiplier to factor in evolution
+        if(data.EvolutionCount > 0)
+        {
+            ScaleMultiplier *= data.EvolutionCount;
+            SeperationMultipler *= data.EvolutionCount;
+        }
+        else // Hasnt evolved yet
+        {
+            ScaleMultiplier *= 0.6f;
+            SeperationMultipler *= 0.6f;
+        }
+        
+        
+        // Load character types from the int array
+        for(int i = 0; i < data.CharacterTypes.Length; i++)
+        {
+            switch (data.CharacterTypes[i])
+            {
+                case 0: // Non-elemental
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.NonElemental);
+                    MatToApply = NonElementalMat; // Set material
+                    break;
+                case 1: // Air
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Air);
+                    MatToApply = AirMat; // Set material
+                    break;
+                case 2: // Earth
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Earth);
+                    MatToApply = EarthMat; // Set material
+                    break;
+                case 3: // Fire
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Fire);
+                    MatToApply = FireMat; // Set material
+                    break;
+                case 4: // Nature
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Nature);
+                    MatToApply = NatureMat; // Set material
+                    break;
+                case 5: // Water
+                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Water);
+                    MatToApply = WaterMat; // Set material
+                    break;
+                default:
+                    break;
+            }            
+        }        
+
+
 
         // Define Part seperation offset
         Vector3 baseSize = Body.GetComponent<Renderer>().bounds.size;
@@ -168,7 +238,7 @@ public class Load_Character : MonoBehaviour
             GameObjectToReturn.GetComponent<MeshFilter>().mesh = newMesh;
 
             // Load material
-            GameObjectToReturn.GetComponent<MeshRenderer>().material = FaceMat;
+            GameObjectToReturn.GetComponent<MeshRenderer>().material = MatToApply;
 
         }
         else // File not found

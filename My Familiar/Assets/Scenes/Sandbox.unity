@@ -6811,6 +6811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2106336107}
   - component: {fileID: 2106336106}
+  - component: {fileID: 2106336110}
   - component: {fileID: 2106336108}
   - component: {fileID: 2106336109}
   m_Layer: 0
@@ -6832,7 +6833,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbce003165ecd2247b04738eb037ec4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FaceMat: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
+  NonElementalMat: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
+  AirMat: {fileID: 2100000, guid: 9459671cb86f3c14a87aeddf7a24b3e8, type: 2}
+  EarthMat: {fileID: 2100000, guid: 7aff1df6dbeb1204f8e25373c04dd9dc, type: 2}
+  FireMat: {fileID: 2100000, guid: b42d56007386ea94b9649146c286e759, type: 2}
+  NatureMat: {fileID: 2100000, guid: 7050d0579d4ae9246a18fdf0f31bf811, type: 2}
+  WaterMat: {fileID: 2100000, guid: 3e24dea351fe7c14593f5b9d614cecfe, type: 2}
 --- !u!4 &2106336107
 Transform:
   m_ObjectHideFlags: 0
@@ -6859,6 +6865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbdaf86d54d7414d8475ee78b4377fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveRef: {fileID: 2106336110}
   LoadRef: {fileID: 2106336106}
   CameraRef: {fileID: 2146963005}
   CharacterNameText: {fileID: 1651399370}
@@ -6885,6 +6892,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnableObject: {fileID: 0}
   SpawnLocation: {fileID: 495413313}
+--- !u!114 &2106336110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106336105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5820acf7f9e806b4b853865878d06730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveSlotInputs: []
 --- !u!1 &2144501147
 GameObject:
   m_ObjectHideFlags: 0
