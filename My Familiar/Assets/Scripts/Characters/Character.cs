@@ -16,7 +16,8 @@ public class Character : MonoBehaviour
     public bool ThisCharacterIsActive = true;
 
     // Stats
-    internal int HealthMax;
+    internal int HealthMax = 60;
+    internal int HealthInitial = 20;
     internal int HappinessMax = 50;
     int Health = 0;
     int Happiness = 1;
@@ -67,7 +68,7 @@ public class Character : MonoBehaviour
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
 
         // Init stats
-        Health = HealthMax;
+        Health = HealthInitial;
         DamageTakenTime = Time.time;
         ExpToLevelUp = ExpNeededForNextLevel();
 
@@ -123,7 +124,6 @@ public class Character : MonoBehaviour
             // Player dead or exhausted
             //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
         }
-
 
         if (value < 0) // Damage was taken
         {
