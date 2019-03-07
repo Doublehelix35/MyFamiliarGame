@@ -55,7 +55,6 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + ".dat");
-        Debug.Log("/" + CharacterName + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
@@ -95,10 +94,7 @@ public class Save_Character : MonoBehaviour {
                     break;
             }
         }
-
-        // File is no longer new
-        data.FileIsNew = false;
-
+        
         // Write the object to file and close it
         bf.Serialize(file, data);
         file.Close();
@@ -150,7 +146,6 @@ class CharacterData
     public string CharacterName;
     public string CharacterPart;
     public int SaveSlotInUse;
-    public bool FileIsNew = true;
 
     public string MaterialName;
     public int Level;

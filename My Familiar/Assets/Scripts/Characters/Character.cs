@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
 
     // Object Refs
     GameObject GameManagerRef;
+    public bool ThisCharacterIsActive = true;
 
     // Stats
     internal int HealthMax;
@@ -226,11 +227,12 @@ public class Character : MonoBehaviour
                     // Increase stats
                     LevelUpStats();
 
-                    // Save evolution and reload                
+                    // Save evolution and reload      
+                    ThisCharacterIsActive = false; // Dont interact with anything else
                     GameManagerRef.GetComponent<GameManager>().EvolveToNextStage(gameObject);
+                    return;
                 }
-            }    
-            
+            }               
         }
         // Update UI
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
@@ -326,7 +328,7 @@ public class Character : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.GetComponent<Item>())
+        if (col.gameObject.GetComponent<Item>() && ThisCharacterIsActive)
         {
             col.gameObject.GetComponent<Item>().Interact(gameObject);
         }

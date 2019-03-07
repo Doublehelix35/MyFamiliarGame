@@ -114,8 +114,6 @@ public class GameManager : MonoBehaviour
     // Evolve character and update save
     internal void EvolveToNextStage(GameObject ObjectToEvolve)
     {
-        // *********** Problem is with save() ***************
-
         // Evolve and save new type
         SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToEvolve); // Load name from current slot to ensure names line up for saving and loading
         

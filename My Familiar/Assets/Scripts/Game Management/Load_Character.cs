@@ -20,8 +20,6 @@ public class Load_Character : MonoBehaviour
     float ScaleMultiplier = 0.2f;
     float Drag = 0.3f;
 
-    bool IsfileNew = true;
-
     internal int LoadCurrentSlot()
     {
         // Create a binary formatter and open the save file
@@ -30,10 +28,7 @@ public class Load_Character : MonoBehaviour
 
         // Create an object to store information from the file in and then close the file
         CharacterData data = (CharacterData)bf.Deserialize(file);
-
-        // Find out whether save is new or not
-        IsfileNew = data.FileIsNew;
-
+        
         file.Close();
 
         return data.SaveSlotInUse;
@@ -60,7 +55,7 @@ public class Load_Character : MonoBehaviour
         CharacterData data = new CharacterData(); // Store save data
 
         // Check if save is new or not
-        if (IsfileNew == false) // Existing file
+        if (File.Exists(Application.persistentDataPath + "/" + CharacterName + ".dat")) // Existing file
         {
             // Create a binary formatter and open the save file
             BinaryFormatter bf = new BinaryFormatter();
@@ -137,9 +132,10 @@ public class Load_Character : MonoBehaviour
                 default:
                     break;
             }            
-        }        
+        }
 
-
+        // Set body mat
+        Body.GetComponent<MeshRenderer>().material = MatToApply;
 
         // Define Part seperation offset
         Vector3 baseSize = Body.GetComponent<Renderer>().bounds.size;
