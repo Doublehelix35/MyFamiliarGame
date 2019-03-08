@@ -32,6 +32,15 @@ public class Character : MonoBehaviour
     float DodgeChance = 1f; // Chance to dodge an incoming attack
     float Speed = 1f;
 
+    // Stomach/Fullness (%)
+    float CurrentFullness = 20f;
+    float MinFullness = 0f;
+    float MaxFullness = 100f;
+    float FullnessLastTickTime; // Time of the last tick
+    public float FullnessTickFrequency = 5f; // How often fullness decreases
+    public float FullnessTickPower = 1f; // How much to remove from fullness every tick
+
+
     // Leveling
     public int Level = 1;
     int Experience = 0;
@@ -71,6 +80,7 @@ public class Character : MonoBehaviour
         Health = HealthInitial;
         DamageTakenTime = Time.time;
         ExpToLevelUp = ExpNeededForNextLevel();
+        FullnessLastTickTime = Time.time;
 
         // Init Element typing
         if(CharactersElementTypes.Count >= 0) // no element type found
@@ -85,6 +95,22 @@ public class Character : MonoBehaviour
         GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
+    }
+
+    void Update()
+    {
+        // Fullness decrease
+        if(FullnessLastTickTime + FullnessTickFrequency < Time.time)
+        {
+            // Reduce fullness
+            CurrentFullness -= FullnessTickPower;
+
+            // Clamp current fullness between min and max
+            Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness); 
+
+            // Reset last tick time
+            FullnessLastTickTime = Time.time;
+        }
     }
 
     // Sets move slot equal to the move that is passed in
@@ -134,6 +160,7 @@ public class Character : MonoBehaviour
         GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
     }
 
+    // To gain happiness pass in positive value, to lose happiness pass in negative value
     public void ChangeHappiness(int value)
     {
         Happiness += value;
@@ -144,6 +171,15 @@ public class Character : MonoBehaviour
         // Update ui
         GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
     } 
+
+    // To gain fullness pass in positive value, to lose fullness pass in negative value
+    public void ChangeFullness(int value)
+    {
+        CurrentFullness += value;
+
+        // Clamp current fullness between min and max
+        Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
+    }
 
     public void GainElementSpecPoints(Elements.ElementType ElementToGainPoints, int pointValue)
     {
