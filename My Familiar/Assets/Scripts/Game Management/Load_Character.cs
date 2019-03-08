@@ -22,14 +22,27 @@ public class Load_Character : MonoBehaviour
 
     internal int LoadCurrentSlot()
     {
-        // Create a binary formatter and open the save file
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat", FileMode.Open);
+        CharacterData data = new CharacterData();
 
-        // Create an object to store information from the file in and then close the file
-        CharacterData data = (CharacterData)bf.Deserialize(file);
+        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+
+            file.Close();
+        }
+        else
+        {
+            // Default to slot 1
+            data.SaveSlotInUse = 1;
+
+            Debug.Log("Error! Current slot not found!");
+        }
         
-        file.Close();
 
         return data.SaveSlotInUse;
     }
@@ -37,13 +50,23 @@ public class Load_Character : MonoBehaviour
     // Load save slot
     internal string Load(int SaveFileSlot)
     {
-        // Create a binary formatter and open the save file
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/" + "SaveSlot" + SaveFileSlot + ".dat", FileMode.Open);
+        CharacterData data = new CharacterData();
 
-        // Create an object to store information from the file in and then close the file
-        CharacterData data = (CharacterData)bf.Deserialize(file);
-        file.Close();
+        if(File.Exists(Application.persistentDataPath + "/" + "SaveSlot" + SaveFileSlot + ".dat"))
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + "SaveSlot" + SaveFileSlot + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+            file.Close();
+        }
+        else
+        {
+            data.CharacterName = "Error!";
+            Debug.Log("Save slot data not found!");
+        }        
 
         return data.CharacterName;
     }

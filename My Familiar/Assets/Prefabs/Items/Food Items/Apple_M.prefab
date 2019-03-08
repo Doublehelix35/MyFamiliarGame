@@ -128,3 +128,4 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 3
   LifeSpan: 5
+  FullnessChangeValue: 40

@@ -33,12 +33,12 @@ public class Character : MonoBehaviour
     float Speed = 1f;
 
     // Stomach/Fullness (%)
-    float CurrentFullness = 20f;
-    float MinFullness = 0f;
-    float MaxFullness = 100f;
+    int CurrentFullness = 20;
+    int MinFullness = 0;
+    int MaxFullness = 100;
     float FullnessLastTickTime; // Time of the last tick
     public float FullnessTickFrequency = 5f; // How often fullness decreases
-    public float FullnessTickPower = 1f; // How much to remove from fullness every tick
+    public int FullnessTickPower = 1; // How much to remove from fullness every tick
 
 
     // Leveling
@@ -94,6 +94,7 @@ public class Character : MonoBehaviour
         GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
         GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
     }
 
@@ -106,10 +107,13 @@ public class Character : MonoBehaviour
             CurrentFullness -= FullnessTickPower;
 
             // Clamp current fullness between min and max
-            Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness); 
+            CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness); 
 
             // Reset last tick time
             FullnessLastTickTime = Time.time;
+
+            // Update ui
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
         }
     }
 
@@ -166,7 +170,7 @@ public class Character : MonoBehaviour
         Happiness += value;
 
         // Clamp happiness between happiness min and max
-        Mathf.Clamp(Happiness, -HappinessMax, HappinessMax);
+        Happiness = Mathf.Clamp(Happiness, -HappinessMax, HappinessMax);
 
         // Update ui
         GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
@@ -178,7 +182,10 @@ public class Character : MonoBehaviour
         CurrentFullness += value;
 
         // Clamp current fullness between min and max
-        Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
+        CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
+
+        // Update ui 
+        GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
     }
 
     public void GainElementSpecPoints(Elements.ElementType ElementToGainPoints, int pointValue)

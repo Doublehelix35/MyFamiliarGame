@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Text ExpText;
     public Text HappinessText;
     public Text HealthText;
+    public Text FullnessText;
 
     // Spec point Texts
     public Text AirText;
@@ -36,11 +37,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Load character based on current save slot in use        
-        //CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
-        //UpdateText_CharacterName(CharacterRef.name); // Name originally set during loading in above line
-        //CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
-        //CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
         ReloadCharacter();
     }
 
@@ -165,6 +161,11 @@ public class GameManager : MonoBehaviour
     public void UpdateText_Health(string currentHealth)
     {
         HealthText.text = currentHealth;
+    }
+
+    public void UpdateText_Fullness(string currentFullness)
+    {
+        FullnessText.text = currentFullness + "/100 (%)";
     }
 
     // Updates element spec texts

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item_Apple : Item
 {
+    public int FullnessChangeValue;
+
     // Player calls this when Apple collides with it
     public override void Interact(GameObject player)
     {
@@ -12,6 +14,9 @@ public class Item_Apple : Item
 
         // Give Happiness value
         player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
+
+        // Give Fullness
+        player.GetComponent<Character>().ChangeFullness(FullnessChangeValue);
 
         // Destroy self
         Destroy(gameObject);

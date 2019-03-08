@@ -2040,7 +2040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -37.339996, y: 68.25}
+  m_AnchoredPosition: {x: -37.339844, y: 68.25}
   m_SizeDelta: {x: 74.68, y: 72.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418846263
@@ -3150,7 +3150,7 @@ GameObject:
   - component: {fileID: 736844512}
   - component: {fileID: 736844511}
   m_Layer: 5
-  m_Name: Experience_num
+  m_Name: Stomach_num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8334,6 +8334,7 @@ MonoBehaviour:
   ExpText: {fileID: 1202359059}
   HappinessText: {fileID: 1865914295}
   HealthText: {fileID: 1411108084}
+  FullnessText: {fileID: 736844511}
   AirText: {fileID: 1326081624}
   EarthText: {fileID: 29817597}
   FireText: {fileID: 1745040043}
