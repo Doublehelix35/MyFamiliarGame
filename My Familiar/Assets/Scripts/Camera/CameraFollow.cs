@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour {
 
     public float Speed = 1f;
 
-    GameObject PlayerRef;
+    GameObject PlayerRef; // Player's parent object
 	
 	// Update is called once per frame
 	void Update ()

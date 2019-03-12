@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     // Object Refs
     GameObject GameManagerRef;
     public bool ThisCharacterIsActive = true;
+    public bool InBattleMode = false;
 
     // Stats
     internal int HealthMax = 60;
@@ -56,9 +57,9 @@ public class Character : MonoBehaviour
     int WaterPoints = 0;
 
     // Moves known
-    Elements.ElementalMoves MoveSlot1 = Elements.ElementalMoves.EmptyMoveSlot;
-    Elements.ElementalMoves MoveSlot2 = Elements.ElementalMoves.EmptyMoveSlot;
-    Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.EmptyMoveSlot;
+    internal Elements.ElementalMoves MoveSlot1 = Elements.ElementalMoves.Tackle;
+    internal Elements.ElementalMoves MoveSlot2 = Elements.ElementalMoves.FireBlaze;
+    internal Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.EmptyMoveSlot;
 
     // Elemental typing
     internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
@@ -71,11 +72,24 @@ public class Character : MonoBehaviour
         // the character should be passed in to be handled internally
     }
 
-    void Start()
+    void Awake()
     {
         // Init object refs
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
 
+        // Set in battle mode?
+        if (GameManagerRef.GetComponent<BattleManager>().isActiveAndEnabled)
+        {
+            InBattleMode = true;
+        }
+        else
+        {
+            InBattleMode = false;
+        }
+    }
+
+    void Start()
+    {
         // Init stats
         Health = HealthInitial;
         DamageTakenTime = Time.time;
@@ -90,18 +104,25 @@ public class Character : MonoBehaviour
 
 
         // Init UI texts
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
+        if (InBattleMode)
+        {
+            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(Health.ToString());
+        }
+        else
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
+        }
     }
 
     void Update()
     {
         // Fullness decrease
-        if(FullnessLastTickTime + FullnessTickFrequency < Time.time)
+        if(FullnessLastTickTime + FullnessTickFrequency < Time.time && !InBattleMode)
         {
             // Reduce fullness
             CurrentFullness -= FullnessTickPower;
@@ -161,7 +182,15 @@ public class Character : MonoBehaviour
         }
 
         // Update ui
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+        if (InBattleMode)
+        {
+            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(Health.ToString());
+        }
+        else
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+        }
+        
     }
 
     // To gain happiness pass in positive value, to lose happiness pass in negative value
@@ -173,7 +202,10 @@ public class Character : MonoBehaviour
         Happiness = Mathf.Clamp(Happiness, -HappinessMax, HappinessMax);
 
         // Update ui
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+        if (!InBattleMode)
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+        }        
     } 
 
     // To gain fullness pass in positive value, to lose fullness pass in negative value
@@ -185,7 +217,10 @@ public class Character : MonoBehaviour
         CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
 
         // Update ui 
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+        if (!InBattleMode)
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+        }        
     }
 
     public void GainElementSpecPoints(Elements.ElementType ElementToGainPoints, int pointValue)
@@ -215,8 +250,11 @@ public class Character : MonoBehaviour
                 break;
         }
         // Update UI
-        GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
+        if (!InBattleMode)
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
                                                                           NaturePoints.ToString(), WaterPoints.ToString());
+        }        
     }
 
     Elements.ElementType CalculateNewTypeForEvolution()
@@ -278,10 +316,13 @@ public class Character : MonoBehaviour
             }               
         }
         // Update UI
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
-        GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
-                                                                          NaturePoints.ToString(), WaterPoints.ToString());
+        if (!InBattleMode)
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
+                                                                              NaturePoints.ToString(), WaterPoints.ToString());
+        }        
     }
 
     int ExpNeededForNextLevel() // Formula for calculating exp needed to reach the next level

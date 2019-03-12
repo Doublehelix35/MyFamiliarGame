@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     // Object refs
     public Save_Character SaveRef;
     public Load_Character LoadRef;    
-    GameObject CharacterRef; // This is the body object as thats what the character script is on
+    GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
 
     // Texts
