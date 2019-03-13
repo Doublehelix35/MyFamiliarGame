@@ -16,7 +16,6 @@ public class BattleManager : MonoBehaviour
     // Texts
     public Text CharacterNameText;
     public Text HealthText;
-    public Text EnemyHealthText;
     public Text MoveButtonText1;
     public Text MoveButtonText2;
     public Text MoveButtonText3;
@@ -69,11 +68,6 @@ public class BattleManager : MonoBehaviour
     public void UpdateText_Health(string currentHealth)
     {
         HealthText.text = currentHealth;
-    }
-
-    public void UpdateText_EnemyHealth(string currentEnemyHealth)
-    {
-        EnemyHealthText.text = currentEnemyHealth;
     }
 
     public void UpdateText_Moves(int moveSlotNum, Elements.ElementalMoves move)

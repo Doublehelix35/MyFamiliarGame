@@ -3074,6 +3074,7 @@ GameObject:
   - component: {fileID: 2106336110}
   - component: {fileID: 2106336108}
   - component: {fileID: 2106336111}
+  - component: {fileID: 2106336109}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -3130,10 +3131,32 @@ MonoBehaviour:
   CameraRef: {fileID: 2146963005}
   CharacterNameText: {fileID: 1651399370}
   HealthText: {fileID: 1411108084}
-  EnemyHealthText: {fileID: 1389178852}
   MoveButtonText1: {fileID: 2113768083}
   MoveButtonText2: {fileID: 2063565761}
   MoveButtonText3: {fileID: 1524392443}
+--- !u!114 &2106336109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106336105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36f17d6c36571e4292a039c9238f72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyHealthText: {fileID: 1389178852}
+  EnemyVert:
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 5, z: 0}
+  - {x: 5, y: 5, z: 0}
+  NonElementalMat: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
+  AirMat: {fileID: 2100000, guid: 9459671cb86f3c14a87aeddf7a24b3e8, type: 2}
+  EarthMat: {fileID: 2100000, guid: 7aff1df6dbeb1204f8e25373c04dd9dc, type: 2}
+  FireMat: {fileID: 2100000, guid: b42d56007386ea94b9649146c286e759, type: 2}
+  NatureMat: {fileID: 2100000, guid: 7050d0579d4ae9246a18fdf0f31bf811, type: 2}
+  WaterMat: {fileID: 2100000, guid: 3e24dea351fe7c14593f5b9d614cecfe, type: 2}
 --- !u!114 &2106336110
 MonoBehaviour:
   m_ObjectHideFlags: 0
