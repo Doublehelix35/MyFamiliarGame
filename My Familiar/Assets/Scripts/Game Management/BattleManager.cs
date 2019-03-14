@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour
     public Save_Character SaveRef;
     public Load_Character LoadRef;
     GameObject CharacterRef; // This is the parent object
+    GameObject EnemyRef;
     public GameObject CameraRef;
     Elements element;
 
@@ -20,11 +21,11 @@ public class BattleManager : MonoBehaviour
     public Text MoveButtonText2;
     public Text MoveButtonText3;
 
-    
+
     void Awake()
     {
         // Init objects
-        element = gameObject.AddComponent<Elements>();
+        element = GetComponent<Elements>();
         ReloadCharacter();
     }
 
@@ -57,6 +58,53 @@ public class BattleManager : MonoBehaviour
 
         CharacterRef.transform.position += new Vector3(-6f, 4f, 0f); // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
+    }
+
+    // Move buttons
+    public void MoveButton(int buttonNum)
+    {
+        Character charScript = CharacterRef.GetComponentInChildren<Character>();
+        bool giveTypeBoost = false;
+        Vector3 spawnOffset = new Vector3(1f, 1f, 0f);
+
+        switch (buttonNum)
+        {
+            case 1: // Move slot 1
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot1]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(charScript.MoveSlot1, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                break;
+
+            case 2: // Move slot 2
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot2]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(charScript.MoveSlot2, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                break;
+
+            case 3: // Move slot 3
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot3]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(charScript.MoveSlot3, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                break;
+
+            default:
+                Debug.Log("Button num isn't valid. There are only 3 buttons!");
+                break;
+        }
+    }
+
+    public void SetEnemyRef(GameObject enemyRef)
+    {
+        EnemyRef = enemyRef;
     }
 
     // Text update methods

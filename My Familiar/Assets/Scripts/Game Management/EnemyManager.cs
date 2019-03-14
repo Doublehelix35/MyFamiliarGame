@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     // Object refs
+    GameObject BattleManagerRef;
     GameObject EnemyRef; // This is the parent object
     Elements element;
 
@@ -47,6 +48,10 @@ public class EnemyManager : MonoBehaviour
         // Set material to match type
         MatToApply = FireMat;
         BuildEnemy();
+
+        // Give battle manager enemy ref
+        BattleManagerRef = GameObject.FindGameObjectWithTag("GameController");
+        BattleManagerRef.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);        
     }
 
     internal void BuildEnemy()

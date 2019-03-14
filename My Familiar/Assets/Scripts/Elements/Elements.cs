@@ -63,7 +63,7 @@ public class Elements : MonoBehaviour {
                 moveString = "Fire Blaze";
                 break;
             case ElementalMoves.NaturesWrath:
-                moveString = "NaturesWrath";
+                moveString = "Natures Wrath";
                 break;
             case ElementalMoves.Tackle:
                 moveString = "Tackle";
@@ -77,7 +77,7 @@ public class Elements : MonoBehaviour {
         return moveString;
     }
 
-    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, float attackValue, Transform target, Transform spawnLocation)
+    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, float attackValue, Transform target, Vector3 spawnLocation)
     {
         // Set type boost
         float typeBoost = 1f;
@@ -95,7 +95,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.AirStrike:
                 // Spawn air strike at spawn location
-                GameObject airStrike = Instantiate(AirStrikePrefab, spawnLocation.position, Quaternion.identity);
+                GameObject airStrike = Instantiate(AirStrikePrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 airStrike.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
@@ -104,7 +104,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.EarthQuake:
                 // Spawn earthquake at spawn location
-                GameObject earthQuake = Instantiate(EarthQuakePrefab, spawnLocation.position, Quaternion.identity);
+                GameObject earthQuake = Instantiate(EarthQuakePrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 earthQuake.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
@@ -113,7 +113,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.FireBlaze:
                 // Spawn fire blaze at spawn location
-                GameObject fireBlaze = Instantiate(FireBlazePrefab, spawnLocation.position, Quaternion.identity);
+                GameObject fireBlaze = Instantiate(FireBlazePrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 fireBlaze.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
@@ -122,7 +122,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.NaturesWrath:
                 // Spawn natures wrath at spawn location
-                GameObject naturesWrath = Instantiate(NaturesWrathPrefab, spawnLocation.position, Quaternion.identity);
+                GameObject naturesWrath = Instantiate(NaturesWrathPrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 naturesWrath.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
@@ -131,7 +131,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.Tackle:
                 // Spawn tackle at spawn location
-                GameObject tackle = Instantiate(TacklePrefab, spawnLocation.position, Quaternion.identity);
+                GameObject tackle = Instantiate(TacklePrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 tackle.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
@@ -140,7 +140,7 @@ public class Elements : MonoBehaviour {
 
             case ElementalMoves.WaterBlast:
                 // Spawn water blast at spawn location
-                GameObject waterBlast = Instantiate(AirStrikePrefab, spawnLocation.position, Quaternion.identity);
+                GameObject waterBlast = Instantiate(WaterBlastPrefab, spawnLocation, Quaternion.identity);
                 // Set target
                 waterBlast.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage

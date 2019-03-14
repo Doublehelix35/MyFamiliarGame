@@ -104,7 +104,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0.2
   m_AngularDrag: 0.1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ff3c29e57254e49ab32c9c62b0c7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileType: 0
+  ProjectileForce: 200

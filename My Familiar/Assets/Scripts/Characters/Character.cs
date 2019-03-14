@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
     float DamageTakenTime;
 
     // Battle stats
-    float Attack = 1f;
+    internal float Attack = 1f;
     float Accuracy = 1f; // Determines if a move hits or misses
     float CritChance = 1f; // Chance to get a critical hit
     float Defence = 1f;
@@ -56,13 +56,13 @@ public class Character : MonoBehaviour
     int NaturePoints = 0;
     int WaterPoints = 0;
 
+    // Elemental typing
+    internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
+
     // Moves known
     internal Elements.ElementalMoves MoveSlot1 = Elements.ElementalMoves.Tackle;
     internal Elements.ElementalMoves MoveSlot2 = Elements.ElementalMoves.FireBlaze;
-    internal Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.EmptyMoveSlot;
-
-    // Elemental typing
-    internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
+    internal Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.NaturesWrath;
 
     // Constructor
     internal Character()
