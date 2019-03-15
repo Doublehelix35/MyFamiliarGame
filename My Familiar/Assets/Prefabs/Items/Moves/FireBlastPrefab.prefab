@@ -129,4 +129,4 @@ MonoBehaviour:
   HappinessChangeValue: 0
   LifeSpan: 5
   itemType: 3
-  ProjectileForce: 200
+  ProjectileForce: 400

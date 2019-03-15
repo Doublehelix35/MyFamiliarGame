@@ -3168,6 +3168,10 @@ MonoBehaviour:
   MoveButtonText1: {fileID: 2113768083}
   MoveButtonText2: {fileID: 2063565761}
   MoveButtonText3: {fileID: 1524392443}
+  MoveButtons:
+  - {fileID: 1865768275}
+  - {fileID: 392990433}
+  - {fileID: 1411217134}
 --- !u!114 &2106336109
 MonoBehaviour:
   m_ObjectHideFlags: 0

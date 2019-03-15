@@ -19,14 +19,42 @@ public class BattleManager : MonoBehaviour
     public Text MoveButtonText1;
     public Text MoveButtonText2;
     public Text MoveButtonText3;
-    
+
+    // Buttons
+    public Button[] MoveButtons;    
+
+    // Move usage timer
+    float LastMoveUseTime;
+    float MoveUsageDelay = 2f;
+
     void Awake()
     {
         // Init objects
         element = GetComponent<Elements>();
         ReloadCharacter();
+
+        // Init timer so moves can be used from the start
+        LastMoveUseTime = Time.time - MoveUsageDelay;
     }
-    
+
+    void Update()
+    {
+        if(LastMoveUseTime + MoveUsageDelay > Time.time) // If move cooling down then disable buttons
+        {
+            foreach(Button b in MoveButtons)
+            {
+                b.interactable = false;
+            }
+        }
+        else // Reactivate buttons
+        {
+            foreach(Button b in MoveButtons)
+            {
+                b.interactable = true;
+            }
+        }
+    }
+
     internal void ReloadCharacter()
     {
         // Reload character
@@ -42,7 +70,7 @@ public class BattleManager : MonoBehaviour
 
         CharacterRef.transform.position += new Vector3(-6f, 4f, 0f); // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
-        gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager and enemy
+        gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager
     }
 
     // Move buttons
@@ -85,6 +113,9 @@ public class BattleManager : MonoBehaviour
                 Debug.Log("Button num isn't valid. There are only 3 buttons!");
                 break;
         }
+
+        // Reset timer
+        LastMoveUseTime = Time.time;
     }
 
     public void SetEnemyRef(GameObject enemyRef)

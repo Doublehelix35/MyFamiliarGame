@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     // Object refs
-    GameObject BattleManagerRef;
     GameObject EnemyRef; // This is the parent object
     GameObject PlayerRef; // this is the parent object
+
 
     // Texts
     public Text EnemyHealthText;
@@ -47,8 +47,7 @@ public class EnemyManager : MonoBehaviour
         BuildEnemy();
 
         // Give battle manager enemy ref
-        BattleManagerRef = GameObject.FindGameObjectWithTag("GameController");
-        BattleManagerRef.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);
+        gameObject.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);        
     }
     
     internal void BuildEnemy()
@@ -142,13 +141,13 @@ public class EnemyManager : MonoBehaviour
         Leg2.transform.parent = EnemyRef.transform;
 
         // Set up rididbodies and character joints
-        SetUpCharacterAsRagdoll(Body, Face, Arm1, Arm2, Leg1, Leg2);       
+        SetUpCharacterAsRagdoll(Body, Face, Arm1, Arm2, Leg1, Leg2);
 
-
-        EnemyRef.transform.position += new Vector3(6f, 4f, 0f); // Spawn above ground and to the right
+        // Spawn above ground and to the right
+        EnemyRef.transform.position += new Vector3(6f, 4f, 0f); 
 
         // Set player ref
-        EnemyRef.GetComponent<Enemy>().PlayerRef = PlayerRef;
+        Body.GetComponent<Enemy>().PlayerRef = PlayerRef;
     }
 
     GameObject CreateMesh(string meshPartName, Vector3[] newVerts)
@@ -262,7 +261,12 @@ public class EnemyManager : MonoBehaviour
 
     public void SetPlayerRef(GameObject playerRef)
     {
-        PlayerRef = playerRef;        
+        PlayerRef = playerRef;
+    }
+
+    public GameObject GetPlayerRef()
+    {
+        return PlayerRef;
     }
 
     // Text update methods

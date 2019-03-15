@@ -20,15 +20,30 @@ public class Projectile_Homing : Item
     // Player calls this when Projectile collides with it
     public override void Interact(GameObject characterToDamage)
     {
+        float damageModifier = 1f;
+
         if(characterToDamage.tag == "Player")
         {
+            // Set damage modifier
+            if (characterToDamage.GetComponent<Character>().CharactersElementTypes.Contains(itemType))
+            {
+                // Take half damage as character type matches projectile type
+                damageModifier = 0.5f;
+            }
+            //else if(true)
+            //{
+            //    damageModifier = 2f;
+            //}
+
             // Deal damage
-            characterToDamage.GetComponent<Character>().ChangeHealth(-Damage);
+            characterToDamage.GetComponent<Character>().ChangeHealth((int)(-Damage * damageModifier));
         }
         else // Enemy
         {
+            // Set damage modifier
+
             // Deal damage
-            characterToDamage.GetComponent<Enemy>().ChangeHealth(-Damage);
+            characterToDamage.GetComponent<Enemy>().ChangeHealth((int)(-Damage * damageModifier));
         }        
         
         // Destroy self

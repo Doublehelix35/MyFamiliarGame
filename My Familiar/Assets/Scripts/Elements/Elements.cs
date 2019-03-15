@@ -29,6 +29,27 @@ public class Elements : MonoBehaviour {
     float TackleMovePower = 1f;
     float WaterBlastMovePower = 2f;
 
+    // Type relationships
+    class TypeRelationship
+    {        
+        public ElementType StrongType;
+        public ElementType WeakType;
+
+        public TypeRelationship(ElementType strongType, ElementType weakType )
+        {            
+            StrongType = strongType;
+            WeakType = weakType;
+        }
+    }
+
+    TypeRelationship Relationship_WaterFire = new TypeRelationship(ElementType.Water, ElementType.Fire);
+    TypeRelationship Relationship_FireNature = new TypeRelationship(ElementType.Fire, ElementType.Nature);
+    TypeRelationship Relationship_NatureEarth = new TypeRelationship(ElementType.Nature, ElementType.Earth);
+    TypeRelationship Relationship_EarthAir = new TypeRelationship(ElementType.Earth, ElementType.Air);
+    TypeRelationship Relationship_AirWater = new TypeRelationship(ElementType.Air, ElementType.Water);
+
+    // Store all relationships in an array
+    TypeRelationship[] Relationships = new TypeRelationship[]{ };
 
     void Awake()
     {
@@ -42,6 +63,10 @@ public class Elements : MonoBehaviour {
         {ElementalMoves.Tackle, ElementType.NonElemental },
         {ElementalMoves.WaterBlast, ElementType.Water }        
     };
+        // Init relationships
+        Relationships[0] = Relationship_WaterFire; Relationships[1] = Relationship_FireNature;
+        Relationships[2] = Relationship_NatureEarth; Relationships[3] = Relationship_EarthAir;
+        Relationships[5] = Relationship_AirWater;
     }
 
     public string ElementalMovesToString (ElementalMoves move)
@@ -151,5 +176,45 @@ public class Elements : MonoBehaviour {
                 Debug.Log("Error! Move not implemented!");
                 break;
         }
+    }
+
+    // Check if there is a type relationship
+    public bool CheckTypeRelationship(ElementType type1, ElementType type2)
+    {
+        // Loop through relationships
+        foreach(TypeRelationship t in Relationships)
+        {
+            // if both types are in the relationship return true
+            if(t.StrongType == type1 && t.WeakType == type2 || t.WeakType == type1 && t.StrongType == type2)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Return strong type in a relationship (Only call if there is a relationship between type1 and type 2)
+    public ElementType ReturnStrongTypeInRelationship(ElementType type1, ElementType type2)
+    {
+        ElementType typeToReturn = ElementType.NonElemental;
+        
+        // Loop through relationships
+        foreach (TypeRelationship t in Relationships)
+        {
+            // if both types are in the relationship return true
+            if (t.StrongType == type1 && t.WeakType == type2 || t.WeakType == type1 && t.StrongType == type2)
+            {
+                typeToReturn = t.StrongType;
+            }
+        }
+
+        // Check for error
+        if(typeToReturn == ElementType.NonElemental)
+        {
+            Debug.Log("Error! Type relationship doesnt exist for strong type to be returned");
+        }
+
+        return typeToReturn;
     }
 }

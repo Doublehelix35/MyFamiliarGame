@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     // Object refs
     GameObject EnemyManagerRef;
-    Elements element;
     public GameObject PlayerRef;
+    Elements element;
 
     // Stats
     internal int HealthMax = 60;
@@ -39,13 +39,13 @@ public class Enemy : MonoBehaviour
 
     // Move usage timer
     float LastMoveUseTime;
-    float MoveUsageDelay = 2f;
+    float MoveUsageDelay = 4f;
     
     void Start()
     {
         // init object refs
         EnemyManagerRef = GameObject.FindGameObjectWithTag("GameController");
-        element = gameObject.AddComponent<Elements>();
+        element = EnemyManagerRef.GetComponent<Elements>();
 
         // Init stats
         Health = HealthInitial;
@@ -73,10 +73,10 @@ public class Enemy : MonoBehaviour
     }
 
     // Move selection
-    public void MoveSelect(int moveNum)
+    void MoveSelect(int moveNum)
     { 
         bool giveTypeBoost = false;
-        Vector3 spawnOffset = new Vector3(1f, 1f, 0f);
+        Vector3 spawnOffset = new Vector3(-2f, 1f, 0f);
 
         switch (moveNum)
         {
