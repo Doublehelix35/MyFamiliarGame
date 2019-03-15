@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
     float DamageTakenTime;
 
     // Battle stats
-    internal float Attack = 1f;
+    internal float Attack = 2f;
     float Accuracy = 1f; // Determines if a move hits or misses
     float CritChance = 1f; // Chance to get a critical hit
     float Defence = 1f;

@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     // Object refs
     GameObject BattleManagerRef;
     GameObject EnemyRef; // This is the parent object
-    Elements element;
+    GameObject PlayerRef; // this is the parent object
 
     // Texts
     public Text EnemyHealthText;
@@ -40,20 +40,17 @@ public class EnemyManager : MonoBehaviour
     float ScaleMultiplier = 0.2f;
     float Drag = 0.3f;
 
-    void Awake()
+    void Start()
     {
-        // Init objects
-        element = gameObject.AddComponent<Elements>();
-
         // Set material to match type
         MatToApply = FireMat;
         BuildEnemy();
 
         // Give battle manager enemy ref
         BattleManagerRef = GameObject.FindGameObjectWithTag("GameController");
-        BattleManagerRef.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);        
+        BattleManagerRef.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);
     }
-
+    
     internal void BuildEnemy()
     {
         // Parent object
@@ -149,6 +146,9 @@ public class EnemyManager : MonoBehaviour
 
 
         EnemyRef.transform.position += new Vector3(6f, 4f, 0f); // Spawn above ground and to the right
+
+        // Set player ref
+        EnemyRef.GetComponent<Enemy>().PlayerRef = PlayerRef;
     }
 
     GameObject CreateMesh(string meshPartName, Vector3[] newVerts)
@@ -258,6 +258,11 @@ public class EnemyManager : MonoBehaviour
         // Fixed joint from face to body
         face.AddComponent<FixedJoint>();
         face.GetComponent<FixedJoint>().connectedBody = body.GetComponent<Rigidbody>();
+    }
+
+    public void SetPlayerRef(GameObject playerRef)
+    {
+        PlayerRef = playerRef;        
     }
 
     // Text update methods

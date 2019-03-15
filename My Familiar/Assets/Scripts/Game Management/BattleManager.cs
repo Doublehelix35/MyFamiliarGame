@@ -13,36 +13,20 @@ public class BattleManager : MonoBehaviour
     public GameObject CameraRef;
     Elements element;
 
-
     // Texts
     public Text CharacterNameText;
     public Text HealthText;
     public Text MoveButtonText1;
     public Text MoveButtonText2;
     public Text MoveButtonText3;
-
-
+    
     void Awake()
     {
         // Init objects
         element = GetComponent<Elements>();
         ReloadCharacter();
     }
-
-    // Evolve character and update save
-    internal void EvolveToNextStage(GameObject ObjectToEvolve)
-    {
-        // Evolve and save new type
-        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToEvolve); // Load name from current slot to ensure names line up for saving and loading
-
-        // Delete old character
-        CharacterRef = new GameObject();
-        Destroy(ObjectToEvolve.transform.parent.gameObject); // Char Ref is the body object so we need to delete the parent
-
-        // Reload character
-        ReloadCharacter();
-    }
-
+    
     internal void ReloadCharacter()
     {
         // Reload character
@@ -58,6 +42,7 @@ public class BattleManager : MonoBehaviour
 
         CharacterRef.transform.position += new Vector3(-6f, 4f, 0f); // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
+        gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager and enemy
     }
 
     // Move buttons
@@ -105,6 +90,11 @@ public class BattleManager : MonoBehaviour
     public void SetEnemyRef(GameObject enemyRef)
     {
         EnemyRef = enemyRef;
+    }
+
+    public GameObject GetCharacterParentRef()
+    {
+        return CharacterRef;
     }
 
     // Text update methods

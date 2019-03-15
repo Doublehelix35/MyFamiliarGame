@@ -16,7 +16,7 @@ public abstract class Item : MonoBehaviour
     public float LifeSpan = 5f;
 
     // Item type
-    protected Elements.ElementType itemType;
+    public Elements.ElementType itemType;
 
     // Constructor
     protected Item() { }

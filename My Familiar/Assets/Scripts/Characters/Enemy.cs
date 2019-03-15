@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     // Object refs
     GameObject EnemyManagerRef;
+    Elements element;
+    public GameObject PlayerRef;
 
     // Stats
     internal int HealthMax = 60;
@@ -15,7 +17,7 @@ public class Enemy : MonoBehaviour
     float DamageTakenTime;
 
     // Battle stats
-    internal float Attack = 1f;
+    internal float Attack = 2f;
     float Accuracy = 1f; // Determines if a move hits or misses
     float CritChance = 1f; // Chance to get a critical hit
     float Defence = 1f;
@@ -34,22 +36,120 @@ public class Enemy : MonoBehaviour
     internal Elements.ElementalMoves MoveSlot1 = Elements.ElementalMoves.Tackle;
     internal Elements.ElementalMoves MoveSlot2 = Elements.ElementalMoves.EarthQuake;
     internal Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.WaterBlast;
+
+    // Move usage timer
+    float LastMoveUseTime;
+    float MoveUsageDelay = 2f;
     
     void Start()
     {
-        // Enemy manager ref
+        // init object refs
         EnemyManagerRef = GameObject.FindGameObjectWithTag("GameController");
+        element = gameObject.AddComponent<Elements>();
 
         // Init stats
         Health = HealthInitial;
         DamageTakenTime = Time.time;
+        LastMoveUseTime = Time.time;
 
         // Init type
         CharactersElementTypes.Add(Elements.ElementType.Earth);
+
+        // Update ui
+        EnemyManagerRef.GetComponent<EnemyManager>().UpdateText_EnemyHealth(Health.ToString());
     }
     
     void Update()
     {
-        
+        if(LastMoveUseTime + MoveUsageDelay < Time.time)
+        {
+            // Randomly choose move
+            int randMove = Random.Range(1, 3);
+            MoveSelect(randMove);
+
+            // Reset timer
+            LastMoveUseTime = Time.time;
+        }
+    }
+
+    // Move selection
+    public void MoveSelect(int moveNum)
+    { 
+        bool giveTypeBoost = false;
+        Vector3 spawnOffset = new Vector3(1f, 1f, 0f);
+
+        switch (moveNum)
+        {
+            case 1: // Move slot 1
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (CharactersElementTypes.Contains(element.MoveDictionary[MoveSlot1]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(MoveSlot1, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                break;
+
+            case 2: // Move slot 2
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (CharactersElementTypes.Contains(element.MoveDictionary[MoveSlot2]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(MoveSlot2, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                break;
+
+            case 3: // Move slot 3
+                // Use the move dictionary to get the move type and then check if the char has that type
+                if (CharactersElementTypes.Contains(element.MoveDictionary[MoveSlot3]))
+                {
+                    giveTypeBoost = true;
+                }
+                element.UseMove(MoveSlot3, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                break;
+
+            default:
+                Debug.Log("Button num isn't valid. There are only 3 buttons!");
+                break;
+        }
+    }
+
+    // To gain health pass in positive value, to lose health pass in negative value
+    public void ChangeHealth(int value)
+    {
+        // Exit if invicible
+        if (DamageTakenTime >= Time.time - InvincibilityTimer) { return; }
+
+        // Change health based on value
+        Health += value;
+
+
+        Debug.Log("Damage!" + Health + "Value" + value);
+
+        if (Health > HealthMax)
+        {
+            Health = HealthMax;
+        }
+        else if (Health <= 0)
+        {
+            // Player dead or exhausted
+            //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
+        }
+
+        if (value < 0) // Damage was taken
+        {
+            DamageTakenTime = Time.time;
+        }
+
+        // Update ui
+        EnemyManagerRef.GetComponent<EnemyManager>().UpdateText_EnemyHealth(Health.ToString());
+
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<Item>())
+        {
+            col.gameObject.GetComponent<Item>().Interact(gameObject);
+        }
     }
 }

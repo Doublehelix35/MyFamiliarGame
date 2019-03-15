@@ -22,12 +22,12 @@ public class Elements : MonoBehaviour {
     public GameObject WaterBlastPrefab;
 
     // Move power
-    float AirStrikeMovePower = 0.8f;
-    float EarthQuakeMovePower = 0.8f;
-    float FireBlazeMovePower = 0.8f;
-    float NaturesWrathMovePower = 0.8f;
-    float TackleMovePower = 0.5f;
-    float WaterBlastMovePower = 0.8f;
+    float AirStrikeMovePower = 2f;
+    float EarthQuakeMovePower = 2f;
+    float FireBlazeMovePower = 2f;
+    float NaturesWrathMovePower = 2f;
+    float TackleMovePower = 1f;
+    float WaterBlastMovePower = 2f;
 
 
     void Awake()
@@ -99,7 +99,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 airStrike.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                airStrike.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * AirStrikeMovePower;
+                airStrike.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * AirStrikeMovePower);
                 break;
 
             case ElementalMoves.EarthQuake:
@@ -108,7 +108,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 earthQuake.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                earthQuake.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * EarthQuakeMovePower;
+                earthQuake.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * EarthQuakeMovePower);
                 break;
 
             case ElementalMoves.FireBlaze:
@@ -117,7 +117,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 fireBlaze.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                fireBlaze.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * FireBlazeMovePower;
+                fireBlaze.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * FireBlazeMovePower);
                 break;
 
             case ElementalMoves.NaturesWrath:
@@ -126,7 +126,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 naturesWrath.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                naturesWrath.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * NaturesWrathMovePower;
+                naturesWrath.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * NaturesWrathMovePower);
                 break;
 
             case ElementalMoves.Tackle:
@@ -135,7 +135,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 tackle.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                tackle.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * TackleMovePower;
+                tackle.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * TackleMovePower);
                 break;
 
             case ElementalMoves.WaterBlast:
@@ -144,7 +144,7 @@ public class Elements : MonoBehaviour {
                 // Set target
                 waterBlast.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
-                waterBlast.GetComponent<Projectile_Homing>().Damage = attackValue * typeBoost * WaterBlastMovePower;
+                waterBlast.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * WaterBlastMovePower);
                 break;
 
             default:

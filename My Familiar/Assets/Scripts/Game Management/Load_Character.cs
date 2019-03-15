@@ -227,6 +227,10 @@ public class Load_Character : MonoBehaviour
         // Set up rididbodies and character joints
         SetUpCharacterAsRagdoll(Body, Face, Arm1, Arm2, Leg1, Leg2);
 
+        // Set up tags
+        Body.tag = "Player"; Face.tag = "Player"; Arm1.tag = "Player";
+        Arm2.tag = "Player"; Leg1.tag = "Player"; Leg2.tag = "Player";
+
         return CharacterToReturn;
         
     }
