@@ -13,6 +13,8 @@ public class BattleManager : MonoBehaviour
     public GameObject CameraRef;
     Elements element;
 
+    public string SandboxSceneName;
+
     // Texts
     public Text CharacterNameText;
     public Text HealthText;
@@ -116,6 +118,26 @@ public class BattleManager : MonoBehaviour
 
         // Reset timer
         LastMoveUseTime = Time.time;
+    }
+
+    // Call when enemy is defeated
+    public void WinBattle()
+    {
+        // Give exp
+
+        // Save stat changes i.e. exp
+
+        // Load sandbox
+        gameObject.GetComponent<Menu>().LoadScene(SandboxSceneName);
+    }
+
+    // Call when player is defeated
+    public void LoseBattle()
+    {
+        // Save stat changes i.e. exp
+
+        // Load sandbox
+        gameObject.GetComponent<Menu>().LoadScene(SandboxSceneName);
     }
 
     public void SetEnemyRef(GameObject enemyRef)

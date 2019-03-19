@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         LastMoveUseTime = Time.time;
 
         // Init type
-        CharactersElementTypes.Add(Elements.ElementType.Earth);
+        CharactersElementTypes.Add(Elements.ElementType.Nature);
 
         // Update ui
         EnemyManagerRef.GetComponent<EnemyManager>().UpdateText_EnemyHealth(Health.ToString());
@@ -131,8 +131,8 @@ public class Enemy : MonoBehaviour
         }
         else if (Health <= 0)
         {
-            // Player dead or exhausted
-            //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
+            // Enemy dead or exhausted
+            EnemyManagerRef.GetComponent<BattleManager>().WinBattle();
         }
 
         if (value < 0) // Damage was taken

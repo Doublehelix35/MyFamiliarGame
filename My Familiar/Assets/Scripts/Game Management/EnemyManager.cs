@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         // Set material to match type
-        MatToApply = FireMat;
+        MatToApply = NatureMat;
         BuildEnemy();
 
         // Give battle manager enemy ref
@@ -63,7 +63,7 @@ public class EnemyManager : MonoBehaviour
 
         // Set Enemy Stats
         int EvolutionCount = 1;
-        EnemyType = Elements.ElementType.Fire;
+        EnemyType = Elements.ElementType.Nature;
 
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if (EvolutionCount > 0)

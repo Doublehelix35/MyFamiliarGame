@@ -42,31 +42,34 @@ public class Elements : MonoBehaviour {
         }
     }
 
+    // Define relationships between elements
     TypeRelationship Relationship_WaterFire = new TypeRelationship(ElementType.Water, ElementType.Fire);
     TypeRelationship Relationship_FireNature = new TypeRelationship(ElementType.Fire, ElementType.Nature);
     TypeRelationship Relationship_NatureEarth = new TypeRelationship(ElementType.Nature, ElementType.Earth);
     TypeRelationship Relationship_EarthAir = new TypeRelationship(ElementType.Earth, ElementType.Air);
     TypeRelationship Relationship_AirWater = new TypeRelationship(ElementType.Air, ElementType.Water);
 
-    // Store all relationships in an array
-    TypeRelationship[] Relationships = new TypeRelationship[]{ };
+    // Store all relationships in a list
+    List<TypeRelationship> Relationships = new List<TypeRelationship>();
 
     void Awake()
     {
         MoveDictionary = new Dictionary<ElementalMoves, ElementType>()
-    {
-        {ElementalMoves.EmptyMoveSlot, ElementType.NonElemental },
-        {ElementalMoves.AirStrike, ElementType.Air },
-        {ElementalMoves.EarthQuake, ElementType.Earth },
-        {ElementalMoves.FireBlaze, ElementType.Fire },
-        {ElementalMoves.NaturesWrath, ElementType.Nature },
-        {ElementalMoves.Tackle, ElementType.NonElemental },
-        {ElementalMoves.WaterBlast, ElementType.Water }        
-    };
+        {
+            {ElementalMoves.EmptyMoveSlot, ElementType.NonElemental },
+            {ElementalMoves.AirStrike, ElementType.Air },
+            {ElementalMoves.EarthQuake, ElementType.Earth },
+            {ElementalMoves.FireBlaze, ElementType.Fire },
+            {ElementalMoves.NaturesWrath, ElementType.Nature },
+            {ElementalMoves.Tackle, ElementType.NonElemental },
+            {ElementalMoves.WaterBlast, ElementType.Water }        
+        };
         // Init relationships
-        Relationships[0] = Relationship_WaterFire; Relationships[1] = Relationship_FireNature;
-        Relationships[2] = Relationship_NatureEarth; Relationships[3] = Relationship_EarthAir;
-        Relationships[5] = Relationship_AirWater;
+        Relationships.Add(Relationship_WaterFire);
+        Relationships.Add(Relationship_FireNature);
+        Relationships.Add(Relationship_NatureEarth);
+        Relationships.Add(Relationship_EarthAir);
+        Relationships.Add(Relationship_AirWater);
     }
 
     public string ElementalMovesToString (ElementalMoves move)
@@ -190,7 +193,6 @@ public class Elements : MonoBehaviour {
                 return true;
             }
         }
-
         return false;
     }
 

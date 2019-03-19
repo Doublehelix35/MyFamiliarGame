@@ -3163,6 +3163,7 @@ MonoBehaviour:
   SaveRef: {fileID: 2106336110}
   LoadRef: {fileID: 2106336106}
   CameraRef: {fileID: 2146963005}
+  SandboxSceneName: Sandbox
   CharacterNameText: {fileID: 1651399370}
   HealthText: {fileID: 1411108084}
   MoveButtonText1: {fileID: 2113768083}

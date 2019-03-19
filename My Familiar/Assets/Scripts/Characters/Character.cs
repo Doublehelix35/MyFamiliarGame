@@ -174,6 +174,11 @@ public class Character : MonoBehaviour
         {
             // Player dead or exhausted
             //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
+            if (InBattleMode)
+            {
+                // Player loses battle
+                GameManagerRef.GetComponent<BattleManager>().LoseBattle();
+            }
         }
 
         if (value < 0) // Damage was taken
