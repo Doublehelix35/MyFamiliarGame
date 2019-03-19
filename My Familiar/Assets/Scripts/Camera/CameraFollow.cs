@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour {
 
     public void SetPlayerRef(GameObject playerRef)
     {
+        // Check if player ref is null         
         if(playerRef = null)
         {
             PlayerRef = playerRef;

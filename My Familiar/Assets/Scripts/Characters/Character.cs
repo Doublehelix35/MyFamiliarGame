@@ -77,15 +77,8 @@ public class Character : MonoBehaviour
         // Init object refs
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
 
-        // Set in battle mode?
-        if (GameManagerRef.GetComponent<BattleManager>().isActiveAndEnabled)
-        {
-            InBattleMode = true;
-        }
-        else
-        {
-            InBattleMode = false;
-        }
+        // Set in battle mode
+        InBattleMode = GameManagerRef.GetComponent<BattleManager>() != null ? true : false;
     }
 
     void Start()

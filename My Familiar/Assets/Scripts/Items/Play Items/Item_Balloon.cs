@@ -40,11 +40,13 @@ public class Item_Balloon : Item
 
     void Update()
     {
+        // Stay under max height
         if(transform.position.y < MaxHeight)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * FloatForce * AttachedObjectForceModifier * Time.deltaTime);
         }
 
+        // If player is attached then set up line render with positions
         if (IsPlayerAttached)
         {
             // Set pos 0 to balloon bottom

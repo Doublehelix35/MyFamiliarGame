@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Text NatureText;
     public Text WaterText;
 
+    // Buttons
+    public Button BattleModeButton;
 
     bool MoveRagdoll = false;
     float DistFromCamera;
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        ReloadCharacter();
+        ReloadCharacter();       
     }
 
     void Start ()
@@ -130,7 +132,10 @@ public class GameManager : MonoBehaviour
         UpdateText_CharacterName(CharacterRef.name);
 
         CharacterRef.transform.position += new Vector3(0f, 4f, 0f); // Spawn above ground
-        CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
+        CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera 
+
+        // Turn on battle mode button if player is evolution 1 or higher
+        BattleModeButton.interactable = CharacterRef.GetComponentInChildren<Character>().CurrentEvolutionStage >= 1 ? true : false;
     }
 
     // Text update methods

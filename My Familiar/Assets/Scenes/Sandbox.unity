@@ -8341,6 +8341,7 @@ MonoBehaviour:
   FireText: {fileID: 1745040043}
   NatureText: {fileID: 872002154}
   WaterText: {fileID: 1411368753}
+  BattleModeButton: {fileID: 1987850109}
 --- !u!114 &2106336109
 MonoBehaviour:
   m_ObjectHideFlags: 0
