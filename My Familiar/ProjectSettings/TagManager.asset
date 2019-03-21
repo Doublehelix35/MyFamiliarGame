@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NonMoving
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

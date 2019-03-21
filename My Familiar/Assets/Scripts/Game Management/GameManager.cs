@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     // Buttons
     public Button BattleModeButton;
 
+    // Touch movement
     bool MoveRagdoll = false;
     float DistFromCamera;
     GameObject Ragdoll;

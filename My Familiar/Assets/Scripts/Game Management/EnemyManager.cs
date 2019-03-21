@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     // Object refs
     GameObject EnemyRef; // This is the parent object
     GameObject PlayerRef; // this is the parent object
-
+    public GameObject EnemyAnchorRef; // G.O. that anchors enemy in pos with spring joint
 
     // Texts
     public Text EnemyHealthText;
@@ -40,6 +40,9 @@ public class EnemyManager : MonoBehaviour
     float ScaleMultiplier = 0.2f;
     float Drag = 0.3f;
 
+    // Spawn offset
+    Vector3 EnemySpawnOffset = new Vector3(6f, 3f, 0f); // Spawn to the left and up
+
     void Start()
     {
         // Set material to match type
@@ -47,7 +50,10 @@ public class EnemyManager : MonoBehaviour
         BuildEnemy();
 
         // Give battle manager enemy ref
-        gameObject.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);        
+        gameObject.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);
+
+        // Set anchor
+        EnemyAnchorRef.GetComponent<SpringJoint>().connectedBody = EnemyRef.GetComponentInChildren<Rigidbody>();
     }
     
     internal void BuildEnemy()
@@ -60,6 +66,9 @@ public class EnemyManager : MonoBehaviour
         
         // Add Enemy script to body object
         Body.AddComponent<Enemy>();
+
+        // Add Enemy tag
+        Body.tag = "Enemy";
 
         // Set Enemy Stats
         int EvolutionCount = 1;
@@ -105,7 +114,7 @@ public class EnemyManager : MonoBehaviour
 
 
         // Arm1
-        Arm1 = CreateMesh(PartName[1], EnemyVert);
+        Arm1 = CreateMesh(PartName[2], EnemyVert);
         // Scale size down
         Arm1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm left and up
@@ -114,7 +123,7 @@ public class EnemyManager : MonoBehaviour
         Arm1.transform.parent = EnemyRef.transform;
 
         // Arm2
-        Arm2 = CreateMesh(PartName[2], EnemyVert);
+        Arm2 = CreateMesh(PartName[3], EnemyVert);
         // Scale size down
         Arm2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm right and up
@@ -123,7 +132,7 @@ public class EnemyManager : MonoBehaviour
         Arm2.transform.parent = EnemyRef.transform;
 
         // Leg1
-        Leg1 = CreateMesh(PartName[1], EnemyVert);
+        Leg1 = CreateMesh(PartName[4], EnemyVert);
         // Scale size down
         Leg1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg left and down
@@ -132,7 +141,7 @@ public class EnemyManager : MonoBehaviour
         Leg1.transform.parent = EnemyRef.transform;
 
         // Load Leg2
-        Leg2 = CreateMesh(PartName[1], EnemyVert);
+        Leg2 = CreateMesh(PartName[5], EnemyVert);
         // Scale size down
         Leg2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg right and down
@@ -144,7 +153,7 @@ public class EnemyManager : MonoBehaviour
         SetUpCharacterAsRagdoll(Body, Face, Arm1, Arm2, Leg1, Leg2);
 
         // Spawn above ground and to the right
-        EnemyRef.transform.position += new Vector3(6f, 4f, 0f); 
+        EnemyRef.transform.position += EnemySpawnOffset; 
 
         // Set player ref
         Body.GetComponent<Enemy>().PlayerRef = PlayerRef;

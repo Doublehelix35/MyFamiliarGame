@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     GameObject EnemyRef;
     public GameObject CameraRef;
     Elements element;
+    public GameObject PlayerAnchorRef; // G.O. that anchors player in pos with spring joint
 
     public string SandboxSceneName;
 
@@ -29,6 +30,18 @@ public class BattleManager : MonoBehaviour
     float LastMoveUseTime;
     float MoveUsageDelay = 2f;
 
+    // Spawn offset
+    Vector3 PlayerSpawnOffset = new Vector3(-6f, 3f, 0f); // Spawn to the left and up
+
+    // Touch movement
+    bool MoveRagdoll = false;
+    float DistFromCamera;
+    GameObject Ragdoll;
+    Vector3 DragOffset;
+    float RagdollMaxVelocity = 1500f;
+    float FollowStopDistance = 0.05f;
+    float RagdollMaxDist = 10f;
+
     void Awake()
     {
         // Init objects
@@ -37,6 +50,9 @@ public class BattleManager : MonoBehaviour
 
         // Init timer so moves can be used from the start
         LastMoveUseTime = Time.time - MoveUsageDelay;
+
+        // Set anchor
+        PlayerAnchorRef.GetComponent<SpringJoint>().connectedBody = CharacterRef.GetComponentInChildren<Rigidbody>();
     }
 
     void Update()
@@ -55,6 +71,65 @@ public class BattleManager : MonoBehaviour
                 b.interactable = true;
             }
         }
+
+        // Move object with touch //
+        if (Input.touchCount == 1) // User is touching the screen
+        {
+            Touch touch = Input.GetTouch(0); // get touch
+            Vector3 touchPos = touch.position; // get touch position
+
+            if (touch.phase == TouchPhase.Began) // check for the first touch
+            {
+                // Cast a ray
+                Ray ray = Camera.main.ScreenPointToRay(touchPos);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    if (hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Player" || hit.transform.tag == "Enemy") // Ray hits a rigidbody thats allowed to be moved
+                    {
+                        Ragdoll = hit.transform.gameObject; // Set ragdoll equal to object hit
+                        MoveRagdoll = true; // Object is being controlled by player
+                        DistFromCamera = hit.transform.position.z - Camera.main.transform.position.z; // Keep z consistant
+                        Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera); // Pos to move to
+                        newPos = Camera.main.ScreenToWorldPoint(newPos); // Convert new pos to world axis
+
+                        float dist = Vector3.Distance(newPos, Ragdoll.transform.position);
+
+                        if (dist > FollowStopDistance)
+                        {
+                            // Set velocity. Calc direction. Then times direction by follow speed and time.deltatime and factor in distance from target pos
+                            Ragdoll.GetComponent<Rigidbody>().velocity = (newPos - Ragdoll.transform.position).normalized * (RagdollMaxVelocity * (dist / RagdollMaxDist) * Time.deltaTime); // Move object
+                        }
+                        else
+                        {
+                            Ragdoll.GetComponent<Rigidbody>().velocity = Vector3.zero; // Stop movement
+                        }
+                    }
+                }
+            }
+            else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            {
+                if (MoveRagdoll)
+                {
+                    // Move object to touch pos
+                    Vector3 newPos = new Vector3(touchPos.x, touchPos.y, DistFromCamera);
+                    newPos = Camera.main.ScreenToWorldPoint(newPos); // Convert new pos to world axis
+
+                    float dist = Vector3.Distance(newPos, Ragdoll.transform.position);
+
+                    if (dist > FollowStopDistance)
+                    {
+                        // Set velocity. Calc direction. Then times direction by follow speed and time.deltatime and factor in distance from target pos
+                        Ragdoll.GetComponent<Rigidbody>().velocity = (newPos - Ragdoll.transform.position).normalized * (RagdollMaxVelocity * (dist / RagdollMaxDist) * Time.deltaTime); // Move object
+                    }
+                }
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                // Stop moving the object
+                MoveRagdoll = false;
+            }
+        }
     }
 
     internal void ReloadCharacter()
@@ -70,7 +145,7 @@ public class BattleManager : MonoBehaviour
         UpdateText_Moves(2, CharacterRef.GetComponentInChildren<Character>().MoveSlot2); // Move 2
         UpdateText_Moves(3, CharacterRef.GetComponentInChildren<Character>().MoveSlot3); // Move 3
 
-        CharacterRef.transform.position += new Vector3(-6f, 4f, 0f); // Spawn above ground and to the left
+        CharacterRef.transform.position += PlayerSpawnOffset; // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
         gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager
     }
