@@ -101,6 +101,7 @@ public class Load_Character : MonoBehaviour
             // Set data thats important for the code that follows
             data.EvolutionCount = 0;
             data.Level = 1;
+            data.CharacterMoves = new int[3] { 5, 0, 0 }; // Default moves are tackle, empty, empty
         }        
 
         // Load character from parts        
@@ -112,12 +113,13 @@ public class Load_Character : MonoBehaviour
 
         // Add character script to body
         Body.AddComponent<Character>();
+        Character characterRef = Body.GetComponent<Character>();
 
         // Load stats
-        Body.GetComponent<Character>().Level = data.Level;
+        characterRef.Level = data.Level;
 
         // Evolution count
-        Body.GetComponent<Character>().CurrentEvolutionStage = data.EvolutionCount;       
+        characterRef.CurrentEvolutionStage = data.EvolutionCount;       
 
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if(data.EvolutionCount > 0)
@@ -136,32 +138,64 @@ public class Load_Character : MonoBehaviour
             switch (data.CharacterTypes[i])
             {
                 case 0: // Non-elemental
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.NonElemental);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.NonElemental);
                     MatToApply = NonElementalMat; // Set material
                     break;
                 case 1: // Air
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Air);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Air);
                     MatToApply = AirMat; // Set material
                     break;
                 case 2: // Earth
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Earth);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Earth);
                     MatToApply = EarthMat; // Set material
                     break;
                 case 3: // Fire
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Fire);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Fire);
                     MatToApply = FireMat; // Set material
                     break;
                 case 4: // Nature
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Nature);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Nature);
                     MatToApply = NatureMat; // Set material
                     break;
                 case 5: // Water
-                    Body.GetComponent<Character>().CharactersElementTypes.Add(Elements.ElementType.Water);
+                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Water);
                     MatToApply = WaterMat; // Set material
                     break;
                 default:
                     break;
             }            
+        }
+
+        // Load character moves from the int array
+        for(int i = 0; i < data.CharacterMoves.Length; i++)
+        {
+            switch (data.CharacterMoves[i])
+            {
+                case 0: // Empty move
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.EmptyMoveSlot;
+                    break;
+                case 1: // Air strike
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.AirStrike;
+                    break;
+                case 2: // Earthquake
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.EarthQuake;
+                    break;
+                case 3: // Fire Blaze
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.FireBlaze;
+                    break;
+                case 4: // Natures Wrath
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.NaturesWrath;
+                    break;
+                case 5: // Tackle
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.Tackle;
+                    break;
+                case 6: // Water Blast
+                    characterRef.MoveSlots[i] = Elements.ElementalMoves.WaterBlast;
+                    break;
+                default:
+                    Debug.Log("Error loading moves from file");
+                    break;
+            }
         }
 
         // Set body mat

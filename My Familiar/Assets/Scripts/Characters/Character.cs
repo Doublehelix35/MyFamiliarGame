@@ -15,6 +15,9 @@ public class Character : MonoBehaviour
     GameObject GameManagerRef;
     public bool ThisCharacterIsActive = true;
     public bool InBattleMode = false;
+    
+    // Objects that are attached
+    internal List<GameObject> AttachedBalloonObjects = new List<GameObject>();
 
     // Stats
     internal int HealthMax = 60;
@@ -60,9 +63,7 @@ public class Character : MonoBehaviour
     internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
 
     // Moves known
-    internal Elements.ElementalMoves MoveSlot1 = Elements.ElementalMoves.Tackle;
-    internal Elements.ElementalMoves MoveSlot2 = Elements.ElementalMoves.FireBlaze;
-    internal Elements.ElementalMoves MoveSlot3 = Elements.ElementalMoves.NaturesWrath;
+    internal Elements.ElementalMoves[] MoveSlots; // Max 3 moves
 
     // Constructor
     internal Character()
@@ -76,6 +77,9 @@ public class Character : MonoBehaviour
     {
         // Init object refs
         GameManagerRef = GameObject.FindGameObjectWithTag("GameController");
+
+        // Init move slots
+        MoveSlots = new Elements.ElementalMoves[3];
 
         // Set in battle mode
         InBattleMode = GameManagerRef.GetComponent<BattleManager>() != null ? true : false;
@@ -137,13 +141,13 @@ public class Character : MonoBehaviour
         switch (moveSlot)
         {
             case 1:
-                MoveSlot1 = moveToLearn;
+                MoveSlots[0] = moveToLearn;
                 break;
             case 2:
-                MoveSlot2 = moveToLearn;
+                MoveSlots[1] = moveToLearn;
                 break;
             case 3:
-                MoveSlot3 = moveToLearn;
+                MoveSlots[2] = moveToLearn;
                 break;
             default:
                 break;
@@ -293,18 +297,71 @@ public class Character : MonoBehaviour
             // Evolve
             for(int i = 0; i < LevelsToEvolveAt.Length; i++) // Loop through levels to evolve at to search for a match
             {
-                if (Level == LevelsToEvolveAt[i])
-                {                    
-                    CurrentEvolutionStage++; // Increase count of evolutions
+                if (Level == LevelsToEvolveAt[i]) // Lvl is an evolution lvl
+                {
+                    // Detach from balloons
+                    DetachFromAllBalloons();
+
+                    // Increase count of evolutions
+                    CurrentEvolutionStage++; 
 
                     // Add new type based on spec points
-                    CharactersElementTypes.Add(CalculateNewTypeForEvolution()); 
+                    Elements.ElementType newType = CalculateNewTypeForEvolution();
+                    CharactersElementTypes.Add(newType);
+
+                    // Add new move based on type to evolve to
+                    Elements.ElementalMoves newMove = Elements.ElementalMoves.EmptyMoveSlot;
+
+                    switch (newType)
+                    {
+                        case Elements.ElementType.Air:
+                            newMove = Elements.ElementalMoves.AirStrike;
+                            break;
+                        case Elements.ElementType.Earth:
+                            newMove = Elements.ElementalMoves.EarthQuake;
+                            break;
+                        case Elements.ElementType.Fire:
+                            newMove = Elements.ElementalMoves.FireBlaze;
+                            break;
+                        case Elements.ElementType.Nature:
+                            newMove = Elements.ElementalMoves.NaturesWrath;
+                            break;
+                        case Elements.ElementType.Water:
+                            newMove = Elements.ElementalMoves.WaterBlast;
+                            break;
+                        default:
+                            Debug.Log("Error choosing move based on type " + newType);
+                            break;
+                    }
+
+                    // Chose move slot based on evolution count
+                    switch (CurrentEvolutionStage)
+                    {
+                        case 1:
+                            // Add new move to slot 2
+                            MoveSlots[1] = newMove;
+                            break;
+                        case 2:
+                            // Add new move to slot 3
+                            MoveSlots[2] = newMove;
+                            break;
+                        case 3:
+                        case 4:
+                        case 5:
+                            // Add new move to slot 1
+                            MoveSlots[0] = newMove;
+                            break;
+                        default:
+                            Debug.Log("Error adding new move to move slot");
+                            break;
+                    }
+
                     if(CurrentEvolutionStage == 1) // First evolution
                     {
                         CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
                     }
                     // Increase stats
-                    LevelUpStats();
+                    LevelUpStats();                    
 
                     // Save evolution and reload      
                     ThisCharacterIsActive = false; // Dont interact with anything else
@@ -406,6 +463,19 @@ public class Character : MonoBehaviour
                 Speed += baseStatIncrease * Magnitude * Mathf.Pow(Level, exponent) * statBoostMedium;
             }
         }        
+    }
+
+    // Detach from balloons
+    void DetachFromAllBalloons()
+    {
+        for (int i = 0; i < AttachedBalloonObjects.Count; i++)
+        {
+            if (AttachedBalloonObjects[i] != null) // Object exists
+            {
+                AttachedBalloonObjects[i].GetComponent<Item_Balloon>().Detach();
+                AttachedBalloonObjects.Remove(AttachedBalloonObjects[i]);
+            }
+        }
     }
 
     void OnCollisionEnter(Collision col)

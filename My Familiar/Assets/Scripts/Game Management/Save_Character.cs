@@ -94,7 +94,40 @@ public class Save_Character : MonoBehaviour {
                     break;
             }
         }
-        
+
+        // Save character moves to int array
+        data.CharacterMoves = new int[3];
+        for(int i = 0; i < data.CharacterMoves.Length; i++)
+        {
+            switch (GameObjectToSave.GetComponent<Character>().MoveSlots[i])
+            {
+                case Elements.ElementalMoves.EmptyMoveSlot:
+                    data.CharacterMoves[i] = 0;
+                    break;
+                case Elements.ElementalMoves.AirStrike:
+                    data.CharacterMoves[i] = 1;
+                    break;
+                case Elements.ElementalMoves.EarthQuake:
+                    data.CharacterMoves[i] = 2;
+                    break;
+                case Elements.ElementalMoves.FireBlaze:
+                    data.CharacterMoves[i] = 3;
+                    break;
+                case Elements.ElementalMoves.NaturesWrath:
+                    data.CharacterMoves[i] = 4;
+                    break;
+                case Elements.ElementalMoves.Tackle:
+                    data.CharacterMoves[i] = 5;
+                    break;
+                case Elements.ElementalMoves.WaterBlast:
+                    data.CharacterMoves[i] = 6;
+                    break;
+                default:
+                    Debug.Log("Error saving moves to file");
+                    break;
+            }
+        }
+
         // Write the object to file and close it
         bf.Serialize(file, data);
         file.Close();
@@ -151,6 +184,7 @@ class CharacterData
     public int Level;
     public int EvolutionCount; // How many evolutions has it had?
     public int[] CharacterTypes = { 0 }; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
+    public int[] CharacterMoves = { 5 }; // 0 = empty move, 1 = AirStrike, 2 = EarthQuake, 3 = FireBlaze, 4 = NaturesWrath, 5 = Tackle, 6 = WaterBlast
 
     public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;

@@ -22,6 +22,8 @@ public class Item_Balloon : Item
         if (!IsPlayerAttached)
         {
             Attach(player);
+            // Tell character it's attached
+            player.GetComponent<Character>().AttachedBalloonObjects.Add(gameObject);
         }
 
         // Give Happiness value
@@ -77,7 +79,7 @@ public class Item_Balloon : Item
         IsPlayerAttached = true;
     }
 
-    void Detach(GameObject objectToDetachFrom)
+    internal void Detach()
     {
         // Detach to String
         Destroy(Balloon_Bottom.GetComponent<SpringJoint>()); // Delete joint

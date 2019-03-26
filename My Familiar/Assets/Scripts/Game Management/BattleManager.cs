@@ -141,9 +141,9 @@ public class BattleManager : MonoBehaviour
         UpdateText_CharacterName(CharacterRef.name);
 
         // Update move slot buttons (Looks at char ref's children to find character script)
-        UpdateText_Moves(1, CharacterRef.GetComponentInChildren<Character>().MoveSlot1); // Move 1
-        UpdateText_Moves(2, CharacterRef.GetComponentInChildren<Character>().MoveSlot2); // Move 2
-        UpdateText_Moves(3, CharacterRef.GetComponentInChildren<Character>().MoveSlot3); // Move 3
+        UpdateText_Moves(1, CharacterRef.GetComponentInChildren<Character>().MoveSlots[0]); // Move 1
+        UpdateText_Moves(2, CharacterRef.GetComponentInChildren<Character>().MoveSlots[1]); // Move 2
+        UpdateText_Moves(3, CharacterRef.GetComponentInChildren<Character>().MoveSlots[2]); // Move 3
 
         CharacterRef.transform.position += PlayerSpawnOffset; // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
@@ -161,29 +161,29 @@ public class BattleManager : MonoBehaviour
         {
             case 1: // Move slot 1
                 // Use the move dictionary to get the move type and then check if the char has that type
-                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot1]))
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlots[0]]))
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlot1, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[0], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             case 2: // Move slot 2
                 // Use the move dictionary to get the move type and then check if the char has that type
-                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot2]))
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlots[1]]))
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlot2, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[1], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             case 3: // Move slot 3
                 // Use the move dictionary to get the move type and then check if the char has that type
-                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlot3]))
+                if (charScript.CharactersElementTypes.Contains(element.MoveDictionary[charScript.MoveSlots[2]]))
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlot3, giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[2], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             default:
