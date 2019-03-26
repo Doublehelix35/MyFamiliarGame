@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
     public int Level = 1;
     int Experience = 0;
     int ExpToLevelUp = 1;
-    int[] LevelsToEvolveAt = { 2, 5, 10, 15 }; // Levels that character evolves at
+    int[] LevelsToEvolveAt = { 2, 3, 4, 10, 15 }; // Levels that character evolves at
     internal int CurrentEvolutionStage = 0; // How many times has it evolved?
 
     // Elemental spec points

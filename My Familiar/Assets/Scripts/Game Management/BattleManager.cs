@@ -31,7 +31,7 @@ public class BattleManager : MonoBehaviour
     float MoveUsageDelay = 2f;
 
     // Spawn offset
-    Vector3 PlayerSpawnOffset = new Vector3(-6f, 3f, 0f); // Spawn to the left and up
+    Vector3 PlayerSpawnOffset = new Vector3(-6f, 2f, 0f); // Spawn to the left and up
 
     // Touch movement
     bool MoveRagdoll = false;
@@ -155,7 +155,7 @@ public class BattleManager : MonoBehaviour
     {
         Character charScript = CharacterRef.GetComponentInChildren<Character>();
         bool giveTypeBoost = false;
-        Vector3 spawnOffset = new Vector3(1f, 1f, 0f);
+        Vector3 spawnOffset = new Vector3(3f, 1f, 0f);
 
         switch (buttonNum)
         {

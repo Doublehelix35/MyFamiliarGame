@@ -16,9 +16,17 @@ public class Load_Character : MonoBehaviour
 
     Material MatToApply;
 
+    float Drag = 0.3f;
+
+    // Default scale and seperation
     float SeperationMultipler = 0.03f;
     float ScaleMultiplier = 0.2f;
-    float Drag = 0.3f;
+
+
+    // Evolution modifiers
+    float EvolutionModifier = 1.02f; // Base modifier
+    float EvolutionCountDivision = 20f; // Makes evo count smaller, so each evolution grows in small increments
+    
 
     internal int LoadCurrentSlot()
     {
@@ -114,13 +122,12 @@ public class Load_Character : MonoBehaviour
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if(data.EvolutionCount > 0)
         {
-            ScaleMultiplier *= data.EvolutionCount;
-            SeperationMultipler *= data.EvolutionCount;
+            ScaleMultiplier *= (EvolutionModifier + ((float)data.EvolutionCount / EvolutionCountDivision));
+            SeperationMultipler *= (EvolutionModifier + ((float)data.EvolutionCount / EvolutionCountDivision));
         }
         else // Hasnt evolved yet
         {
-            ScaleMultiplier *= 0.8f;
-            SeperationMultipler *= 0.8f;
+
         }
 
         // Load character types from the int array

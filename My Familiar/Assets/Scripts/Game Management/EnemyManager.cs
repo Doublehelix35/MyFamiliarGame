@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
     float Drag = 0.3f;
 
     // Spawn offset
-    Vector3 EnemySpawnOffset = new Vector3(6f, 3f, 0f); // Spawn to the left and up
+    Vector3 EnemySpawnOffset = new Vector3(6f, 2f, 0f); // Spawn to the left and up
 
     void Start()
     {
