@@ -130,6 +130,9 @@ public class BattleManager : MonoBehaviour
                 MoveRagdoll = false;
             }
         }
+
+        // Tell character ai whether to move or not (Only move if player is not moving ragdoll)
+        CharacterRef.GetComponentInChildren<Character_AI>().StopOrResumeMoving(!MoveRagdoll);
     }
 
     internal void ReloadCharacter()

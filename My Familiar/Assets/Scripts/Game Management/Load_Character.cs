@@ -115,6 +115,9 @@ public class Load_Character : MonoBehaviour
         Body.AddComponent<Character>();
         Character characterRef = Body.GetComponent<Character>();
 
+        // Add character AI script to body
+        Body.AddComponent<Character_AI>();
+
         // Load stats
         characterRef.Level = data.Level;
 

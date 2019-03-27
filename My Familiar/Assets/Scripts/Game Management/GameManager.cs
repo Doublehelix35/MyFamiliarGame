@@ -108,6 +108,9 @@ public class GameManager : MonoBehaviour
                 MoveRagdoll = false;
             }
         }
+
+        // Tell character ai whether to move or not (Only move if player is not moving ragdoll)
+        CharacterRef.GetComponentInChildren<Character_AI>().StopOrResumeMoving(!MoveRagdoll);
     }
 
     // Evolve character and update save
