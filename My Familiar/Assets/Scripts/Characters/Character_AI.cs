@@ -4,36 +4,60 @@ using UnityEngine;
 
 public class Character_AI : MonoBehaviour
 {
-    // Should be attached to the body and apply forces from there
+    /// Should be attached to the body and apply forces from there ///
 
 
-    // Speed of movement
-    public float IdleForce = 70f;
-    float IdleStartTime;
-    internal float WanderSpeed = 1f;
+    // Force of movement
+    public float IdleForce = 600f;
+    public float WanderForce = 1000f;
+    
+    // Timers
+    float LastIdleTime; // Last idle action
+    float IdleWait = 4f; // Time to wait between idle actions
+    float LastWanderTime; // Last wander action
+    float WanderWait = 4f; // Time to wait between wander actions
 
     bool CanMove = true;
-    bool IsIdle = true;
-    bool IsWandering = false;
-    
-    
+
+    Rigidbody rigid; // Store a ref to reduce GetComponent() calls
+
     void Start()
     {
-        
+        // Init timers
+        LastIdleTime = Time.time;
+        LastWanderTime = Time.time;
+
+        // Init rigidbody
+        rigid = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
+        // Check if already moving and if so CanMove = false
+        CanMove = rigid.velocity.x > 0.1f ? false : true;
+        CanMove = rigid.velocity.y > 0.1f ? false : true;
+
         if (CanMove)
         {
-            if (IsIdle) // Idle
+            if (LastIdleTime + IdleWait < Time.time) // Idle
             {
-                // Add force up and times that by idle force and use ping pong to change force direction smoothly between -1 and 1
-                transform.GetComponent<Rigidbody>().AddForce(Vector3.up * (Mathf.PingPong(Time.time, 2f) - 1f) * IdleForce);
-            }
-            else // Wander
-            {
+                // Add force upwards * idle force
+                rigid.AddForce(Vector3.up *  IdleForce);
 
+                // Reset timer
+                LastIdleTime = Time.time;
+            }
+            
+            if(LastWanderTime + WanderWait < Time.time) // Wander
+            {
+                // Direction
+                int dir = Random.Range(-1, 2); // Returns -1 or 0 or 1
+
+                // Add force
+                rigid.AddForce(Vector3.right * WanderForce * dir);
+
+                // Reset timer
+                LastWanderTime = Time.time;
             }
         }
     }
