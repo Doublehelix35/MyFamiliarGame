@@ -200,7 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbce003165ecd2247b04738eb037ec4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FaceMat: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
+  NonElementalMat: {fileID: 0}
+  AirMat: {fileID: 0}
+  EarthMat: {fileID: 0}
+  FireMat: {fileID: 0}
+  NatureMat: {fileID: 0}
+  WaterMat: {fileID: 0}
 --- !u!1 &512213594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,7 +1189,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.75686276, g: 0.7019608, b: 0.9254902, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
