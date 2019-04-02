@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SaveSelection.unity
     guid: 89c812b5e7b565840b4ecc80c9c72c39
   - enabled: 1
+    path: Assets/Scenes/Creator_Explanation.unity
+    guid: a0985b68ae528bb4dab3d018db8affc9
+  - enabled: 1
     path: Assets/Scenes/Creator_Face.unity
     guid: 259086441563e17448881c6796e14bfa
   - enabled: 1
