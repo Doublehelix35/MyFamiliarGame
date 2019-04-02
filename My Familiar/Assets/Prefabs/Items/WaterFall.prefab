@@ -196,6 +196,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   GunRef: {fileID: 6114790217695811315}
   WaterProjectile: {fileID: 1324736429289520583, guid: 5f79ee8c6915abf40918b6cd928363b8,
     type: 3}
@@ -321,7 +322,7 @@ GameObject:
   - component: {fileID: 6114790218902321206}
   m_Layer: 11
   m_Name: WaterFall
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

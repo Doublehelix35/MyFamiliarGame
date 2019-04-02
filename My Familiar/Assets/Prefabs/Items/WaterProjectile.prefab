@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5443790686356438928}
   m_Layer: 12
   m_Name: WaterProjectile
-  m_TagString: NonMoving
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   GunRef: {fileID: 0}
   WaterProjectile: {fileID: 0}
   FirePoint: {fileID: 0}

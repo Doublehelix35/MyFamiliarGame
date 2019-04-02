@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 114788148662288644}
   m_Layer: 11
   m_Name: Fireball
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +128,4 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0

@@ -15,13 +15,19 @@ public class Item_Balloon : Item
     public GameObject Balloon_Bottom;
     public GameObject Balloon_String;
 
+    GameObject PlayerRef;
+
     // Player calls this when Balloon collides with it
     public override void Interact(GameObject player)
     {
+        // Set PlayerRef
+        PlayerRef = player;
+
         // If player isn't attached then attach it
         if (!IsPlayerAttached)
         {
             Attach(player);
+
             // Tell character it's attached
             player.GetComponent<Character>().AttachedBalloonObjects.Add(gameObject);
         }
@@ -32,6 +38,9 @@ public class Item_Balloon : Item
         // Destroy self
         if (Uses <= 0)
         {
+            // Remove object from character's list
+            player.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
+
             Destroy(gameObject);
         }
         else
@@ -98,5 +107,18 @@ public class Item_Balloon : Item
 
         // Set is player attached to false
         IsPlayerAttached = false;
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        // Pop on collision with training items
+        if (col.gameObject.tag == "TrainingItem")
+        {
+            // Remove object from character's list
+            PlayerRef.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
+
+            // Destroy self
+            Destroy(gameObject);
+        }
     }
 }

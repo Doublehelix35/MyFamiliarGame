@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2158348130909758939}
   m_Layer: 11
   m_Name: Vine_07
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348130909758939
 HingeJoint:
@@ -184,7 +185,7 @@ GameObject:
   - component: {fileID: 2158348131095937408}
   m_Layer: 11
   m_Name: Vine_02
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131095937408
 HingeJoint:
@@ -351,7 +353,7 @@ GameObject:
   - component: {fileID: 2158348131398353684}
   m_Layer: 11
   m_Name: Vine_01
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -465,6 +467,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131398353684
 HingeJoint:
@@ -518,7 +521,7 @@ GameObject:
   - component: {fileID: 2158348131416229263}
   m_Layer: 11
   m_Name: Vine_04
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -632,6 +635,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131416229263
 HingeJoint:
@@ -684,7 +688,7 @@ GameObject:
   - component: {fileID: 8029278551193817218}
   m_Layer: 11
   m_Name: Vine
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -797,6 +801,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!1 &2158348132360083027
 GameObject:
@@ -815,7 +820,7 @@ GameObject:
   - component: {fileID: 2158348132360083117}
   m_Layer: 11
   m_Name: Vine_06
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -929,6 +934,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132360083117
 HingeJoint:
@@ -982,7 +988,7 @@ GameObject:
   - component: {fileID: 2158348132466298167}
   m_Layer: 11
   m_Name: Vine_03
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1096,6 +1102,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132466298167
 HingeJoint:
@@ -1149,7 +1156,7 @@ GameObject:
   - component: {fileID: 2158348132787607980}
   m_Layer: 11
   m_Name: Vine_05
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1263,6 +1270,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132787607980
 HingeJoint:
@@ -1316,7 +1324,7 @@ GameObject:
   - component: {fileID: 3129819639828452136}
   m_Layer: 11
   m_Name: Vine_08
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1430,6 +1438,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &3129819639828452136
 HingeJoint:
@@ -1483,7 +1492,7 @@ GameObject:
   - component: {fileID: 5484278279955858353}
   m_Layer: 11
   m_Name: Vine_09
-  m_TagString: Untagged
+  m_TagString: TrainingItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1596,6 +1605,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &5484278279955858353
 HingeJoint:
