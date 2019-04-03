@@ -22,8 +22,6 @@ public class CharacterCreation : MonoBehaviour {
     GameObject ActiveMeshObject;
     bool ActiveMeshObjectIsBuilt = false;
 
-    public Toggle ResetToggle;
-
     public Vector3[] testVert;
 
     public Save_Character SaveRef;
@@ -179,20 +177,16 @@ public class CharacterCreation : MonoBehaviour {
         //return MeshObject;
     }
 
-    public void Clear(bool clearIt)
+    public void Clear()
     {
-        if (clearIt)
-        {
             LinePointCount = 1;
             lineRend.positionCount = LinePointCount;
-            ResetToggle.isOn = false;
             LineIsActive = false;
 
             // Destroy and reset
             Destroy(ActiveMeshObject, 0.01f);
             ActiveMeshObject = new GameObject();
-            ActiveMeshObjectIsBuilt = false;
-        }
+            ActiveMeshObjectIsBuilt = false;        
     }
 
     public void Complete(bool isComplete)

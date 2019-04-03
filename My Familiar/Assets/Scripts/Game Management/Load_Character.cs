@@ -218,7 +218,7 @@ public class Load_Character : MonoBehaviour
         // Add capsule collider to body
         Body.AddComponent<CapsuleCollider>();
         Body.GetComponent<CapsuleCollider>().radius = baseSize.x / 4;
-        Body.GetComponent<CapsuleCollider>().height = baseSize.y * 2;
+        Body.GetComponent<CapsuleCollider>().height = baseSize.y * 2.4f;
 
         // Load Face
         GameObject Face = Load(CharacterName, "Face");
@@ -255,7 +255,7 @@ public class Load_Character : MonoBehaviour
         // Scale size down
         Leg1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg left and down
-        Leg1.transform.position = new Vector3(Leg1.transform.position.x - PartSeperationOffset, Leg1.transform.position.y - (2 * PartSeperationOffset), Leg1.transform.position.z);
+        Leg1.transform.position = new Vector3(Leg1.transform.position.x - PartSeperationOffset, Leg1.transform.position.y - (3 * PartSeperationOffset), Leg1.transform.position.z);
         // Set parent
         Leg1.transform.parent = CharacterToReturn.transform;
 
@@ -264,7 +264,7 @@ public class Load_Character : MonoBehaviour
         // Scale size down
         Leg2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg right and down
-        Leg2.transform.position = new Vector3(Leg2.transform.position.x + PartSeperationOffset, Leg2.transform.position.y - (2 * PartSeperationOffset), Leg2.transform.position.z);
+        Leg2.transform.position = new Vector3(Leg2.transform.position.x + PartSeperationOffset, Leg2.transform.position.y - (3 * PartSeperationOffset), Leg2.transform.position.z);
         // Set parent
         Leg2.transform.parent = CharacterToReturn.transform;
 
