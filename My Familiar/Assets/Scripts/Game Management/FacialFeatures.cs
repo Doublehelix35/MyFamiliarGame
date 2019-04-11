@@ -11,22 +11,46 @@ public class FacialFeatures : MonoBehaviour
     public Save_Character SaveRef;
     public Load_Character LoadRef;
 
+    GameObject FaceRef;
+    public Vector3 FaceOffset;
+
     public string NextSceneName;
 
     string CharacterName;
     public string PartName;
     public Material PartMaterial;
 
-    // Start is called before the first frame update
+   
     void Start()
     {
-        
+        // Load the face into the scene
+        FaceRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot()), "Face"); // Load slot no > load character name > load character's face
+
+        // Center face in scene
+        FaceRef.transform.position += FaceOffset;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Touch input
+        if(Input.touchCount >= 1) // User is touching the sceen
+        {
+            Touch touch = Input.GetTouch(0); // Get the touch
+            if (touch.phase == TouchPhase.Began) // Check if first touch
+            {
+
+            }
+            else if(touch.phase == TouchPhase.Moved) // Move Facial object
+            {
+
+            }
+            else if(touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) // Drop facial object
+            {
+
+            }
+
+        }
     }
 
     public void Clear()

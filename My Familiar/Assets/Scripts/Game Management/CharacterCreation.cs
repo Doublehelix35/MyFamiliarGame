@@ -44,10 +44,11 @@ public class CharacterCreation : MonoBehaviour {
 
 	void Update ()
     {
-        if(Input.touchCount >= 1 && !LineIsActive) // user is touching the screen
+        // Touch input
+        if(Input.touchCount >= 1 && !LineIsActive) // User is touching the screen
         {
-            Touch touch = Input.GetTouch(0); // get the touch
-            if (touch.phase == TouchPhase.Began) // check for the first touch
+            Touch touch = Input.GetTouch(0); // Get the touch
+            if (touch.phase == TouchPhase.Began) // Check for the first touch
             {
                 // Update touch positions
                 FirstTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -55,9 +56,9 @@ public class CharacterCreation : MonoBehaviour {
 
                 // Start of line
                 lineRend.positionCount = LinePointCount; // Set line size
-                lineRend.SetPosition(0, new Vector3(FirstTouchPos.x, FirstTouchPos.y, 0f)); // set pos of new line segment
+                lineRend.SetPosition(0, new Vector3(FirstTouchPos.x, FirstTouchPos.y, 0f)); // Set pos of new line segment
             }
-            else if (touch.phase == TouchPhase.Moved) // update the last position based on where they moved
+            else if (touch.phase == TouchPhase.Moved) // Update the last position based on where they moved
             {
                 // Check distance from last point
                 float dist = Vector3.Distance(LastTouchPos, Camera.main.ScreenToWorldPoint(touch.position));
