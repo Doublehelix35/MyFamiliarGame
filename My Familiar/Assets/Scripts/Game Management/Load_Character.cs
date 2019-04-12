@@ -6,22 +6,27 @@ using System.IO;
 
 public class Load_Character : MonoBehaviour
 {
-
+    // Materials
     public Material NonElementalMat;
     public Material AirMat;
     public Material EarthMat;
     public Material FireMat;
     public Material NatureMat;
     public Material WaterMat;
-
     Material MatToApply;
+
+    // Facial prefabs
+    public GameObject EyePrefab;
+    public GameObject NosePrefab;
+    public GameObject MouthPrefab;
+
+    float FacialOffset_Z = 0.1f; // Spawn facial features in front of face
 
     float Drag = 0.3f;
 
     // Default scale and seperation
     float SeperationMultipler = 0.03f;
     float ScaleMultiplier = 0.2f;
-
 
     // Evolution modifiers
     float EvolutionModifier = 1.02f; // Base modifier
@@ -230,7 +235,42 @@ public class Load_Character : MonoBehaviour
         Face.transform.position = new Vector3(Face.transform.position.x, Face.transform.position.y + (4 * PartSeperationOffset), Face.transform.position.z);
         // Set parent
         Face.transform.parent = CharacterToReturn.transform;
-        
+
+        // Load Facial Features
+        string[] facialParts = LoadFacialConfig(CharacterName);
+
+        // Loop through, spawn each facial feature, set the face as parent to all facial features
+        foreach(string part in facialParts)
+        {
+            if(File.Exists(Application.persistentDataPath + "/" + CharacterName + part + ".dat"))
+            {
+                GameObject prefabToSpawn;
+                Vector3 SpawnPos = Face.transform.position;
+                SpawnPos.z -= FacialOffset_Z;
+                SpawnPos += LoadFacialFeature(CharacterName, part);
+
+                // Select prefab to spawn
+                if (part.Contains("Eye")) { prefabToSpawn = EyePrefab; }
+                else if (part.Contains("Nose")) { prefabToSpawn = NosePrefab; }
+                else if (part.Contains("Mouth")) { prefabToSpawn = MouthPrefab; }
+                else { prefabToSpawn = EyePrefab; }
+
+                // Spawn facial object
+                GameObject facialObject = Instantiate(prefabToSpawn);
+                // Set position
+                facialObject.transform.position = SpawnPos;
+                // Set name
+                facialObject.name = part;
+                // Scale down
+                facialObject.transform.localScale *= ScaleMultiplier;
+                // Set parent
+                facialObject.transform.parent = Face.transform;
+            }
+            else
+            {
+                Debug.Log("File not found " + "/" + CharacterName + part + ".dat");
+            }            
+        }
 
         // Load Arm1
         GameObject Arm1 = Load(CharacterName, "Arm1");
@@ -335,6 +375,49 @@ public class Load_Character : MonoBehaviour
         }
 
         return GameObjectToReturn;
+    }
+
+    // Load facial configuration i.e. how many of each facial feature to load and their names
+    string[] LoadFacialConfig(string CharacterName)
+    {
+        CharacterData data = new CharacterData();
+
+        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + "FacialConfig" + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+
+            file.Close();
+        }
+
+        return data.FacialConfig;
+    }
+
+    // Load facial feature and return its relative position to the face
+    Vector3 LoadFacialFeature(string CharacterName, string CharacterPart)
+    {
+        CharacterData data = new CharacterData();
+
+        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+
+            file.Close();
+        }
+
+        // Convert back to a vector 3
+        Vector3 RelativePositionToFace = new Vector3(data.Facial_X, data.Facial_Y, data.Facial_Z);
+
+        return RelativePositionToFace;
     }
 
     void SetUpCharacterAsRagdoll(GameObject body, GameObject face, GameObject arm1, GameObject arm2, GameObject leg1, GameObject leg2)

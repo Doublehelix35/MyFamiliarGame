@@ -159,7 +159,7 @@ MonoBehaviour:
   - {x: 5, y: 4, z: 0}
   SaveRef: {fileID: 118838911}
   LoadRef: {fileID: 118838912}
-  NextSceneName: Creator_Body
+  NextSceneName: Creator_FacialFeatures
 --- !u!4 &118838910
 Transform:
   m_ObjectHideFlags: 0
@@ -205,6 +205,9 @@ MonoBehaviour:
   FireMat: {fileID: 0}
   NatureMat: {fileID: 0}
   WaterMat: {fileID: 0}
+  EyePrefab: {fileID: 0}
+  NosePrefab: {fileID: 0}
+  MouthPrefab: {fileID: 0}
 --- !u!1 &297534391
 GameObject:
   m_ObjectHideFlags: 0

@@ -145,10 +145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SaveRef: {fileID: 118838911}
   LoadRef: {fileID: 118838912}
-  FaceOffset: {x: -2.2, y: -1.4, z: 0}
-  NextSceneName: 
-  PartName: 
-  PartMaterial: {fileID: 0}
+  FaceOffset: {x: 0, y: 0, z: 0}
+  NextSceneName: Creator_Body
+  TestPrefab: {fileID: 8801674677255869671, guid: b4964d50151500f43a67cdc38d23e996,
+    type: 3}
 --- !u!4 &118838910
 Transform:
   m_ObjectHideFlags: 0
@@ -194,6 +194,12 @@ MonoBehaviour:
   FireMat: {fileID: 2100000, guid: b42d56007386ea94b9649146c286e759, type: 2}
   NatureMat: {fileID: 2100000, guid: 7050d0579d4ae9246a18fdf0f31bf811, type: 2}
   WaterMat: {fileID: 2100000, guid: 3e24dea351fe7c14593f5b9d614cecfe, type: 2}
+  EyePrefab: {fileID: 8801674677255869671, guid: b4964d50151500f43a67cdc38d23e996,
+    type: 3}
+  NosePrefab: {fileID: 136670065626514476, guid: 27135ce28b396624dba9953c6127e1bb,
+    type: 3}
+  MouthPrefab: {fileID: 4723083196380928302, guid: df066b9dbb56c324a8e9ee22a30883f8,
+    type: 3}
 --- !u!1 &297534391
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +279,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 118838909}
         m_MethodName: Clear
         m_Mode: 1
         m_Arguments:
@@ -560,9 +566,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 118838909}
         m_MethodName: Complete
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1050,10 +1056,10 @@ RectTransform:
   m_Father: {fileID: 1052437798}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 344.1, y: 90.29999}
-  m_SizeDelta: {x: -713, y: -209}
+  m_AnchoredPosition: {x: -55.899994, y: -134.70001}
+  m_SizeDelta: {x: 87, y: 241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1498394557
 MonoBehaviour:
@@ -1534,7 +1540,7 @@ PrefabInstance:
     - target: {fileID: 136670065626514476, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
       propertyPath: m_TagString
-      value: FacialObject
+      value: NonMoving
       objectReference: {fileID: 0}
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
@@ -1559,7 +1565,7 @@ PrefabInstance:
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
@@ -1569,7 +1575,7 @@ PrefabInstance:
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
@@ -1584,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 136670065626514475, guid: 27135ce28b396624dba9953c6127e1bb,
         type: 3}
@@ -1593,25 +1599,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27135ce28b396624dba9953c6127e1bb, type: 3}
---- !u!1 &136670065609414727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 136670065626514476, guid: 27135ce28b396624dba9953c6127e1bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 136670065609414726}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &136670065609414728
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136670065609414727}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4723083196616751367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1627,7 +1614,7 @@ PrefabInstance:
     - target: {fileID: 4723083196380928302, guid: df066b9dbb56c324a8e9ee22a30883f8,
         type: 3}
       propertyPath: m_TagString
-      value: FacialObject
+      value: NonMoving
       objectReference: {fileID: 0}
     - target: {fileID: 4723083196380928299, guid: df066b9dbb56c324a8e9ee22a30883f8,
         type: 3}
@@ -1720,7 +1707,7 @@ PrefabInstance:
     - target: {fileID: 8801674677255869671, guid: b4964d50151500f43a67cdc38d23e996,
         type: 3}
       propertyPath: m_TagString
-      value: FacialObject
+      value: NonMoving
       objectReference: {fileID: 0}
     - target: {fileID: 8801674677255869666, guid: b4964d50151500f43a67cdc38d23e996,
         type: 3}

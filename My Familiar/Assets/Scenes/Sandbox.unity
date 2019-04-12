@@ -8392,6 +8392,12 @@ MonoBehaviour:
   FireMat: {fileID: 2100000, guid: b42d56007386ea94b9649146c286e759, type: 2}
   NatureMat: {fileID: 2100000, guid: 7050d0579d4ae9246a18fdf0f31bf811, type: 2}
   WaterMat: {fileID: 2100000, guid: 3e24dea351fe7c14593f5b9d614cecfe, type: 2}
+  EyePrefab: {fileID: 8801674677255869671, guid: b4964d50151500f43a67cdc38d23e996,
+    type: 3}
+  NosePrefab: {fileID: 136670065626514476, guid: 27135ce28b396624dba9953c6127e1bb,
+    type: 3}
+  MouthPrefab: {fileID: 4723083196380928302, guid: df066b9dbb56c324a8e9ee22a30883f8,
+    type: 3}
 --- !u!4 &2106336107
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Creator_Face.unity
     guid: 259086441563e17448881c6796e14bfa
   - enabled: 1
+    path: Assets/Scenes/Creator_FacialFeatures.unity
+    guid: b23640a76d12c4944bebebaa9d89ed22
+  - enabled: 1
     path: Assets/Scenes/Creator_Body.unity
     guid: fa5a199d1b5a2ca4ab0a66bb5275474a
   - enabled: 1

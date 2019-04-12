@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
         // Move object with touch //
         if (Input.touchCount == 1) // User is touching the screen
         {
-            Touch touch = Input.GetTouch(0); // get touch
-            Vector3 touchPos = touch.position; // get touch position
+            Touch touch = Input.GetTouch(0); // Get touch
+            Vector3 touchPos = touch.position; // Get touch position
 
-            if (touch.phase == TouchPhase.Began) // check for the first touch
+            if (touch.phase == TouchPhase.Began) // Check for the first touch
             {
                 // Cast a ray
                 Ray ray = Camera.main.ScreenPointToRay(touchPos);

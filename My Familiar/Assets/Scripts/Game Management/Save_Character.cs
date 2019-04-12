@@ -171,6 +171,49 @@ public class Save_Character : MonoBehaviour {
         bf.Serialize(file, data);
         file.Close();
     }
+
+    // Save facial feature
+    internal void SaveFacialFeature(string CharacterName, string CharacterPart, Vector3 PositionRelativeToFace)
+    {
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat");
+        Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
+
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+
+        // Save facial feature's position
+        data.Facial_X = PositionRelativeToFace.x;
+        data.Facial_Y = PositionRelativeToFace.y;
+        data.Facial_Z = PositionRelativeToFace.z;
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    // Save data on how many facial features there are to load
+    internal void SaveFacialConfig(string CharacterName, string[] CharacterParts)
+    {
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + "FacialConfig" + ".dat");
+        Debug.Log("Save Char" + "/" + CharacterName + "FacialConfig" + ".dat");
+
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+        
+        // Save facial config
+        if(CharacterParts != null || CharacterParts.Length > 0)
+        {
+            data.FacialConfig = CharacterParts;
+        }
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
+    }
 }
 
 [System.Serializable]
@@ -186,6 +229,11 @@ class CharacterData
     public int[] CharacterTypes = { 0 }; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
     public int[] CharacterMoves = { 5 }; // 0 = empty move, 1 = AirStrike, 2 = EarthQuake, 3 = FireBlaze, 4 = NaturesWrath, 5 = Tackle, 6 = WaterBlast
 
+    // Facial features
+    public float Facial_X, Facial_Y, Facial_Z;
+    public string[] FacialConfig;
+
+    // Mesh data
     public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;
 }
