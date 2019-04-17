@@ -214,6 +214,24 @@ public class Save_Character : MonoBehaviour {
         bf.Serialize(file, data);
         file.Close();
     }
+
+    internal void SaveFirstTimeLoading(string CharacterName, bool isFirstTime)
+    {
+        // Create a binary formatter and a new file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + "FirstTimeLoading" + ".dat");
+        Debug.Log("Save Char" + "/" + CharacterName + "FirstTimeLoading" + ".dat");
+
+        // Create an object to save information to
+        CharacterData data = new CharacterData();
+
+        // Save first time loading
+        data.FirstTimeLoadingSave = isFirstTime;
+
+        // Write the object to file and close it
+        bf.Serialize(file, data);
+        file.Close();
+    }
 }
 
 [System.Serializable]
@@ -221,7 +239,9 @@ class CharacterData
 {
     public string CharacterName;
     public string CharacterPart;
+
     public int SaveSlotInUse;
+    public bool FirstTimeLoadingSave = true;
 
     public string MaterialName;
     public int Level;

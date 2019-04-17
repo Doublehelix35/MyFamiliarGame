@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Load_Character LoadRef;    
     GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
+    
 
     // Texts
     public Text CharacterNameText;
@@ -38,14 +39,14 @@ public class GameManager : MonoBehaviour
     float FollowStopDistance = 0.05f;
     float RagdollMaxDist = 10f;
 
-    void Awake()
+    // Egg Spawning
+    public GameObject EggPrefab;
+    Vector3 EggSpawnPos = new Vector3(0f, 5f, 0f);
+
+    void Awake ()
     {
-        ReloadCharacter();       
-    }
-
-    void Start ()
-    {       
-
+        // Will either spawn egg (1st time spawn) or reload character from file
+        ReloadCharacter();
     }
 	
 	void Update ()
@@ -83,6 +84,14 @@ public class GameManager : MonoBehaviour
                             Ragdoll.GetComponent<Rigidbody>().velocity = Vector3.zero; // Stop movement
                         }
                     }
+                    
+                    // Egg code
+                    if(hit.transform.tag == "Egg")
+                    {
+                        // Interact with egg and pass it ref of Game manager
+                        hit.transform.gameObject.GetComponent<Item_Egg>().Interact(gameObject);
+                    }
+                    
                 }
             }
             else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
@@ -140,6 +149,11 @@ public class GameManager : MonoBehaviour
 
         // Turn on battle mode button if player is evolution 1 or higher
         BattleModeButton.interactable = CharacterRef.GetComponentInChildren<Character>().CurrentEvolutionStage >= 1 ? true : false;
+    }
+
+    internal void SpawnEgg()
+    {
+        Instantiate(EggPrefab, EggSpawnPos, Quaternion.identity);
     }
 
     // Text update methods

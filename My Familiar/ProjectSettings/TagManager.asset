@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - TrainingItem
   - FacialObject
+  - Egg
   layers:
   - Default
   - TransparentFX

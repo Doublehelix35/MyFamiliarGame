@@ -31,6 +31,8 @@ public class Load_Character : MonoBehaviour
     // Evolution modifiers
     float EvolutionModifier = 1.02f; // Base modifier
     float EvolutionCountDivision = 20f; // Makes evo count smaller, so each evolution grows in small increments
+
+    bool FirstTimeLoadingSave = false;
     
 
     internal int LoadCurrentSlot()
@@ -103,11 +105,17 @@ public class Load_Character : MonoBehaviour
         }
         else // New file
         {
-            // Set data thats important for the code that follows
+            // Set data thats important for the code that follows          
             data.EvolutionCount = 0;
             data.Level = 1;
             data.CharacterMoves = new int[3] { 5, 0, 0 }; // Default moves are tackle, empty, empty
-        }        
+        }
+
+        // If first time spawn egg and exit function, if not then continue to build character
+        if (CheckFirstTimeLoad(CharacterName))
+        {
+            return new GameObject(CharacterName);
+        }
 
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
@@ -418,6 +426,34 @@ public class Load_Character : MonoBehaviour
         Vector3 RelativePositionToFace = new Vector3(data.Facial_X, data.Facial_Y, data.Facial_Z);
 
         return RelativePositionToFace;
+    }
+
+    // If first time spawn egg and return true, if not then return false
+    bool CheckFirstTimeLoad(string CharName)
+    {
+        CharacterData data = new CharacterData();
+
+        if (File.Exists(Application.persistentDataPath + "/" + CharName + "FirstTimeLoading" + ".dat"))
+        {
+            // Create a binary formatter and open the save file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/" + CharName +  "FirstTimeLoading" + ".dat", FileMode.Open);
+
+            // Create an object to store information from the file in and then close the file
+            data = (CharacterData)bf.Deserialize(file);
+
+            file.Close();
+        }
+
+        if (data.FirstTimeLoadingSave)
+        {
+            // Spawn egg        
+            gameObject.GetComponent<GameManager>().SpawnEgg();
+            // Set first time loading to false
+            gameObject.GetComponent<Save_Character>().SaveFirstTimeLoading(CharName, false);
+            return true;
+        }
+        return false;
     }
 
     void SetUpCharacterAsRagdoll(GameObject body, GameObject face, GameObject arm1, GameObject arm2, GameObject leg1, GameObject leg2)
