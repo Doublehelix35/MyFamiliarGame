@@ -111,12 +111,6 @@ public class Load_Character : MonoBehaviour
             data.CharacterMoves = new int[3] { 5, 0, 0 }; // Default moves are tackle, empty, empty
         }
 
-        // If first time spawn egg and exit function, if not then continue to build character
-        if (CheckFirstTimeLoad(CharacterName))
-        {
-            return new GameObject(CharacterName);
-        }
-
         // Load character from parts        
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
         if(CharacterToReturn.name == "") { CharacterToReturn.name = "NO NAME FOUND"; }
@@ -428,8 +422,8 @@ public class Load_Character : MonoBehaviour
         return RelativePositionToFace;
     }
 
-    // If first time spawn egg and return true, if not then return false
-    bool CheckFirstTimeLoad(string CharName)
+    // If first time return true, if not then return false
+    internal bool CheckFirstTimeLoad(string CharName)
     {
         CharacterData data = new CharacterData();
 
@@ -447,8 +441,6 @@ public class Load_Character : MonoBehaviour
 
         if (data.FirstTimeLoadingSave)
         {
-            // Spawn egg        
-            gameObject.GetComponent<GameManager>().SpawnEgg();
             // Set first time loading to false
             gameObject.GetComponent<Save_Character>().SaveFirstTimeLoading(CharName, false);
             return true;

@@ -34,8 +34,8 @@ public class FacialFeatures : MonoBehaviour
         FaceRef.transform.position += FaceOffset;
 
         // Test code
-        GameObject eye = Instantiate(TestPrefab, transform.position, Quaternion.identity);
-        FacialObjectsInScene.Add(eye);        
+        //GameObject eye = Instantiate(TestPrefab, transform.position, Quaternion.identity);
+        //FacialObjectsInScene.Add(eye);        
     }
     
     void Update()

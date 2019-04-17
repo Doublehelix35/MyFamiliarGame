@@ -7884,97 +7884,6 @@ Transform:
   m_Father: {fileID: 727558504}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1865339052
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6407995920009430897, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_Name
-      value: EggShell
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.26
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6407995920009430892, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6545490301986389740, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: EggSprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6545490301986389740, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: Uses
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6545490301986389740, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: EggSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 45808688134299b42aa9a234c7fa042a,
-        type: 3}
-    - target: {fileID: 6545490301986389740, guid: c05dc3094c356704287b46acb6029ff6,
-        type: 3}
-      propertyPath: EggSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: e5325721f569e8346920450ffddf44cb,
-        type: 3}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c05dc3094c356704287b46acb6029ff6, type: 3}
 --- !u!1 &1865914293
 GameObject:
   m_ObjectHideFlags: 0
@@ -8530,6 +8439,7 @@ MonoBehaviour:
   NatureText: {fileID: 872002154}
   WaterText: {fileID: 1411368753}
   BattleModeButton: {fileID: 1987850109}
+  ShowButton: {fileID: 1420238671}
   EggPrefab: {fileID: 6407995920009430897, guid: c05dc3094c356704287b46acb6029ff6,
     type: 3}
 --- !u!114 &2106336109

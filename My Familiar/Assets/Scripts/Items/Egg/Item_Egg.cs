@@ -7,14 +7,14 @@ public class Item_Egg : Item
     // Egg that player hatches from when first created
 
     public Sprite[] EggSprites;
-    int i; // increment through egg sprites
+    int i = 0; // increment through egg sprites
 
     // GM calls this when this is touched
     public override void Interact(GameObject GM)
     {
         // Change egg sprite
         i++;
-        Mathf.Clamp(i, 0f, EggSprites.Length); // Clamp between 0 and length of egg sprites
+        i = Mathf.Clamp(i, 0, EggSprites.Length - 1); // Clamp between 0 and length of egg sprites - 1
         gameObject.GetComponent<SpriteRenderer>().sprite = EggSprites[i];
 
         // Reduce uses

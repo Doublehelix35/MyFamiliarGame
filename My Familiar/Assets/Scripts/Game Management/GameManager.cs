@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     // Buttons
     public Button BattleModeButton;
+    public Button ShowButton;
 
     // Touch movement
     bool MoveRagdoll = false;
@@ -42,11 +43,22 @@ public class GameManager : MonoBehaviour
     // Egg Spawning
     public GameObject EggPrefab;
     Vector3 EggSpawnPos = new Vector3(0f, 5f, 0f);
+    bool EggActive = false;
 
     void Awake ()
     {
         // Will either spawn egg (1st time spawn) or reload character from file
-        ReloadCharacter();
+        if (LoadRef.CheckFirstTimeLoad(LoadRef.Load(LoadRef.LoadCurrentSlot())))
+        {
+            // Spawn egg        
+            gameObject.GetComponent<GameManager>().SpawnEgg();
+            EggActive = true;
+            ShowButton.interactable = false;
+        }
+        else
+        {
+            ReloadCharacter();
+        }
     }
 	
 	void Update ()
@@ -119,7 +131,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Tell character ai whether to move or not (Only move if player is not moving ragdoll)
-        CharacterRef.GetComponentInChildren<Character_AI>().StopOrResumeMoving(!MoveRagdoll);
+        if(!EggActive) { CharacterRef.GetComponentInChildren<Character_AI>().StopOrResumeMoving(!MoveRagdoll); }        
     }
 
     // Evolve character and update save
@@ -149,6 +161,12 @@ public class GameManager : MonoBehaviour
 
         // Turn on battle mode button if player is evolution 1 or higher
         BattleModeButton.interactable = CharacterRef.GetComponentInChildren<Character>().CurrentEvolutionStage >= 1 ? true : false;
+
+        // Set egg active to false
+        EggActive = false;
+
+        // Set show button to interactable
+        ShowButton.interactable = true;
     }
 
     internal void SpawnEgg()

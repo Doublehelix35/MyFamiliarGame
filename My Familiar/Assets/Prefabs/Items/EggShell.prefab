@@ -132,3 +132,6 @@ MonoBehaviour:
   HappinessChangeValue: 0
   LifeSpan: 5
   itemType: 0
+  EggSprites:
+  - {fileID: 21300000, guid: 45808688134299b42aa9a234c7fa042a, type: 3}
+  - {fileID: 21300000, guid: e5325721f569e8346920450ffddf44cb, type: 3}
