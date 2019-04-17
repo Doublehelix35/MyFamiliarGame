@@ -21,6 +21,7 @@ public class Load_Character : MonoBehaviour
     public GameObject MouthPrefab;
 
     float FacialOffset_Z = 0.1f; // Spawn facial features in front of face
+    float FacialOffsetDivison = 4f; // How seperated the facial features are
 
     float Drag = 0.3f;
 
@@ -115,7 +116,7 @@ public class Load_Character : MonoBehaviour
         GameObject CharacterToReturn = new GameObject(CharacterName); // Parent to all parts
         if(CharacterToReturn.name == "") { CharacterToReturn.name = "NO NAME FOUND"; }
 
-        // Load Body
+        /*/ Load Body /*/
         GameObject Body = Load(CharacterName, "Body");
 
         // Add character script to body
@@ -227,7 +228,8 @@ public class Load_Character : MonoBehaviour
         Body.GetComponent<CapsuleCollider>().radius = baseSize.x / 4;
         Body.GetComponent<CapsuleCollider>().height = baseSize.y * 2.4f;
 
-        // Load Face
+
+        /*/ Load Face /*/
         GameObject Face = Load(CharacterName, "Face");
         // Scale size down
         Face.transform.localScale *= ScaleMultiplier;
@@ -249,7 +251,7 @@ public class Load_Character : MonoBehaviour
                 GameObject prefabToSpawn;
                 Vector3 SpawnPos = Face.transform.position;
                 SpawnPos.z -= FacialOffset_Z;
-                SpawnPos += LoadFacialFeature(CharacterName, part);
+                SpawnPos += LoadFacialFeature(CharacterName, part) / FacialOffsetDivison;
 
                 // Select prefab to spawn
                 if (part.Contains("Eye")) { prefabToSpawn = EyePrefab; }
@@ -267,6 +269,8 @@ public class Load_Character : MonoBehaviour
                 facialObject.transform.localScale *= ScaleMultiplier;
                 // Set parent
                 facialObject.transform.parent = Face.transform;
+
+                Debug.Log(facialObject.name + " " + facialObject.transform.position.ToString());
             }
             else
             {
@@ -274,7 +278,7 @@ public class Load_Character : MonoBehaviour
             }            
         }
 
-        // Load Arm1
+        /*/ Load Arm1 /*/
         GameObject Arm1 = Load(CharacterName, "Arm1");
         // Scale size down
         Arm1.transform.localScale *= (ScaleMultiplier / 1.5f);
@@ -283,7 +287,7 @@ public class Load_Character : MonoBehaviour
         // Set parent
         Arm1.transform.parent = CharacterToReturn.transform;
 
-        // Load Arm2
+        /*/ Load Arm2 /*/
         GameObject Arm2 = Load(CharacterName, "Arm2");
         // Scale size down
         Arm2.transform.localScale *= (ScaleMultiplier / 1.5f);
@@ -292,7 +296,7 @@ public class Load_Character : MonoBehaviour
         // Set parent
         Arm2.transform.parent = CharacterToReturn.transform;
 
-        // Load Leg1
+        /*/ Load Leg1 /*/
         GameObject Leg1 = Load(CharacterName, "Leg1");
         // Scale size down
         Leg1.transform.localScale *= (ScaleMultiplier / 1.5f);
@@ -301,7 +305,7 @@ public class Load_Character : MonoBehaviour
         // Set parent
         Leg1.transform.parent = CharacterToReturn.transform;
 
-        // Load Leg2
+        /*/ Load Leg2 /*/
         GameObject Leg2 = Load(CharacterName, "Leg2");
         // Scale size down
         Leg2.transform.localScale *= (ScaleMultiplier / 1.5f);
@@ -317,8 +321,7 @@ public class Load_Character : MonoBehaviour
         Body.tag = "Player"; Face.tag = "Player"; Arm1.tag = "Player";
         Arm2.tag = "Player"; Leg1.tag = "Player"; Leg2.tag = "Player";
 
-        return CharacterToReturn;
-        
+        return CharacterToReturn;        
     }
 
     // Load only part selected
@@ -384,7 +387,7 @@ public class Load_Character : MonoBehaviour
     {
         CharacterData data = new CharacterData();
 
-        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+        if (File.Exists(Application.persistentDataPath + "/" + CharacterName + "FacialConfig" + ".dat"))
         {
             // Create a binary formatter and open the save file
             BinaryFormatter bf = new BinaryFormatter();
@@ -404,11 +407,11 @@ public class Load_Character : MonoBehaviour
     {
         CharacterData data = new CharacterData();
 
-        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+        if (File.Exists(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat"))
         {
             // Create a binary formatter and open the save file
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat", FileMode.Open);
 
             // Create an object to store information from the file in and then close the file
             data = (CharacterData)bf.Deserialize(file);
