@@ -22,8 +22,13 @@ public class EnemyManager : MonoBehaviour
     GameObject Arm2;
     GameObject Leg1;
     GameObject Leg2;
-    
+
+    List<Vector3[]> EnemiesList = new List<Vector3[]>();
     public Vector3[] EnemyVert;
+    public Vector3[] EnemyVert2;
+    public Vector3[] EnemyVert3;
+    public Vector3[] EnemyVert4;
+    
 
     // Materials
     public Material NonElementalMat;
@@ -45,6 +50,12 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
+        // Add enemy vector3 arrays into a list
+        EnemiesList.Add(EnemyVert);
+        EnemiesList.Add(EnemyVert2);
+        EnemiesList.Add(EnemyVert3);
+        EnemiesList.Add(EnemyVert4);
+
         // Set material to match type
         MatToApply = NatureMat;
         BuildEnemy();
@@ -53,7 +64,7 @@ public class EnemyManager : MonoBehaviour
         gameObject.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);
 
         // Set anchor
-        EnemyAnchorRef.GetComponent<SpringJoint>().connectedBody = EnemyRef.GetComponentInChildren<Rigidbody>();
+        EnemyAnchorRef.GetComponent<SpringJoint>().connectedBody = EnemyRef.GetComponentInChildren<Rigidbody>();        
     }
     
     internal void BuildEnemy()
@@ -61,8 +72,10 @@ public class EnemyManager : MonoBehaviour
         // Parent object
         EnemyRef = new GameObject(EnemyName);
 
+        Vector3[] PartVectorShape = ChooseEnemyShape();
+
         // Body
-        Body = CreateMesh(PartName[1], EnemyVert);
+        Body = CreateMesh(PartName[1], PartVectorShape);
         
         // Add Enemy script to body object
         Body.AddComponent<Enemy>();
@@ -102,7 +115,7 @@ public class EnemyManager : MonoBehaviour
         Body.GetComponent<CapsuleCollider>().height = baseSize.y * 2;
 
         // Face
-        Face = CreateMesh(PartName[0], EnemyVert);
+        Face = CreateMesh(PartName[0], PartVectorShape);
         // Scale size down
         Face.transform.localScale *= ScaleMultiplier;
         // Add cube collider
@@ -114,7 +127,7 @@ public class EnemyManager : MonoBehaviour
 
 
         // Arm1
-        Arm1 = CreateMesh(PartName[2], EnemyVert);
+        Arm1 = CreateMesh(PartName[2], PartVectorShape);
         // Scale size down
         Arm1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm left and up
@@ -123,7 +136,7 @@ public class EnemyManager : MonoBehaviour
         Arm1.transform.parent = EnemyRef.transform;
 
         // Arm2
-        Arm2 = CreateMesh(PartName[3], EnemyVert);
+        Arm2 = CreateMesh(PartName[3], PartVectorShape);
         // Scale size down
         Arm2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move arm right and up
@@ -132,7 +145,7 @@ public class EnemyManager : MonoBehaviour
         Arm2.transform.parent = EnemyRef.transform;
 
         // Leg1
-        Leg1 = CreateMesh(PartName[4], EnemyVert);
+        Leg1 = CreateMesh(PartName[4], PartVectorShape);
         // Scale size down
         Leg1.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg left and down
@@ -141,7 +154,7 @@ public class EnemyManager : MonoBehaviour
         Leg1.transform.parent = EnemyRef.transform;
 
         // Load Leg2
-        Leg2 = CreateMesh(PartName[5], EnemyVert);
+        Leg2 = CreateMesh(PartName[5], PartVectorShape);
         // Scale size down
         Leg2.transform.localScale *= (ScaleMultiplier / 1.5f);
         // Move leg right and down
@@ -266,6 +279,15 @@ public class EnemyManager : MonoBehaviour
         // Fixed joint from face to body
         face.AddComponent<FixedJoint>();
         face.GetComponent<FixedJoint>().connectedBody = body.GetComponent<Rigidbody>();
+    }
+
+    Vector3[] ChooseEnemyShape()
+    {
+        int rand = Random.Range(0, EnemiesList.Count);
+
+        Vector3[] vectorToReturn = EnemiesList[rand];
+
+        return vectorToReturn;
     }
 
     public void SetPlayerRef(GameObject playerRef)
