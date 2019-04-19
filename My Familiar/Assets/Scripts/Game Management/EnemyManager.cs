@@ -74,6 +74,9 @@ public class EnemyManager : MonoBehaviour
 
         Vector3[] PartVectorShape = ChooseEnemyShape();
 
+        // Choose element type
+        EnemyType = ChooseEnemyType();
+
         // Body
         Body = CreateMesh(PartName[1], PartVectorShape);
         
@@ -85,7 +88,8 @@ public class EnemyManager : MonoBehaviour
 
         // Set Enemy Stats
         int EvolutionCount = 1;
-        EnemyType = Elements.ElementType.Nature;
+        
+        Body.GetComponent<Enemy>().CharactersElementTypes.Add(EnemyType);
 
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if (EvolutionCount > 0)
@@ -288,6 +292,35 @@ public class EnemyManager : MonoBehaviour
         Vector3[] vectorToReturn = EnemiesList[rand];
 
         return vectorToReturn;
+    }
+
+    // Randomly return an element and set mat to apply to that type
+    Elements.ElementType ChooseEnemyType()
+    {
+        int rand = Random.Range(1, 6);
+        Debug.Log(rand);
+
+        switch (rand)
+        {
+            case 1: // Air
+                MatToApply = AirMat;
+                return Elements.ElementType.Air;
+            case 2: // Earth
+                MatToApply = EarthMat;
+                return Elements.ElementType.Earth;
+            case 3: // Fire
+                MatToApply = FireMat;
+                return Elements.ElementType.Fire;
+            case 4: // Nature
+                MatToApply = NatureMat;
+                return Elements.ElementType.Nature;
+            case 5: // Water
+                MatToApply = WaterMat;
+                return Elements.ElementType.Water;
+            default:
+                MatToApply = NonElementalMat;
+                return Elements.ElementType.NonElemental;
+        }
     }
 
     public void SetPlayerRef(GameObject playerRef)

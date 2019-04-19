@@ -67,7 +67,7 @@ public class BattleManager : MonoBehaviour
         else // Reactivate buttons
         {
             foreach(Button b in MoveButtons)
-            {
+            {                
                 b.interactable = true;
             }
         }

@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         LastMoveUseTime = Time.time;
 
         // Init type
-        CharactersElementTypes.Add(Elements.ElementType.Nature);
+        CharactersElementTypes.Add(Elements.ElementType.NonElemental);
 
         // Update ui
         EnemyManagerRef.GetComponent<EnemyManager>().UpdateText_EnemyHealth(Health.ToString());

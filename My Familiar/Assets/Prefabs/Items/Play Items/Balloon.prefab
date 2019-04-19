@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4976965907187661745}
   - component: {fileID: 4976965907187661744}
   - component: {fileID: 4976965907187661759}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Balloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +130,7 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 5
   LifeSpan: 5
+  itemType: 0
   FloatForce: 1800
   AttachedObjectForceModifierMax: 2.2
   MinDistFromBalloon: 0.1
@@ -152,7 +153,7 @@ GameObject:
   - component: {fileID: 4976965908448397088}
   - component: {fileID: 4976965908448397092}
   - component: {fileID: 9206296792283556481}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Balloon_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +419,7 @@ GameObject:
   - component: {fileID: 4976965908484019033}
   - component: {fileID: 4976965908484019032}
   - component: {fileID: 8423098910848688756}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
