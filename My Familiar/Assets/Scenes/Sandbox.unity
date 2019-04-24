@@ -2790,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 415854, guid: bd96af3d15508c443b025b4fb4b22947, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 1.743
       objectReference: {fileID: 0}
     - target: {fileID: 415854, guid: bd96af3d15508c443b025b4fb4b22947, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2842,11 +2842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347702, guid: bd96af3d15508c443b025b4fb4b22947, type: 3}
       propertyPath: m_LightProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2347702, guid: bd96af3d15508c443b025b4fb4b22947, type: 3}
       propertyPath: m_ReflectionProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2347702, guid: bd96af3d15508c443b025b4fb4b22947, type: 3}
       propertyPath: m_MotionVectors
@@ -3566,8 +3566,8 @@ MeshRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0
   m_MotionVectors: 2
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4090,8 +4090,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.5, y: -7.9}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -2.8, y: -16.8}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708495563
 MonoBehaviour:
@@ -4117,9 +4117,9 @@ MonoBehaviour:
   m_UVRect:
     serializedVersion: 2
     x: 0.5
-    y: 0.3
-    width: 1
-    height: 1
+    y: 0.5
+    width: 0.5
+    height: 0.5
 --- !u!222 &708495564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4162,8 +4162,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23.4, y: -8.9}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -23.4, y: 6.1}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717052443
 MonoBehaviour:
@@ -4188,10 +4188,10 @@ MonoBehaviour:
   m_Texture: {fileID: 8400000, guid: aa7966f98f6202c49a3e03ff2bf7f9e8, type: 2}
   m_UVRect:
     serializedVersion: 2
-    x: -0.25
-    y: -0.4
-    width: 1
-    height: 1
+    x: 0
+    y: 0
+    width: 0.5
+    height: 0.5
 --- !u!222 &717052444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6620,8 +6620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000052452, y: -10.899994}
-  m_SizeDelta: {x: 180, y: 180}
+  m_AnchoredPosition: {x: -0.0000052452, y: -37}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131822601
 MonoBehaviour:
@@ -6646,10 +6646,10 @@ MonoBehaviour:
   m_Texture: {fileID: 8400000, guid: aa7966f98f6202c49a3e03ff2bf7f9e8, type: 2}
   m_UVRect:
     serializedVersion: 2
-    x: -0.28
-    y: 0.4
-    width: 1
-    height: 1
+    x: 0
+    y: 0.5
+    width: 0.5
+    height: 0.5
 --- !u!222 &1131822602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7541,8 +7541,8 @@ Camera:
   m_GameObject: {fileID: 1332451552}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -7568,10 +7568,10 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1332451555
@@ -7759,11 +7759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2306332, guid: e93018e624f55614e9161ee76de85736, type: 3}
       propertyPath: m_LightProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2306332, guid: e93018e624f55614e9161ee76de85736, type: 3}
       propertyPath: m_ReflectionProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2306332, guid: e93018e624f55614e9161ee76de85736, type: 3}
       propertyPath: m_CastShadows
@@ -9109,11 +9109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399556, guid: 2412cbf946859cf43b635953f1a83b2d, type: 3}
       propertyPath: m_ReflectionProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2399556, guid: 2412cbf946859cf43b635953f1a83b2d, type: 3}
       propertyPath: m_LightProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2399556, guid: 2412cbf946859cf43b635953f1a83b2d, type: 3}
       propertyPath: m_MotionVectors
@@ -9666,8 +9666,8 @@ MeshRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0
   m_MotionVectors: 2
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
