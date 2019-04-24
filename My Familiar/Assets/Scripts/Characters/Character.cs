@@ -21,10 +21,10 @@ public class Character : MonoBehaviour
 
     // Stats
     internal int HealthMax = 60;
-    internal int HealthInitial = 20;
-    internal int HappinessMax = 50;
+    internal int HealthInitial = 20;    
     int Health = 0;
-    int Happiness = 1;
+    int Happiness = 50; // 0 min, start at 50, max 100
+    internal int HappinessMax = 100;
     float InvincibilityTimer = 0.5f;
     float DamageTakenTime;
 
@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
     float Speed = 1f;
 
     // Stomach/Fullness (%)
-    int CurrentFullness = 20;
+    int CurrentFullness = 50;
     int MinFullness = 0;
     int MaxFullness = 100;
     float FullnessLastTickTime; // Time of the last tick
@@ -108,10 +108,10 @@ public class Character : MonoBehaviour
         else
         {
             GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp);
+            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax);
             GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
             GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
         }
     }
@@ -131,7 +131,7 @@ public class Character : MonoBehaviour
             FullnessLastTickTime = Time.time;
 
             // Update ui
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
         }
     }
 
@@ -200,13 +200,13 @@ public class Character : MonoBehaviour
     {
         Happiness += value;
 
-        // Clamp happiness between happiness min and max
-        Happiness = Mathf.Clamp(Happiness, -HappinessMax, HappinessMax);
+        // Clamp happiness between zero and happiness max
+        Happiness = Mathf.Clamp(Happiness, 0, HappinessMax);
 
         // Update ui
         if (!InBattleMode)
         {
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Happiness(Happiness.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax);
         }        
     } 
 
@@ -221,7 +221,7 @@ public class Character : MonoBehaviour
         // Update ui 
         if (!InBattleMode)
         {
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Fullness(CurrentFullness.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
         }        
     }
 
@@ -373,7 +373,7 @@ public class Character : MonoBehaviour
         // Update UI
         if (!InBattleMode)
         {
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Exp(Experience.ToString());
+            GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp);
             GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
             GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(),
                                                                               NaturePoints.ToString(), WaterPoints.ToString());

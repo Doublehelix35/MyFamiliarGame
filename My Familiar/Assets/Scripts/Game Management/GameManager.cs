@@ -9,14 +9,11 @@ public class GameManager : MonoBehaviour
     public Save_Character SaveRef;
     public Load_Character LoadRef;    
     GameObject CharacterRef; // This is the parent object
-    public GameObject CameraRef;
-    
+    public GameObject CameraRef;  
 
     // Texts
     public Text CharacterNameText;
     public Text LevelText;
-    public Text ExpText;
-    public Text HappinessText;
     public Text HealthText;
     public Text FullnessText;
 
@@ -30,6 +27,11 @@ public class GameManager : MonoBehaviour
     // Buttons
     public Button BattleModeButton;
     public Button ShowButton;
+
+    // Misc UI Elements
+    public Slider Exp_ProgressBar;
+    public Material HappinessMat; // Background for happiness icon
+    public Material FullnessMat; // Background for fullness icon
 
     // Touch movement
     bool MoveRagdoll = false;
@@ -174,6 +176,26 @@ public class GameManager : MonoBehaviour
         Instantiate(EggPrefab, EggSpawnPos, Quaternion.identity);
     }
 
+    // Set value on exp progress bar (value should be between 0 and 1)
+    public void Update_Exp(float currentExp, float maxExp)
+    {
+        Exp_ProgressBar.value = currentExp / maxExp;
+    }
+
+    // Set happiness background mat equal to a point in the transition between red and green based on happiness
+    public void Update_Happiness(float currentHappiness, float maxHappiness)
+    {
+        // lerp between red and green based on happiness
+        HappinessMat.color = Color.Lerp(new Color(0.97f, 0.6f, 0.59f) , new Color(0.64f, 0.97f, 0.59f), currentHappiness / maxHappiness);
+    }
+
+    // Set fullness background mat equal to a point in the transition between red and green based on fullness
+    public void Update_Fullness(float currentFullness, float maxFullness)
+    {
+        // Lerp between red and green based on fullness
+        FullnessMat.color = Color.Lerp(Color.red, Color.green, currentFullness / maxFullness);
+    }
+
     // Text update methods
     /// <summary>
     /// Alternative idea: Could have one updateText method that takes 2 params 1) String value 2) enum TextToChange
@@ -187,27 +209,12 @@ public class GameManager : MonoBehaviour
     public void UpdateText_Level(string currentLevel)
     {
         LevelText.text = currentLevel;
-    }
-
-    public void UpdateText_Exp(string currentExp)
-    {
-        ExpText.text = currentExp;
-    }
-
-    public void UpdateText_Happiness(string currentHappiness)
-    {
-        HappinessText.text = currentHappiness;
-    }
+    }    
 
     public void UpdateText_Health(string currentHealth)
     {
         HealthText.text = currentHealth;
-    }
-
-    public void UpdateText_Fullness(string currentFullness)
-    {
-        FullnessText.text = currentFullness + "/100 (%)";
-    }
+    }    
 
     // Updates element spec texts
     public void UpdateText_AllElements(string currentAirPoints, string currentEarthPoints, string currentFirePoints, string currentNaturePoints, string currentWaterPoints)
