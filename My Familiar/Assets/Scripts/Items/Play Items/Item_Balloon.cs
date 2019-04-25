@@ -115,7 +115,10 @@ public class Item_Balloon : Item
         if (col.gameObject.tag == "TrainingItem")
         {
             // Remove object from character's list
-            PlayerRef.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
+            if (PlayerRef != null)
+            {
+                PlayerRef.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
+            }            
 
             // Destroy self
             Destroy(gameObject);

@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public Text CharacterNameText;
     public Text LevelText;
     public Text HealthText;
-    public Text FullnessText;
 
     // Spec point Texts
     public Text AirText;
