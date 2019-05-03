@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1782742706741780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.92, y: 4.68, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   Uses: 1
-  Damage: 1
-  ExpPointsGiven: 1
-  SpecPointsGiven: 1
-  HappinessChangeValue: -1
+  Damage: 3
+  ExpPointsGiven: 3
+  SpecPointsGiven: 3
+  HappinessChangeValue: -3
   LifeSpan: 5
-  itemType: 0
+  itemType: 3

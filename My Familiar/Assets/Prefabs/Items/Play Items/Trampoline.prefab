@@ -101,7 +101,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3149020287695644717}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 4
   m_Drag: 0.2
   m_AngularDrag: 0.1
   m_UseGravity: 1
@@ -128,4 +128,5 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 5
   LifeSpan: 5
+  itemType: 0
   BounceMagnitude: 100

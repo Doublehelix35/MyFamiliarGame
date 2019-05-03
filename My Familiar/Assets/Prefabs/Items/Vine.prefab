@@ -801,7 +801,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
-  itemType: 0
+  itemType: 4
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!1 &2158348132360083027
 GameObject:
