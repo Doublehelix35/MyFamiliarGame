@@ -33,7 +33,7 @@ public class Quests : Observer
     // Quest texts
     string[] QuestStrings = { "", "Train with a Fireball", "Train with a Boulder", "Train with Vines", "Train with a Storm Orb",
                                   "Train with the Waterfall", "Play with a Balloon", "Play with a Trampoline", "Give an Apple",
-                                  "Reach max happiness", "Reach max energy", "Win a battle", "Evolve!"};
+                                  "Reach max happiness", "Reach max energy", "Win a battle", "Evolve your Familiar"};
 
     // Dictionary to bind quests to their texts
     Dictionary<QuestEnum, string> QuestDictionary;
@@ -47,14 +47,15 @@ public class Quests : Observer
     void Awake()
     {
         // Init tutorial quest list and all quests list
-        foreach(QuestEnum e in System.Enum.GetValues(typeof(QuestEnum)))
+        foreach (QuestEnum e in System.Enum.GetValues(typeof(QuestEnum)))
         {
             // Dont add empty
-            if(e == QuestEnum.Empty) { break; }
-
-            // Add everything in quest enum
-            TutorialList.Add(e);
-            AllQuests.Add(e);
+            if(e != QuestEnum.Empty)
+            {
+                // Add everything in quest enum
+                TutorialList.Add(e);
+                AllQuests.Add(e);
+            }            
         }
 
         // Init quest dictionary
@@ -78,9 +79,12 @@ public class Quests : Observer
         // Set quests
         SetNewQuest(1);
         SetNewQuest(2);
-        SetNewQuest(3);     
+        SetNewQuest(3);
 
         // Update quest UI
+        UpdateQuest1(false, ActiveQuestArray[0]);
+        UpdateQuest2(false, ActiveQuestArray[1]);
+        UpdateQuest3(false, ActiveQuestArray[2]);
     }
 
     // Receives info on events from subjects
@@ -113,12 +117,17 @@ public class Quests : Observer
         {
             // Select a tutorial quest
             int rand = Random.Range(0, TutorialList.Count);
+            Debug.Log("tut count " + TutorialList.Count + " Rand " + rand);
             chosenQuest = TutorialList[rand];
+
+            // Remove quest from tutorial list
+            TutorialList.Remove(TutorialList[rand]);
         }
-        else
+        else if(AllQuests.Count > 0)
         {
             // Select any quest other than empty
             int rand = Random.Range(0, AllQuests.Count);
+            Debug.Log("all q count " + AllQuests.Count + " Rand " + rand);
             chosenQuest = AllQuests[rand];
         }        
 
@@ -160,32 +169,57 @@ public class Quests : Observer
 
     // isQuestComplete sets the toggle on/off, progressMade enables quest progress to be made or kept same.
     // Pass in a quest to change quest in that slot (Doesnt accept empty)
-    void UpdateQuest1(bool isQuestComplete, int progressMade = 0, QuestEnum quest = QuestEnum.Empty)
+    void UpdateQuest1(bool isQuestComplete, QuestEnum newQuest = QuestEnum.Empty, int progressMade = 0)
     {
         // Update toggle
         Quest1_Toggle.isOn = isQuestComplete;
 
         // Update to new quest
-        if(quest != QuestEnum.Empty)
+        if(newQuest != QuestEnum.Empty)
         {
+            // If last quest completed then give reward
+
             // Set quest slot to new quest
-            ActiveQuestArray[0] = quest;
+            ActiveQuestArray[0] = newQuest;
 
             // Update UI
-            Quest1_Text.text = "";
-
+            Quest1_Text.text = QuestDictionary[newQuest];
         }
     }
 
-    void UpdateQuest2(bool isQuestComplete, int progressMade = 0)
+    void UpdateQuest2(bool isQuestComplete, QuestEnum newQuest = QuestEnum.Empty, int progressMade = 0)
     {
         // Update toggle
         Quest2_Toggle.isOn = isQuestComplete;
+
+        // Update to new quest
+        if (newQuest != QuestEnum.Empty)
+        {
+            // If last quest completed then give reward
+
+            // Set quest slot to new quest
+            ActiveQuestArray[0] = newQuest;
+
+            // Update UI
+            Quest2_Text.text = QuestDictionary[newQuest];
+        }
     }
 
-    void UpdateQuest3(bool isQuestComplete, int progressMade = 0)
+    void UpdateQuest3(bool isQuestComplete, QuestEnum newQuest = QuestEnum.Empty, int progressMade = 0)
     {
         // Update toggle
         Quest3_Toggle.isOn = isQuestComplete;
+
+        // Update to new quest
+        if (newQuest != QuestEnum.Empty)
+        {
+            // If last quest completed then give reward
+
+            // Set quest slot to new quest
+            ActiveQuestArray[0] = newQuest;
+
+            // Update UI
+            Quest3_Text.text = QuestDictionary[newQuest];
+        }
     }
 }
