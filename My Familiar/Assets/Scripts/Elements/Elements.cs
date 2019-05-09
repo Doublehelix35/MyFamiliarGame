@@ -54,6 +54,7 @@ public class Elements : MonoBehaviour {
 
     void Awake()
     {
+        // Init move dictionary
         MoveDictionary = new Dictionary<ElementalMoves, ElementType>()
         {
             {ElementalMoves.EmptyMoveSlot, ElementType.NonElemental },

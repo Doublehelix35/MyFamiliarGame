@@ -30,6 +30,14 @@ public class Quests : Observer
     public enum QuestEnum { Empty, UseFireball, UseBoulder, UseVines, UseStormOrb, UseWaterfall, UseBalloon, UseTrampoline, UseFood, MakeHappy, MakeFull, WinBattle, Evolve }
     List<QuestEnum> AllQuests = new List<QuestEnum> { }; // Stores all quests (except empty)
 
+    // Quest texts
+    string[] QuestStrings = { "", "Train with a Fireball", "Train with a Boulder", "Train with Vines", "Train with a Storm Orb",
+                                  "Train with the Waterfall", "Play with a Balloon", "Play with a Trampoline", "Give an Apple",
+                                  "Reach max happiness", "Reach max energy", "Win a battle", "Evolve!"};
+
+    // Dictionary to bind quests to their texts
+    Dictionary<QuestEnum, string> QuestDictionary;
+
     // Array of active quests
     QuestEnum[] ActiveQuestArray = new QuestEnum[3] { QuestEnum.Empty, QuestEnum.Empty, QuestEnum.Empty };
 
@@ -49,6 +57,24 @@ public class Quests : Observer
             AllQuests.Add(e);
         }
 
+        // Init quest dictionary
+        QuestDictionary = new Dictionary<QuestEnum, string>()
+        {
+            {QuestEnum.Empty, QuestStrings[0] },
+            {QuestEnum.UseFireball, QuestStrings[1] },
+            {QuestEnum.UseBoulder, QuestStrings[2] },
+            {QuestEnum.UseVines, QuestStrings[3] },
+            {QuestEnum.UseStormOrb, QuestStrings[4] },
+            {QuestEnum.UseWaterfall, QuestStrings[5] },
+            {QuestEnum.UseBalloon, QuestStrings[6] },
+            {QuestEnum.UseTrampoline, QuestStrings[7] },
+            {QuestEnum.UseFood, QuestStrings[8] },
+            {QuestEnum.MakeHappy, QuestStrings[9] },
+            {QuestEnum.MakeFull, QuestStrings[10] },
+            {QuestEnum.WinBattle, QuestStrings[11] },
+            {QuestEnum.Evolve, QuestStrings[12] }
+        };
+
         // Set quests
         SetNewQuest(1);
         SetNewQuest(2);
@@ -57,7 +83,7 @@ public class Quests : Observer
         // Update quest UI
     }
 
-    // Receives info on events by subjects
+    // Receives info on events from subjects
     public override void OnNotify(GameObject GO, Events _event)
     {
         // If all quests are empty, exit
@@ -132,11 +158,23 @@ public class Quests : Observer
         }
     }
 
-    // isQuestComplete sets the toggle on/off, progressMade enables quest progress to be made or kept same
-    void UpdateQuest1(bool isQuestComplete, int progressMade = 0)
+    // isQuestComplete sets the toggle on/off, progressMade enables quest progress to be made or kept same.
+    // Pass in a quest to change quest in that slot (Doesnt accept empty)
+    void UpdateQuest1(bool isQuestComplete, int progressMade = 0, QuestEnum quest = QuestEnum.Empty)
     {
         // Update toggle
         Quest1_Toggle.isOn = isQuestComplete;
+
+        // Update to new quest
+        if(quest != QuestEnum.Empty)
+        {
+            // Set quest slot to new quest
+            ActiveQuestArray[0] = quest;
+
+            // Update UI
+            Quest1_Text.text = "";
+
+        }
     }
 
     void UpdateQuest2(bool isQuestComplete, int progressMade = 0)
