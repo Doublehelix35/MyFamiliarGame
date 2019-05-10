@@ -87,56 +87,9 @@ public class Quests : Observer
         UpdateQuest3(false, ActiveQuestArray[2]);
     }
 
-    // Receives info on events from subjects
-    public override void OnNotify(GameObject GO, Events _event)
-    {
-        // If all quests are empty, exit
-        if (ActiveQuestArray[0] == QuestEnum.Empty && ActiveQuestArray[1] == QuestEnum.Empty && ActiveQuestArray[2] == QuestEnum.Empty)
-        {
-            return;
-        }
-
-        // Check event and trigger relevant quest
-        switch (_event)
-        {
-            case Events.ItemUsed:
-                // Used fireball
-                TriggerQuest(QuestEnum.UseFireball);
-                break;
-            default:
-                break;
-        }
-    }
-
-    QuestEnum ChooseNextQuest()
-    {
-        QuestEnum chosenQuest = QuestEnum.Empty;
-
-        // Are there tutorial quests left?
-        if(TutorialList.Count > 0)
-        {
-            // Select a tutorial quest
-            int rand = Random.Range(0, TutorialList.Count);
-            Debug.Log("tut count " + TutorialList.Count + " Rand " + rand);
-            chosenQuest = TutorialList[rand];
-
-            // Remove quest from tutorial list
-            TutorialList.Remove(TutorialList[rand]);
-        }
-        else if(AllQuests.Count > 0)
-        {
-            // Select any quest other than empty
-            int rand = Random.Range(0, AllQuests.Count);
-            Debug.Log("all q count " + AllQuests.Count + " Rand " + rand);
-            chosenQuest = AllQuests[rand];
-        }        
-
-        return chosenQuest;
-    }
-
     // Set a new quest to a slot
     void SetNewQuest(int questSlotNum)
-    {        
+    {
         switch (questSlotNum)
         {
             case 1:
@@ -154,16 +107,147 @@ public class Quests : Observer
         }
     }
 
-    // Trigger quest
-    void TriggerQuest(QuestEnum quest)
+    QuestEnum ChooseNextQuest()
     {
-        switch (quest)
+        QuestEnum chosenQuest = QuestEnum.Empty;
+
+        // Are there tutorial quests left?
+        if (TutorialList.Count > 0)
         {
-            case QuestEnum.UseFireball:
-                UsedFireball = true;
+            // Select a tutorial quest
+            int rand = Random.Range(0, TutorialList.Count);
+            Debug.Log("tut count " + TutorialList.Count + " Rand " + rand);
+            chosenQuest = TutorialList[rand];
+
+            // Remove quest from tutorial list
+            TutorialList.Remove(TutorialList[rand]);
+        }
+        else if (AllQuests.Count > 0)
+        {
+            // Select any quest other than empty
+            int rand = Random.Range(0, AllQuests.Count);
+            Debug.Log("all q count " + AllQuests.Count + " Rand " + rand);
+            chosenQuest = AllQuests[rand];
+        }
+
+        return chosenQuest;
+    }
+
+    // Receives info on events from subjects
+    public override void OnNotify(GameObject GO, Events _event)
+    {
+        // If all quests are empty, exit
+        if (ActiveQuestArray[0] == QuestEnum.Empty && ActiveQuestArray[1] == QuestEnum.Empty && ActiveQuestArray[2] == QuestEnum.Empty)
+        {
+            return;
+        }
+
+        // Check event and trigger relevant quest
+        switch (_event)
+        {
+            case Events.ItemUsed:
+                if (GO.name.Contains("Fireball"))
+                {
+                    // Used fireball
+                    TriggerQuest(QuestEnum.UseFireball);
+                }
+                else if (GO.name.Contains("Boulder"))
+                {
+                    // Used Boulder
+                    TriggerQuest(QuestEnum.UseBoulder);
+                }
+                else if (GO.name.Contains("Vine"))
+                {
+                    // Used Vines
+                    TriggerQuest(QuestEnum.UseVines);
+                }
+                else if (GO.name.Contains("Storm"))
+                {
+                    // Used Storm Orb
+                    TriggerQuest(QuestEnum.UseStormOrb);
+                }
+                else if (GO.name.Contains("Waterfall"))
+                {
+                    // Used Waterfall
+                    TriggerQuest(QuestEnum.UseWaterfall);
+                }
+                else if (GO.name.Contains("Balloon"))
+                {
+                    // Used Balloon
+                    TriggerQuest(QuestEnum.UseBalloon);
+                }
+                else if (GO.name.Contains("Trampoline"))
+                {
+                    // Used Trampoline
+                    TriggerQuest(QuestEnum.UseTrampoline);
+                }
+                else if (GO.name.Contains("Apple"))
+                {
+                    // Used Food
+                    TriggerQuest(QuestEnum.UseFood);
+                }
+                else
+                {
+                    Debug.Log("Error Item not found (Quest)");
+                }                
                 break;
+
+            case Events.Evolve:
+                // Evolved
+                TriggerQuest(QuestEnum.Evolve);
+                break;
+
+            case Events.EnergyFull:
+                // Full energy
+                TriggerQuest(QuestEnum.MakeFull);
+                break;
+
+            case Events.HappinessMax:
+                // Max Happiness
+                TriggerQuest(QuestEnum.MakeHappy);
+                break;
+
+            case Events.BattleWon:
+                // Won battle
+                TriggerQuest(QuestEnum.WinBattle);
+                break;
+
+            case Events.LevelUp:
+                break;
+
+            case Events.LogIn:
+                break;
+
             default:
                 break;
+        }
+    }
+
+    // If incoming quest == an active quest --> update relevant quest slot
+    void TriggerQuest(QuestEnum quest)
+    {
+        // Quest 1
+        if (ActiveQuestArray[0] == quest)
+        {
+            // Update quest 1 to completed and pass in a new quest
+            UpdateQuest1(true, ChooseNextQuest());
+        }
+        // Quest 2
+        else if (ActiveQuestArray[1] == quest)
+        {
+            // Update quest 2 to completed and pass in a new quest
+            UpdateQuest2(true, ChooseNextQuest());
+        }
+        // Quest 3
+        else if (ActiveQuestArray[2] == quest)
+        {
+            // Update quest 3 to completed and pass in a new quest
+            UpdateQuest3(true, ChooseNextQuest());
+        }
+        // Quest not found
+        else
+        {
+            Debug.Log("Error quest not found in active quests");
         }
     }
 
@@ -198,7 +282,7 @@ public class Quests : Observer
             // If last quest completed then give reward
 
             // Set quest slot to new quest
-            ActiveQuestArray[0] = newQuest;
+            ActiveQuestArray[1] = newQuest;
 
             // Update UI
             Quest2_Text.text = QuestDictionary[newQuest];
@@ -216,7 +300,7 @@ public class Quests : Observer
             // If last quest completed then give reward
 
             // Set quest slot to new quest
-            ActiveQuestArray[0] = newQuest;
+            ActiveQuestArray[2] = newQuest;
 
             // Update UI
             Quest3_Text.text = QuestDictionary[newQuest];
