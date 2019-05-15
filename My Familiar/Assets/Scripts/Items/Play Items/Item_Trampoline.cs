@@ -15,8 +15,11 @@ public class Item_Trampoline : Item
         // Give Happiness value
         player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
 
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
         // Destroy self
-        if(Uses <= 0)
+        if (Uses <= 0)
         {
             Destroy(gameObject);
         }

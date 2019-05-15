@@ -22,6 +22,9 @@ public class Item_Swing : Item
         // Give Happiness value
         player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
 
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
         // Destroy parent object
         if (SwingParent.GetComponent<Item_Swing>().Uses <= 0)
         {

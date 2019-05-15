@@ -21,8 +21,11 @@ public class Item_Vine : Item
         // Give exp
         player.GetComponent<Character>().GainExp(ExpPointsGiven);
 
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
         // Destroy whole vine
-        if(HighestParentVine.GetComponent<Item_Vine>().Uses <= 0)
+        if (HighestParentVine.GetComponent<Item_Vine>().Uses <= 0)
         {
             Destroy(HighestParentVine);
         }

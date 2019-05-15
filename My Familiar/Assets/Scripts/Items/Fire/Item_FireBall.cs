@@ -20,6 +20,9 @@ public class Item_FireBall :  Item
         // Give exp
         player.GetComponent<Character>().GainExp(ExpPointsGiven);
 
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
         // Destroy self
         Destroy(gameObject);
     }

@@ -52,7 +52,7 @@ public class Item_WaterFall : Item
         player.GetComponent<Character>().GainExp(ExpPointsGiven);
 
         // Destroy self
-        if(GunRef.GetComponent<Item_WaterFall>().Uses <= 0)
+        if (GunRef.GetComponent<Item_WaterFall>().Uses <= 0)
         {
             Destroy(GunRef.transform.parent.gameObject);
         }
@@ -67,6 +67,9 @@ public class Item_WaterFall : Item
     {
         if(GunRef != gameObject) // Only water projectile should do this
         {
+            // Notify observers
+            Notify(gameObject, Observer.Events.ItemUsed);
+
             // Destroy self if collison detected
             Destroy(gameObject);
         }

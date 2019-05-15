@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public Save_Character SaveRef;
     public Load_Character LoadRef;    
     GameObject CharacterRef; // This is the parent object
-    public GameObject CameraRef;  
+    public GameObject CameraRef;
+    public Observer QuestObserver;
 
     // Texts
     public Text CharacterNameText;
@@ -168,6 +169,9 @@ public class GameManager : MonoBehaviour
 
         // Set show button to interactable
         ShowButton.interactable = true;
+
+        // Add observer to character subject
+        CharacterRef.GetComponentInChildren<Subject>().AddObserver(QuestObserver);
     }
 
     internal void SpawnEgg()

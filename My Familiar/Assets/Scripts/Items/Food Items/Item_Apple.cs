@@ -18,6 +18,9 @@ public class Item_Apple : Item
         // Give Fullness
         player.GetComponent<Character>().ChangeFullness(FullnessChangeValue);
 
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
         // Destroy self
         Destroy(gameObject);
     }

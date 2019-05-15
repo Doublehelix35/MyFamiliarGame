@@ -270,7 +270,7 @@ public class Load_Character : MonoBehaviour
                 // Set parent
                 facialObject.transform.parent = Face.transform;
 
-                Debug.Log(facialObject.name + " " + facialObject.transform.position.ToString());
+                //Debug.Log(facialObject.name + " " + facialObject.transform.position.ToString());
             }
             else
             {

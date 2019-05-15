@@ -12,6 +12,9 @@ public class Quests : Observer
     public Text Quest1_Text;
     public Text Quest2_Text;
     public Text Quest3_Text;
+    public Image Quest1_Highlight;
+    public Image Quest2_Highlight;
+    public Image Quest3_Highlight;
 
     // Quest lengths
     int Quest1Length = 1; // How many triggers it takes to complete
@@ -116,7 +119,6 @@ public class Quests : Observer
         {
             // Select a tutorial quest
             int rand = Random.Range(0, TutorialList.Count);
-            Debug.Log("tut count " + TutorialList.Count + " Rand " + rand);
             chosenQuest = TutorialList[rand];
 
             // Remove quest from tutorial list
@@ -268,6 +270,7 @@ public class Quests : Observer
 
             // Update UI
             Quest1_Text.text = QuestDictionary[newQuest];
+            Quest1_Toggle.isOn = false;
         }
     }
 
@@ -286,6 +289,7 @@ public class Quests : Observer
 
             // Update UI
             Quest2_Text.text = QuestDictionary[newQuest];
+            Quest2_Toggle.isOn = false;
         }
     }
 
@@ -304,6 +308,9 @@ public class Quests : Observer
 
             // Update UI
             Quest3_Text.text = QuestDictionary[newQuest];
+            Quest3_Toggle.isOn = false;
         }
     }
+
+    // Fades the quest highlight
 }

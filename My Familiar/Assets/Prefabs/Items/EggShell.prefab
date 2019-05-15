@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 45808688134299b42aa9a234c7fa042a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1629b2c2cce3f6b4cbcabb961569168a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,5 +133,5 @@ MonoBehaviour:
   LifeSpan: 5
   itemType: 0
   EggSprites:
-  - {fileID: 21300000, guid: 45808688134299b42aa9a234c7fa042a, type: 3}
-  - {fileID: 21300000, guid: e5325721f569e8346920450ffddf44cb, type: 3}
+  - {fileID: 21300000, guid: 1629b2c2cce3f6b4cbcabb961569168a, type: 3}
+  - {fileID: 21300000, guid: a5f91e4a317ebdb488db4993812d4ffa, type: 3}

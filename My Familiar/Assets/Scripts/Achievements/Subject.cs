@@ -27,6 +27,6 @@ public class Subject : MonoBehaviour
         {
             // Send notification
             o.OnNotify(gameObject, _event);
-        }
+        }        
     }
 }

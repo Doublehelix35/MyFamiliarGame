@@ -226,9 +226,8 @@ MonoBehaviour:
   MinDistanceBetweenPoints: 0.01
   LineWidth: 0.2
   LineMat: {fileID: 2100000, guid: 37a75a5614ebd4e4b8a2bd9eb75f742d, type: 2}
-  PartName: Arm1
+  PartName: Explanation
   PartMaterial: {fileID: 2100000, guid: 8a059ddfaf2f3b54fb97f2f3e0790b7b, type: 2}
-  ResetToggle: {fileID: 0}
   testVert:
   - {x: 4, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -286,6 +285,9 @@ MonoBehaviour:
   FireMat: {fileID: 0}
   NatureMat: {fileID: 0}
   WaterMat: {fileID: 0}
+  EyePrefab: {fileID: 0}
+  NosePrefab: {fileID: 0}
+  MouthPrefab: {fileID: 0}
 --- !u!114 &118838913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,7 +589,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 118838909}
         m_MethodName: Clear
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

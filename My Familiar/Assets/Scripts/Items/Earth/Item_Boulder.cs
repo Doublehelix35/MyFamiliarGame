@@ -21,7 +21,10 @@ public class Item_Boulder : Item
         // Give exp
         player.GetComponent<Character>().GainExp(ExpPointsGiven);
 
-        if(Health <= 1)
+        // Notify observers
+        Notify(gameObject, Observer.Events.ItemUsed);
+
+        if (Health <= 1)
         {
             // Destroy self
             Destroy(gameObject);

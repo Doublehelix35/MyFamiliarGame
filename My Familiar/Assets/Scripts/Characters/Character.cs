@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : Subject
 {
     /// <summary>
     /// Remember most supporting properties like rigidbodies are set up
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour
     public int Level = 1;
     int Experience = 0;
     int ExpToLevelUp = 1;
-    int[] LevelsToEvolveAt = { 2, 3, 4, 10, 15 }; // Levels that character evolves at
+    int[] LevelsToEvolveAt = { 3, 6, 9 }; // Levels that character evolves at
     internal int CurrentEvolutionStage = 0; // How many times has it evolved?
 
     // Elemental spec points
@@ -203,6 +203,8 @@ public class Character : MonoBehaviour
         // Clamp happiness between zero and happiness max
         Happiness = Mathf.Clamp(Happiness, 0, HappinessMax);
 
+        if (Happiness == HappinessMax) { Notify(gameObject, Observer.Events.HappinessMax); }
+
         // Update ui
         if (!InBattleMode)
         {
@@ -217,6 +219,8 @@ public class Character : MonoBehaviour
 
         // Clamp current fullness between min and max
         CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
+
+        if (CurrentFullness == MaxFullness) { Notify(gameObject, Observer.Events.EnergyFull); }
 
         // Update ui 
         if (!InBattleMode)
@@ -365,6 +369,7 @@ public class Character : MonoBehaviour
 
                     // Save evolution and reload      
                     ThisCharacterIsActive = false; // Dont interact with anything else
+                    Notify(gameObject, Observer.Events.Evolve);
                     GameManagerRef.GetComponent<GameManager>().EvolveToNextStage(gameObject);
                     return;
                 }
