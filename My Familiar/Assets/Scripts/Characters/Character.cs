@@ -13,8 +13,10 @@ public class Character : Subject
 
     // Object Refs
     GameObject GameManagerRef;
+    
     public bool ThisCharacterIsActive = true;
     public bool InBattleMode = false;
+
     
     // Objects that are attached
     internal List<GameObject> AttachedBalloonObjects = new List<GameObject>();
@@ -109,7 +111,7 @@ public class Character : Subject
         {
             GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
             GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp);
-            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax);
+            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, true);
             GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
             GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
             GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
@@ -207,8 +209,18 @@ public class Character : Subject
 
         // Update ui
         if (!InBattleMode)
-        {
-            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax);
+        {            
+            // If value positive
+            if(value > 0)
+            {
+                // Update happiness and flash up arrow
+                GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, true);
+            }
+            else
+            {
+                // Update happiness and flash down arrow
+                GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, false);
+            }
         }        
     } 
 

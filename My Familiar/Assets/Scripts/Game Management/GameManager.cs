@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
     public Observer QuestObserver;
+    public UIFlashing Happiness_DownArrow; // Flashes down when happiness lost
+    public UIFlashing Happiness_UpArrow; // Flashes up when happiness gained
 
     // Texts
     public Text CharacterNameText;
@@ -186,10 +188,19 @@ public class GameManager : MonoBehaviour
     }
 
     // Set happiness background mat equal to a point in the transition between red and green based on happiness
-    public void Update_Happiness(float currentHappiness, float maxHappiness)
+    public void Update_Happiness(float currentHappiness, float maxHappiness, bool isUp)
     {
         // lerp between red and green based on happiness
         HappinessMat.color = Color.Lerp(new Color(0.97f, 0.6f, 0.59f) , new Color(0.64f, 0.97f, 0.59f), currentHappiness / maxHappiness);
+
+        if (isUp)
+        {
+            Happiness_UpArrow.Flash();
+        }
+        else
+        {
+            Happiness_DownArrow.Flash();
+        }
     }
 
     // Set fullness background mat equal to a point in the transition between red and green based on fullness

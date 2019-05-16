@@ -10,9 +10,8 @@ public class DayNightCycle : MonoBehaviour
     float DayProgressStep = 0.002f; // increment by
     float UpdateDelay = 1f; // delay in seconds
 
-    private IEnumerator coroutine;
-
-    // Start is called before the first frame update
+    IEnumerator coroutine;
+    
     void Start()
     {
         // Init skybox to 0
