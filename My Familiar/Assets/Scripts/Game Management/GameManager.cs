@@ -11,11 +11,17 @@ public class GameManager : MonoBehaviour
     GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
     public Observer QuestObserver;
+
+    public AudioSource TapSound; // Object holding the tap sound
+
+    // UI
     public UIFlashing Happiness_DownArrow; // Flashes down when happiness lost
     public UIFlashing Happiness_UpArrow; // Flashes up when happiness gained
     public UIFlashing Fullness_DownArrow; // Flashes down when fullness lost
     public UIFlashing Fullness_UpArrow; // Flashes up when fullness gained
-
+    public UIFlashing LevelUpFlash; // Flashes on level up
+    public UIFlashing EvolvedFlash; // Flashes on evolution
+    
     // Texts
     public Text CharacterNameText;
     public Text LevelText;
@@ -77,6 +83,9 @@ public class GameManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began) // Check for the first touch
             {
+                // Tap sound
+                TapSound.Play();
+
                 // Cast a ray
                 Ray ray = Camera.main.ScreenPointToRay(touchPos);
                 RaycastHit hit;
@@ -183,6 +192,13 @@ public class GameManager : MonoBehaviour
         Instantiate(EggPrefab, EggSpawnPos, Quaternion.identity);
     }
 
+    // Reward for completing quest
+    internal void QuestReward(int expGain)
+    {
+        // Tell character to gain exp
+        CharacterRef.GetComponentInChildren<Character>().GainExp(expGain);
+    }
+
     // Set value on exp progress bar (value should be between 0 and 1)
     public void Update_Exp(float currentExp, float maxExp)
     {
@@ -249,5 +265,16 @@ public class GameManager : MonoBehaviour
         FireText.text = currentFirePoints;
         NatureText.text = currentNaturePoints;
         WaterText.text = currentWaterPoints;
+    }
+
+    // Flash UI elements
+    public void FlashLevelUp()
+    {
+        LevelUpFlash.Flash();
+    }
+
+    public void FlashEvolved()
+    {
+        EvolvedFlash.Flash();
     }
 }

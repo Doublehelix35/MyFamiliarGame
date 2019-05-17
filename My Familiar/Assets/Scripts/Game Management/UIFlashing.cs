@@ -7,28 +7,39 @@ public class UIFlashing : MonoBehaviour
 {
     public float FlashMax = 2f; // Duration of flashing in seconds total
     public float FlashDelay = 0.2f; // Gap between each flash
+    public float StartDelay = 2f; // Delay after scene is loaded
+    public bool isImageNotText; // true = image false = text
 
     float LastTimeStamp;
     float LastFlashTime;
 
     RawImage FlashingImage;
+    Text FlashingText;
+
+    
 
     void Start()
     {
         // Init time
-        LastTimeStamp = Time.time;
-        LastFlashTime = Time.time;
+        LastTimeStamp = Time.time - StartDelay;
+        LastFlashTime = Time.time - StartDelay;
 
-        FlashingImage = GetComponent<RawImage>();
+        if (isImageNotText)
+        {
+            FlashingImage = GetComponent<RawImage>();
+        }
+        else
+        {
+            FlashingText = GetComponent<Text>();
+        }
+        
     }
 
     // Activate flashing
     internal void Flash()
     {
-        Debug.Log("Flash");
-
         LastTimeStamp = Time.time;
-        LastFlashTime = Time.time;
+        LastFlashTime = Time.time - FlashDelay; // Flash immediately
     }
 
     // Loop and flash image for flashMax
@@ -41,7 +52,15 @@ public class UIFlashing : MonoBehaviour
             if(LastFlashTime + FlashDelay <= Time.time)
             {
                 // Flash
-                FlashingImage.enabled = !FlashingImage.enabled; // Toggle enabled
+                if (isImageNotText)
+                {
+                    FlashingImage.enabled = !FlashingImage.enabled; // Toggle
+                }
+                else
+                {
+                    FlashingText.enabled = !FlashingText.enabled; // Toggle
+                    Debug.Log("Flash " + gameObject.ToString());
+                }                
 
                 // Reset last flash time
                 LastFlashTime = Time.time;
@@ -50,7 +69,15 @@ public class UIFlashing : MonoBehaviour
         else
         {
             // Make sure image isnt visible when not flashing
-            FlashingImage.enabled = false;
+            if (isImageNotText)
+            {
+                FlashingImage.enabled = false;
+            }
+            else
+            {
+                FlashingText.enabled = false;
+            }
+                
         }
     }
 }

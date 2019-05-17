@@ -308,7 +308,10 @@ public class Character : Subject
 
         if (Experience > ExpToLevelUp)
         {
+            // Level up
             Level++;
+            GameManagerRef.GetComponent<GameManager>().FlashLevelUp(); // Flash level up UI
+
             Experience = Experience - ExpToLevelUp; // Carry over leftover exp
             ExpToLevelUp = ExpNeededForNextLevel(); // Increase exp needed to lvl up
 
@@ -384,6 +387,7 @@ public class Character : Subject
                     // Save evolution and reload      
                     ThisCharacterIsActive = false; // Dont interact with anything else
                     Notify(gameObject, Observer.Events.Evolve);
+                    GameManagerRef.GetComponent<GameManager>().FlashEvolved(); // Flash evolved UI
                     GameManagerRef.GetComponent<GameManager>().EvolveToNextStage(gameObject);
                     return;
                 }

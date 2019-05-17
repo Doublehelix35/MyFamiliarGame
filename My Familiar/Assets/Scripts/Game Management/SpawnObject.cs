@@ -31,7 +31,14 @@ public class SpawnObject : MonoBehaviour {
 
         if (IsObservable)
         {
-            GO.GetComponent<Subject>().AddObserver(QuestObserver);
+            if (GO.name.Contains("Water")) // Waterfall exception
+            {
+                GO.GetComponentInChildren<Subject>().AddObserver(QuestObserver);
+            }
+            else
+            {
+                GO.GetComponent<Subject>().AddObserver(QuestObserver);
+            }            
         }
     }
 

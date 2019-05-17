@@ -16,6 +16,10 @@ public class Quests : Observer
     public Image Quest2_Highlight;
     public Image Quest3_Highlight;
 
+    public UIFlashing QuestCompletedFlash; // Flashes on quest complete
+
+    public GameManager GameManagerRef;
+
     // Quest lengths
     int Quest1Length = 1; // How many triggers it takes to complete
     int Quest2Length = 1;
@@ -233,23 +237,29 @@ public class Quests : Observer
         {
             // Update quest 1 to completed and pass in a new quest
             UpdateQuest1(true, ChooseNextQuest());
+            QuestCompletedFlash.Flash();
+            GameManagerRef.QuestReward(10); // Give 10 exp
         }
         // Quest 2
         else if (ActiveQuestArray[1] == quest)
         {
             // Update quest 2 to completed and pass in a new quest
             UpdateQuest2(true, ChooseNextQuest());
+            QuestCompletedFlash.Flash();
+            GameManagerRef.QuestReward(10); // Give 10 exp
         }
         // Quest 3
         else if (ActiveQuestArray[2] == quest)
         {
             // Update quest 3 to completed and pass in a new quest
             UpdateQuest3(true, ChooseNextQuest());
+            QuestCompletedFlash.Flash();
+            GameManagerRef.QuestReward(10); // Give 10 exp
         }
         // Quest not found
         else
         {
-            Debug.Log("Error quest not found in active quests");
+            //Debug.Log("Error quest not found in active quests");
         }
     }
 
