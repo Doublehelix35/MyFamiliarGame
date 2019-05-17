@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public Observer QuestObserver;
     public UIFlashing Happiness_DownArrow; // Flashes down when happiness lost
     public UIFlashing Happiness_UpArrow; // Flashes up when happiness gained
+    public UIFlashing Fullness_DownArrow; // Flashes down when fullness lost
+    public UIFlashing Fullness_UpArrow; // Flashes up when fullness gained
 
     // Texts
     public Text CharacterNameText;
@@ -204,10 +206,19 @@ public class GameManager : MonoBehaviour
     }
 
     // Set fullness background mat equal to a point in the transition between red and green based on fullness
-    public void Update_Fullness(float currentFullness, float maxFullness)
+    public void Update_Fullness(float currentFullness, float maxFullness, bool isUp)
     {
         // Lerp between red and green based on fullness
         FullnessMat.color = Color.Lerp(Color.red, Color.green, currentFullness / maxFullness);
+
+        if (isUp)
+        {
+            Fullness_UpArrow.Flash();
+        }
+        else
+        {
+            Fullness_DownArrow.Flash();
+        }
     }
 
     // Text update methods

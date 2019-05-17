@@ -5,48 +5,52 @@ using UnityEngine.UI;
 
 public class UIFlashing : MonoBehaviour
 {
-    public int FlashMax = 4;
-    int flashCount = 0;
+    public float FlashMax = 2f; // Duration of flashing in seconds total
+    public float FlashDelay = 0.2f; // Gap between each flash
 
-    bool isFlashing = false;
+    float LastTimeStamp;
+    float LastFlashTime;
 
-    IEnumerator coroutine;
+    RawImage FlashingImage;
 
     void Start()
     {
-        // Start coroutine;
-        coroutine = FlashImage();   
-        StartCoroutine(coroutine);
+        // Init time
+        LastTimeStamp = Time.time;
+        LastFlashTime = Time.time;
+
+        FlashingImage = GetComponent<RawImage>();
     }
 
     // Activate flashing
     internal void Flash()
     {
-        flashCount = 0;
-        isFlashing = true;
+        Debug.Log("Flash");
+
+        LastTimeStamp = Time.time;
+        LastFlashTime = Time.time;
     }
 
     // Loop and flash image for flashMax
-    IEnumerator FlashImage()
+    void FixedUpdate()
     {
-        while (isFlashing)
+        // Check if able to be flashing
+        if(LastTimeStamp + FlashMax >= Time.time)
         {
-            // Off
-            GetComponent<RawImage>().enabled = false;
-            // Wait
-            yield return new WaitForSeconds(0.2f);
-            // On
-            GetComponent<RawImage>().enabled = true;
-            // Wait
-            yield return new WaitForSeconds(0.2f);
-            // Off
-            GetComponent<RawImage>().enabled = false;
+            // Check time since last flash
+            if(LastFlashTime + FlashDelay <= Time.time)
+            {
+                // Flash
+                FlashingImage.enabled = !FlashingImage.enabled; // Toggle enabled
 
-            flashCount++;
-
-            // Sets isFlashing to false to exit loop
-            isFlashing = flashCount >= FlashMax ? false : true;
+                // Reset last flash time
+                LastFlashTime = Time.time;
+            }
         }
-
+        else
+        {
+            // Make sure image isnt visible when not flashing
+            FlashingImage.enabled = false;
+        }
     }
 }

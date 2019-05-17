@@ -113,7 +113,7 @@ public class Character : Subject
             GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp);
             GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, true);
             GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
-            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
+            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, true);
             GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
         }
     }
@@ -124,16 +124,10 @@ public class Character : Subject
         if(FullnessLastTickTime + FullnessTickFrequency < Time.time && !InBattleMode)
         {
             // Reduce fullness
-            CurrentFullness -= FullnessTickPower;
-
-            // Clamp current fullness between min and max
-            CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness); 
+            ChangeFullness(-FullnessTickPower);
 
             // Reset last tick time
             FullnessLastTickTime = Time.time;
-
-            // Update ui
-            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
         }
     }
 
@@ -237,7 +231,15 @@ public class Character : Subject
         // Update ui 
         if (!InBattleMode)
         {
-            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness);
+            if(value > 0)
+            {
+                GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, true);
+            }
+            else
+            {
+                GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, false);
+            }
+            
         }        
     }
 
