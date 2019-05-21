@@ -536,7 +536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &467785263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
       type: 2}
   size: {x: 32, y: 32}
   maxSize: 20
-  numOfCircleToShow: 1
+  numOfCircleToShow: 4
   Initialized: 0
 --- !u!4 &467785265
 Transform:
