@@ -153,6 +153,16 @@ public class BattleManager : MonoBehaviour
         gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager
     }
 
+    // Object to save needs to have the character script attached
+    internal void SaveCharaterStats(GameObject ObjectToSave = null)
+    {
+        // Default object is character ref's child (body)
+        if (ObjectToSave == null) { ObjectToSave = CharacterRef.transform.GetChild(0).gameObject; }
+
+        // Save character's stats
+        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToSave); // Load name from current slot to ensure names line up for saving and loading
+    }
+
     // Move buttons
     public void MoveButton(int buttonNum)
     {

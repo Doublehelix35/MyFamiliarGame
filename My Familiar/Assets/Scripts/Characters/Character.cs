@@ -22,24 +22,23 @@ public class Character : Subject
     internal List<GameObject> AttachedBalloonObjects = new List<GameObject>();
 
     // Stats
-    internal int HealthMax = 60;
-    internal int HealthInitial = 20;    
-    int Health = 0;
-    int Happiness = 50; // 0 min, start at 50, max 100
+    internal int HealthMax = 60; // Health maximum
+    internal int Health = 0; // Current health
+    internal int Happiness = 50; // 0 min, start at 50, max 100
     internal int HappinessMax = 100;
     float InvincibilityTimer = 0.5f;
     float DamageTakenTime;
 
     // Battle stats
-    internal float Attack = 2f;
-    float Accuracy = 1f; // Determines if a move hits or misses
-    float CritChance = 1f; // Chance to get a critical hit
-    float Defence = 1f;
-    float DodgeChance = 1f; // Chance to dodge an incoming attack
-    float Speed = 1f;
+    internal float Attack;
+    internal float Accuracy; // Determines if a move hits or misses
+    internal float CritChance; // Chance to get a critical hit
+    internal float Defence;
+    internal float DodgeChance; // Chance to dodge an incoming attack
+    internal float Speed;
 
     // Stomach/Fullness (%)
-    int CurrentFullness = 50;
+    internal int CurrentFullness = 50;
     int MinFullness = 0;
     int MaxFullness = 100;
     float FullnessLastTickTime; // Time of the last tick
@@ -49,17 +48,17 @@ public class Character : Subject
 
     // Leveling
     public int Level = 1;
-    int Experience = 0;
+    internal int Experience = 0;
     int ExpToLevelUp = 1;
     int[] LevelsToEvolveAt = { 3, 6, 9 }; // Levels that character evolves at
     internal int CurrentEvolutionStage = 0; // How many times has it evolved?
 
     // Elemental spec points
-    int AirPoints = 0;
-    int EarthPoints = 0;
-    int FirePoints = 0;
-    int NaturePoints = 0;
-    int WaterPoints = 0;
+    internal int AirPoints = 0;
+    internal int EarthPoints = 0;
+    internal int FirePoints = 0;
+    internal int NaturePoints = 0;
+    internal int WaterPoints = 0;
 
     // Elemental typing
     internal List<Elements.ElementType> CharactersElementTypes = new List<Elements.ElementType>();
@@ -90,7 +89,6 @@ public class Character : Subject
     void Start()
     {
         // Init stats
-        Health = HealthInitial;
         DamageTakenTime = Time.time;
         ExpToLevelUp = ExpNeededForNextLevel();
         FullnessLastTickTime = Time.time;
@@ -310,6 +308,7 @@ public class Character : Subject
         {
             // Level up
             Level++;
+            LevelUpStats(); // Increase stats
             GameManagerRef.GetComponent<GameManager>().FlashLevelUp(); // Flash level up UI
 
             Experience = Experience - ExpToLevelUp; // Carry over leftover exp
@@ -381,12 +380,14 @@ public class Character : Subject
                     {
                         CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
                     }
-                    // Increase stats
-                    LevelUpStats();                    
 
+                    // Reset spec points
+                    AirPoints = 0; EarthPoints = 0; FirePoints = 0;
+                    NaturePoints = 0; WaterPoints = 0;
+                    
                     // Save evolution and reload      
                     ThisCharacterIsActive = false; // Dont interact with anything else
-                    Notify(gameObject, Observer.Events.Evolve);
+                    Notify(gameObject, Observer.Events.Evolve); // Evolved event notification
                     GameManagerRef.GetComponent<GameManager>().FlashEvolved(); // Flash evolved UI
                     GameManagerRef.GetComponent<GameManager>().EvolveToNextStage(gameObject);
                     return;

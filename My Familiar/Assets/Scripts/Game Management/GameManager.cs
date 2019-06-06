@@ -152,15 +152,25 @@ public class GameManager : MonoBehaviour
     // Evolve character and update save
     internal void EvolveToNextStage(GameObject ObjectToEvolve)
     {
-        // Evolve and save new type
-        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToEvolve); // Load name from current slot to ensure names line up for saving and loading
+        // Save stats
+        SaveCharaterStats(ObjectToEvolve);
         
         // Delete old character
         CharacterRef = new GameObject();
-        Destroy(ObjectToEvolve.transform.parent.gameObject); // Char Ref is the body object so we need to delete the parent
+        Destroy(ObjectToEvolve.transform.parent.gameObject); // ObjectToEvolve is the body object so we need to delete the parent
 
         // Reload character
         ReloadCharacter();
+    }
+
+    // Object to save needs to have the character script attached
+    internal void SaveCharaterStats(GameObject ObjectToSave = null)
+    {
+        // Default object is character ref's child (body)
+        if(ObjectToSave == null) { ObjectToSave = CharacterRef.transform.GetChild(0).gameObject; }
+
+        // Save character's stats
+        SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToSave); // Load name from current slot to ensure names line up for saving and loading
     }
 
     internal void ReloadCharacter()

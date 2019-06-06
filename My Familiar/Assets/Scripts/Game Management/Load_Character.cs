@@ -106,10 +106,20 @@ public class Load_Character : MonoBehaviour
         }
         else // New file
         {
-            // Set data thats important for the code that follows          
-            data.EvolutionCount = 0;
-            data.Level = 1;
+            // Set empty data to defaults      
+
+            // General stats
             data.CharacterMoves = new int[3] { 5, 0, 0 }; // Default moves are tackle, empty, empty
+            data.Level = 1; data.Experience = 0; data.EvolutionCount = 0;
+            data.Health = 20; data.Happiness = 50; data.Fullness = 50;
+
+            // Battle stats
+            data.Attack = 1f; data.Accuracy = 1f; data.CritChance = 1f;
+            data.Defence = 1f; data.DodgeChance = 1f; data.Speed = 1f;
+
+            // Spec Points  
+            data.AirPoints = 0; data.EarthPoints = 0; data.FirePoints = 0;
+            data.NaturePoints = 0; data.WaterPoints = 0;
         }
 
         // Load character from parts        
@@ -121,17 +131,27 @@ public class Load_Character : MonoBehaviour
 
         // Add character script to body
         Body.AddComponent<Character>();
-        Character characterRef = Body.GetComponent<Character>();
+        Character charRef = Body.GetComponent<Character>();
 
         // Add character AI script to body
         Body.AddComponent<Character_AI>();
 
-        // Load stats
-        characterRef.Level = data.Level;
+        // Load general stats
+        charRef.Level = data.Level; charRef.Experience = data.Experience;
+        charRef.Health = data.Health; charRef.Happiness = data.Happiness;
+        charRef.CurrentFullness = data.Fullness;
+        charRef.CurrentEvolutionStage = data.EvolutionCount;
 
-        // Evolution count
-        characterRef.CurrentEvolutionStage = data.EvolutionCount;       
+        // Load battle stats
+        charRef.Attack = data.Attack; charRef.Accuracy = data.Accuracy;
+        charRef.CritChance = data.CritChance; charRef.Defence = data.Defence;
+        charRef.DodgeChance = data.DodgeChance; charRef.Speed = data.Speed;
 
+        // Load spec points
+        charRef.AirPoints = data.AirPoints; charRef.EarthPoints = data.EarthPoints;
+        charRef.FirePoints = data.FirePoints; charRef.NaturePoints = data.NaturePoints;
+        charRef.WaterPoints = data.WaterPoints;
+        
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if(data.EvolutionCount > 0)
         {
@@ -149,27 +169,27 @@ public class Load_Character : MonoBehaviour
             switch (data.CharacterTypes[i])
             {
                 case 0: // Non-elemental
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.NonElemental);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.NonElemental);
                     MatToApply = NonElementalMat; // Set material
                     break;
                 case 1: // Air
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Air);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.Air);
                     MatToApply = AirMat; // Set material
                     break;
                 case 2: // Earth
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Earth);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.Earth);
                     MatToApply = EarthMat; // Set material
                     break;
                 case 3: // Fire
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Fire);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.Fire);
                     MatToApply = FireMat; // Set material
                     break;
                 case 4: // Nature
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Nature);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.Nature);
                     MatToApply = NatureMat; // Set material
                     break;
                 case 5: // Water
-                    characterRef.CharactersElementTypes.Add(Elements.ElementType.Water);
+                    charRef.CharactersElementTypes.Add(Elements.ElementType.Water);
                     MatToApply = WaterMat; // Set material
                     break;
                 default:
@@ -183,25 +203,25 @@ public class Load_Character : MonoBehaviour
             switch (data.CharacterMoves[i])
             {
                 case 0: // Empty move
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.EmptyMoveSlot;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.EmptyMoveSlot;
                     break;
                 case 1: // Air strike
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.AirStrike;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.AirStrike;
                     break;
                 case 2: // Earthquake
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.EarthQuake;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.EarthQuake;
                     break;
                 case 3: // Fire Blaze
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.FireBlaze;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.FireBlaze;
                     break;
                 case 4: // Natures Wrath
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.NaturesWrath;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.NaturesWrath;
                     break;
                 case 5: // Tackle
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.Tackle;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.Tackle;
                     break;
                 case 6: // Water Blast
-                    characterRef.MoveSlots[i] = Elements.ElementalMoves.WaterBlast;
+                    charRef.MoveSlots[i] = Elements.ElementalMoves.WaterBlast;
                     break;
                 default:
                     Debug.Log("Error loading moves from file");

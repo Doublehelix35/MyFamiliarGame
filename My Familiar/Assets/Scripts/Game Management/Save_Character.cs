@@ -49,7 +49,7 @@ public class Save_Character : MonoBehaviour {
         file.Close();
     }
 
-    // Save character stats and types
+    // Save character stats, types and moves
     internal void Save(string CharacterName, GameObject GameObjectToSave)
     {
         // Create a binary formatter and a new file
@@ -59,18 +59,38 @@ public class Save_Character : MonoBehaviour {
         // Create an object to save information to
         CharacterData data = new CharacterData();
 
-        // Save evolution count
-        data.EvolutionCount = GameObjectToSave.GetComponent<Character>().CurrentEvolutionStage;
+        // Temp character ref
+        Character charRef = GameObjectToSave.GetComponent<Character>();
 
-        // Save level
-        data.Level = GameObjectToSave.GetComponent<Character>().Level;
+        // Save general stats
+        data.Level = charRef.Level;
+        data.Experience = charRef.Experience;
+        data.Health = charRef.Health;
+        data.Happiness = charRef.Happiness;
+        data.Fullness = charRef.CurrentFullness;
+        data.EvolutionCount = charRef.CurrentEvolutionStage;
+
+        // Save battle stats
+        data.Attack = charRef.Attack;
+        data.Accuracy = charRef.Accuracy;
+        data.CritChance = charRef.CritChance;
+        data.Defence = charRef.Defence;
+        data.DodgeChance = charRef.DodgeChance;
+        data.Speed = charRef.Speed;
+
+        // Save spec points
+        data.AirPoints = charRef.AirPoints;
+        data.EarthPoints = charRef.EarthPoints;
+        data.FirePoints = charRef.FirePoints;
+        data.NaturePoints = charRef.NaturePoints;
+        data.WaterPoints = charRef.WaterPoints;
 
         // Save character types to int array
-        data.CharacterTypes = new int[GameObjectToSave.GetComponent<Character>().CharactersElementTypes.Count];
+        data.CharacterTypes = new int[charRef.CharactersElementTypes.Count];
         for (int i = 0; i < data.CharacterTypes.Length; i++)
         {
             // Convert from Element.ElementType to int for serialization
-            switch (GameObjectToSave.GetComponent<Character>().CharactersElementTypes[i])
+            switch (charRef.CharactersElementTypes[i])
             {
                 case Elements.ElementType.NonElemental:
                     data.CharacterTypes[i] = 0;
@@ -139,20 +159,24 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat");
-        Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
+        //Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
 
+        // Temp mesh filter ref
+        MeshFilter meshFilterRef = GameObjectToSave.GetComponent<MeshFilter>();
+
         // Save vertices
 
         // Init arrays
-        Vector3[] VertsTemp = new Vector3[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
-        data.Vertices_x = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
-        data.Vertices_y = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
-        data.Vertices_z = new float[GameObjectToSave.GetComponent<MeshFilter>().mesh.vertexCount];
+        Vector3[] VertsTemp = new Vector3[meshFilterRef.mesh.vertexCount];
+        data.Vertices_x = new float[meshFilterRef.mesh.vertexCount];
+        data.Vertices_y = new float[meshFilterRef.mesh.vertexCount];
+        data.Vertices_z = new float[meshFilterRef.mesh.vertexCount];
 
-        VertsTemp = GameObjectToSave.GetComponent<MeshFilter>().mesh.vertices;
+        // Convert from vector3 array and save as 3 floats arrays
+        VertsTemp = meshFilterRef.mesh.vertices;
 
         for (int i = 0; i < VertsTemp.Length; i++)
         {
@@ -162,7 +186,7 @@ public class Save_Character : MonoBehaviour {
         }
 
         // Save Triangles
-        data.Triangles = GameObjectToSave.GetComponent<MeshFilter>().mesh.triangles;
+        data.Triangles = meshFilterRef.mesh.triangles;
 
         // Save Material
         data.MaterialName = "Yellow";
@@ -178,7 +202,7 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + CharacterPart + ".dat");
-        Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
+        //Debug.Log("Save Char" + "/" + CharacterName + CharacterPart + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
@@ -199,7 +223,7 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + "FacialConfig" + ".dat");
-        Debug.Log("Save Char" + "/" + CharacterName + "FacialConfig" + ".dat");
+        //Debug.Log("Save Char" + "/" + CharacterName + "FacialConfig" + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
@@ -220,7 +244,7 @@ public class Save_Character : MonoBehaviour {
         // Create a binary formatter and a new file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/" + CharacterName + "FirstTimeLoading" + ".dat");
-        Debug.Log("Save Char" + "/" + CharacterName + "FirstTimeLoading" + ".dat");
+        //Debug.Log("Save Char" + "/" + CharacterName + "FirstTimeLoading" + ".dat");
 
         // Create an object to save information to
         CharacterData data = new CharacterData();
@@ -239,15 +263,8 @@ class CharacterData
 {
     public string CharacterName;
     public string CharacterPart;
-
     public int SaveSlotInUse;
     public bool FirstTimeLoadingSave = true;
-
-    public string MaterialName;
-    public int Level;
-    public int EvolutionCount; // How many evolutions has it had?
-    public int[] CharacterTypes = { 0 }; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
-    public int[] CharacterMoves = { 5 }; // 0 = empty move, 1 = AirStrike, 2 = EarthQuake, 3 = FireBlaze, 4 = NaturesWrath, 5 = Tackle, 6 = WaterBlast
 
     // Facial features
     public float Facial_X, Facial_Y, Facial_Z;
@@ -256,4 +273,30 @@ class CharacterData
     // Mesh data
     public float[] Vertices_x, Vertices_y, Vertices_z;
     public int[] Triangles;
+    public string MaterialName;
+
+    // General stats
+    public int Health;
+    public int Happiness;
+    public int Fullness;
+    public int Level;
+    public int Experience;
+    public int EvolutionCount; // How many evolutions has it had?
+    public int[] CharacterTypes = { 0 }; // 0 = non-elemental 1 = air 2 = earth 3 = fire 4 = nature 5 = water
+    public int[] CharacterMoves = { 5 }; // 0 = empty move, 1 = AirStrike, 2 = EarthQuake, 3 = FireBlaze, 4 = NaturesWrath, 5 = Tackle, 6 = WaterBlast
+       
+    // Battle stats
+    public float Attack;
+    public float Accuracy; // Determines if a move hits or misses
+    public float CritChance; // Chance to get a critical hit
+    public float Defence;
+    public float DodgeChance; // Chance to dodge an incoming attack
+    public float Speed;
+
+    // Spec points
+    public int AirPoints;
+    public int EarthPoints;
+    public int FirePoints;
+    public int NaturePoints;
+    public int WaterPoints;    
 }
