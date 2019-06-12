@@ -286,10 +286,10 @@ class CharacterData
     public int[] CharacterMoves = { 5 }; // 0 = empty move, 1 = AirStrike, 2 = EarthQuake, 3 = FireBlaze, 4 = NaturesWrath, 5 = Tackle, 6 = WaterBlast
        
     // Battle stats
-    public float Attack;
+    public int Attack;
     public float Accuracy; // Determines if a move hits or misses
     public float CritChance; // Chance to get a critical hit
-    public float Defence;
+    public int Defence;
     public float DodgeChance; // Chance to dodge an incoming attack
     public float Speed;
 

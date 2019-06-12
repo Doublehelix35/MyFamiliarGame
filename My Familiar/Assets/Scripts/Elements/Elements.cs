@@ -106,14 +106,10 @@ public class Elements : MonoBehaviour {
         return moveString;
     }
 
-    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, float attackValue, Transform target, Vector3 spawnLocation)
+    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, float attackValue,float accuracy, float critChance, Transform target, Vector3 spawnLocation)
     {
         // Set type boost
-        float typeBoost = 1f;
-        if (isThereTypeBoost)
-        {
-            typeBoost = 1.5f;
-        }
+        float typeBoost = isThereTypeBoost ? 1.5f : 1f; 
 
         // Use selected move
         switch (moveToUse)
@@ -129,6 +125,10 @@ public class Elements : MonoBehaviour {
                 airStrike.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 airStrike.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * AirStrikeMovePower);
+                // Set accuracy
+                airStrike.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                airStrike.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             case ElementalMoves.EarthQuake:
@@ -138,6 +138,10 @@ public class Elements : MonoBehaviour {
                 earthQuake.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 earthQuake.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * EarthQuakeMovePower);
+                // Set accuracy
+                earthQuake.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                earthQuake.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             case ElementalMoves.FireBlaze:
@@ -147,6 +151,10 @@ public class Elements : MonoBehaviour {
                 fireBlaze.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 fireBlaze.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * FireBlazeMovePower);
+                // Set accuracy
+                fireBlaze.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                fireBlaze.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             case ElementalMoves.NaturesWrath:
@@ -156,6 +164,10 @@ public class Elements : MonoBehaviour {
                 naturesWrath.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 naturesWrath.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * NaturesWrathMovePower);
+                // Set accuracy
+                naturesWrath.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                naturesWrath.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             case ElementalMoves.Tackle:
@@ -165,6 +177,10 @@ public class Elements : MonoBehaviour {
                 tackle.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 tackle.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * TackleMovePower);
+                // Set accuracy
+                tackle.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                tackle.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             case ElementalMoves.WaterBlast:
@@ -174,6 +190,10 @@ public class Elements : MonoBehaviour {
                 waterBlast.GetComponent<Projectile_Homing>().Target = target;
                 // Set damage
                 waterBlast.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * WaterBlastMovePower);
+                // Set accuracy
+                waterBlast.GetComponent<Projectile_Homing>().Accuracy = accuracy;
+                // Set crit chance
+                waterBlast.GetComponent<Projectile_Homing>().CritChance = critChance;
                 break;
 
             default:

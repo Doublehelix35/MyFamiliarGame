@@ -114,8 +114,8 @@ public class Load_Character : MonoBehaviour
             data.Health = 20; data.Happiness = 50; data.Fullness = 50;
 
             // Battle stats
-            data.Attack = 1f; data.Accuracy = 1f; data.CritChance = 1f;
-            data.Defence = 1f; data.DodgeChance = 1f; data.Speed = 1f;
+            data.Attack = 1; data.Accuracy = 1f; data.CritChance = 0.02f;
+            data.Defence = 1; data.DodgeChance = 1f; data.Speed = 1f;
 
             // Spec Points  
             data.AirPoints = 0; data.EarthPoints = 0; data.FirePoints = 0;
@@ -138,7 +138,8 @@ public class Load_Character : MonoBehaviour
 
         // Load general stats
         charRef.Level = data.Level; charRef.Experience = data.Experience;
-        charRef.Health = data.Health; charRef.Happiness = data.Happiness;
+        charRef.Health = data.Health < 0 ? 0 : data.Health; // Make sure health isnt below 0
+        charRef.Happiness = data.Happiness;
         charRef.CurrentFullness = data.Fullness;
         charRef.CurrentEvolutionStage = data.EvolutionCount;
 

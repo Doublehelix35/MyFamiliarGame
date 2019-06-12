@@ -29,6 +29,10 @@ public class BattleManager : MonoBehaviour
     // Move usage timer
     float LastMoveUseTime;
     float MoveUsageDelay = 2f;
+    float MoveSpeedBase = 5f;
+    float MoveStarvingPenalty = 0f;
+    float MoveRefreshedBonus = 0f;
+    float MoveHappinessBonus = 0f;
 
     // Spawn offset
     Vector3 PlayerSpawnOffset = new Vector3(-6f, 2f, 0f); // Spawn to the left and up
@@ -139,15 +143,26 @@ public class BattleManager : MonoBehaviour
     {
         // Reload character
         CharacterRef = LoadRef.Load(LoadRef.Load(LoadRef.LoadCurrentSlot())); // Get slot no. then character name then load character
+        Character CharTemp = CharacterRef.GetComponentInChildren<Character>(); // Temp ref to char script
 
         // Update UI and give camera new ref
         UpdateText_CharacterName(CharacterRef.name);
 
         // Update move slot buttons (Looks at char ref's children to find character script)
-        UpdateText_Moves(1, CharacterRef.GetComponentInChildren<Character>().MoveSlots[0]); // Move 1
-        UpdateText_Moves(2, CharacterRef.GetComponentInChildren<Character>().MoveSlots[1]); // Move 2
-        UpdateText_Moves(3, CharacterRef.GetComponentInChildren<Character>().MoveSlots[2]); // Move 3
+        UpdateText_Moves(1, CharTemp.MoveSlots[0]); // Move 1
+        UpdateText_Moves(2, CharTemp.MoveSlots[1]); // Move 2
+        UpdateText_Moves(3, CharTemp.MoveSlots[2]); // Move 3
 
+        // Set move bonuses and penalties
+        MoveStarvingPenalty = CharTemp.CurrentFullness <= 25 ? 1f : 0f; // If fullness < 25% then turn penalty on
+        MoveRefreshedBonus = CharTemp.CurrentFullness >= 75 ? 1f : 0f; // If fullness > 75% then turn bonus on
+        MoveHappinessBonus = CharTemp.Happiness >= 75 ? 1f : 0f; // If happiness > 75% then turn bonus on
+
+        // Calculate move delay (Factor in bonuses and penalties)
+        MoveUsageDelay = (MoveSpeedBase + MoveStarvingPenalty - MoveRefreshedBonus - MoveHappinessBonus) 
+                            / CharTemp.Speed;
+
+        // Player scene setup
         CharacterRef.transform.position += PlayerSpawnOffset; // Spawn above ground and to the left
         CameraRef.GetComponent<CameraFollow>().SetPlayerRef(CharacterRef); // Set player ref in camera   
         gameObject.GetComponent<EnemyManager>().SetPlayerRef(CharacterRef); // Set player ref in enemy manager
@@ -178,7 +193,8 @@ public class BattleManager : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlots[0], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[0], giveTypeBoost, charScript.Attack, charScript.Accuracy,
+                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             case 2: // Move slot 2
@@ -187,7 +203,8 @@ public class BattleManager : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlots[1], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[1], giveTypeBoost, charScript.Attack, charScript.Accuracy,
+                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             case 3: // Move slot 3
@@ -196,7 +213,8 @@ public class BattleManager : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(charScript.MoveSlots[2], giveTypeBoost, charScript.Attack, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                element.UseMove(charScript.MoveSlots[2], giveTypeBoost, charScript.Attack, charScript.Accuracy,
+                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
                 break;
 
             default:

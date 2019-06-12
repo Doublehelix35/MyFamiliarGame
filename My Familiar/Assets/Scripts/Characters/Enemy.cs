@@ -11,18 +11,18 @@ public class Enemy : MonoBehaviour
 
     // Stats
     internal int HealthMax = 60;
-    internal int HealthInitial = 20;
+    internal int HealthInitial = 50;
     int Health = 0;
     float InvincibilityTimer = 0.5f;
     float DamageTakenTime;
 
     // Battle stats
-    internal float Attack = 2f;
-    float Accuracy = 1f; // Determines if a move hits or misses
-    float CritChance = 1f; // Chance to get a critical hit
-    float Defence = 1f;
-    float DodgeChance = 1f; // Chance to dodge an incoming attack
-    float Speed = 1f;
+    internal int Attack = 5; // Damage of an attack
+    internal float Accuracy = 1f; // Determines if a move hits or misses
+    internal float CritChance = 0.03f; // Chance to get a critical hit
+    internal int Defence = 1; // Amount of damage to ignore
+    internal float DodgeChance = 1f; // Chance to dodge an incoming attack
+    internal float Speed = 1f; // How quickly the enemy attacks
 
     // Leveling
     public int Level = 1;
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot1, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot1, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
                 break;
 
             case 2: // Move slot 2
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot2, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot2, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
                 break;
 
             case 3: // Move slot 3
@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot3, giveTypeBoost, Attack, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot3, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
                 break;
 
             default:

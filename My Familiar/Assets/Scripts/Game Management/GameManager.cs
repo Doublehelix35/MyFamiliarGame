@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
     public Observer QuestObserver;
-
     public AudioSource TapSound; // Object holding the tap sound
 
     // UI

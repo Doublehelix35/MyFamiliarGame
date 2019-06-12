@@ -8,6 +8,10 @@ public class Projectile_Homing : Item
 
     internal Transform Target;
     public float ProjectileForce;
+    internal float Accuracy; // Currently doesnt do anything (waiting for particle attack upgrade)
+    internal float CritChance;
+    float CritPower = 4f;
+    int DamageMin = 1;
 
     Elements ElementsRef;
     
@@ -34,6 +38,8 @@ public class Projectile_Homing : Item
     public override void Interact(GameObject characterToDamage)
     {
         float damageModifier = 1f;
+        float randCrit = Random.Range(0f, 1f);
+        damageModifier = randCrit < CritChance ? CritPower : 1f; // Check if attack will deal critical damage
 
         // Do the same thing for player and enemy but use their own script
         if(characterToDamage.tag == "Player")
@@ -57,8 +63,10 @@ public class Projectile_Homing : Item
                     }
                 }
             }
-            // Deal damage
-            characterToDamage.GetComponent<Character>().ChangeHealth((int)(-(Damage * damageModifier)));
+            // Calculate and then deal damage
+            Damage = (int)(Damage * damageModifier); // Damage * modifier
+            Damage = Damage - charRef.Defence <= DamageMin ? DamageMin : Damage - charRef.Defence; // Damage - defence
+            characterToDamage.GetComponent<Character>().ChangeHealth(-Damage); // Deal damage
         }
         else // Enemy
         {
@@ -80,9 +88,11 @@ public class Projectile_Homing : Item
                         damageModifier *= 2f;
                     }
                 }
-            }           
-            // Deal damage
-            characterToDamage.GetComponent<Enemy>().ChangeHealth((int)(-(Damage * damageModifier)));
+            }
+            // Calculate and then deal damage
+            Damage = (int)(Damage * damageModifier); // Damage * modifier
+            Damage = Damage - enemyRef.Defence <= DamageMin ? DamageMin : Damage - enemyRef.Defence; // Damage - defence
+            characterToDamage.GetComponent<Enemy>().ChangeHealth(-Damage);
         }        
         
         // Destroy self
