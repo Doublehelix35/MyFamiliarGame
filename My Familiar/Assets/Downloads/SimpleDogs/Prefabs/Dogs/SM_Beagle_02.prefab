@@ -1187,6 +1187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458714}
   - component: {fileID: 9547742}
+  - component: {fileID: 5793161460303837665}
   m_Layer: 0
   m_Name: SM_Beagle_02
   m_TagString: Untagged
@@ -1264,6 +1265,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &5793161460303837665
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119676}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &119842
 GameObject:
   m_ObjectHideFlags: 0

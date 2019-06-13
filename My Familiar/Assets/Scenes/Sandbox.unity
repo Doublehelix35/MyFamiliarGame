@@ -7218,6 +7218,69 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!1 &1020598839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020598841}
+  - component: {fileID: 1020598840}
+  m_Layer: 0
+  m_Name: AnimalSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1020598840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020598839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a187083aa6d1f4684c79e6fd771467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalPrefabs:
+  - {fileID: 112640, guid: c7ca0992ba00761469f731111e56b107, type: 3}
+  - {fileID: 120214, guid: 9bf484c5ec3d3bf43b2034c829f1abbe, type: 3}
+  - {fileID: 106474, guid: 7a63e4af9b16b0e49bcca60ecf52f421, type: 3}
+  - {fileID: 123684, guid: acc4d8a26110cb6428122c07dfc2123f, type: 3}
+  - {fileID: 110800, guid: 93cb479d468030d41adf46954015450d, type: 3}
+  - {fileID: 102230, guid: 85de8c5eef336ad48900b2ac3e7bf65d, type: 3}
+  - {fileID: 143334, guid: 2bef80595ef820f49868a8eeed4de42d, type: 3}
+  - {fileID: 176460, guid: 2492a299dc68f4e42a99bb86a2ab7d94, type: 3}
+  - {fileID: 187040, guid: 05554c72f25b7364caea91a88803135d, type: 3}
+  - {fileID: 186368, guid: db7fed737639cd447bfca2866e61fd6a, type: 3}
+  - {fileID: 197258, guid: 782ffceb74ed3aa47a2a09261607aeb2, type: 3}
+  - {fileID: 180050, guid: 47b7b2bda0418604cabfdb9e76181145, type: 3}
+  - {fileID: 103890, guid: 2b6e184cdeba888429a079d519a7c8d5, type: 3}
+  - {fileID: 122544, guid: 46714b0216b7ab048a1982c5753859ce, type: 3}
+  - {fileID: 179218, guid: 7e327461e79cb2a479e055d455c9a2fd, type: 3}
+  MovementSpeedMin: 170
+  MovementSpeedMax: 250
+  DelayBetweenSpawns: 14
+  AnimalLifeTime: 14
+--- !u!4 &1020598841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020598839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20, y: 0.6, z: 11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1030434560
 PrefabInstance:
   m_ObjectHideFlags: 0

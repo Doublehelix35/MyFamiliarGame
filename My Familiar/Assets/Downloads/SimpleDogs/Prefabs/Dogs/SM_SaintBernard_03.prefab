@@ -4939,6 +4939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 436228}
   - component: {fileID: 9534008}
+  - component: {fileID: 5230990429216754456}
   m_Layer: 0
   m_Name: SM_SaintBernard_03
   m_TagString: Untagged
@@ -5016,6 +5017,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &5230990429216754456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188416}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &188954
 GameObject:
   m_ObjectHideFlags: 0

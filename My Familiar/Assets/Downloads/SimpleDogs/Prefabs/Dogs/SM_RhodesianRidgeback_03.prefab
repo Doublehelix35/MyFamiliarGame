@@ -4291,6 +4291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491430}
   - component: {fileID: 9556502}
+  - component: {fileID: 4381890191199706226}
   m_Layer: 0
   m_Name: SM_RhodesianRidgeback_03
   m_TagString: Untagged
@@ -4368,6 +4369,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &4381890191199706226
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165584}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &165872
 GameObject:
   m_ObjectHideFlags: 0

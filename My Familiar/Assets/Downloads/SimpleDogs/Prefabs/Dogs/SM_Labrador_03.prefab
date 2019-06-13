@@ -4110,6 +4110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 431156}
   - component: {fileID: 9521142}
+  - component: {fileID: 3728821362666403605}
   m_Layer: 0
   m_Name: SM_Labrador_03
   m_TagString: Untagged
@@ -4187,6 +4188,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &3728821362666403605
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174180}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &174294
 GameObject:
   m_ObjectHideFlags: 0

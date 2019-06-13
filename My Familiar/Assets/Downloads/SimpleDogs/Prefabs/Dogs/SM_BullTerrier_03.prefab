@@ -5752,6 +5752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 436964}
   - component: {fileID: 9512434}
+  - component: {fileID: 7670197409576100808}
   m_Layer: 0
   m_Name: SM_BullTerrier_03
   m_TagString: Untagged
@@ -5829,6 +5830,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &7670197409576100808
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194090}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &195056
 GameObject:
   m_ObjectHideFlags: 0
