@@ -71,6 +71,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Parent object
         EnemyRef = new GameObject(EnemyName);
+        EnemyRef.tag = "Enemy";
 
         Vector3[] PartVectorShape = ChooseEnemyShape();
 
@@ -298,7 +299,6 @@ public class EnemyManager : MonoBehaviour
     Elements.ElementType ChooseEnemyType()
     {
         int rand = Random.Range(1, 6);
-        Debug.Log(rand);
 
         switch (rand)
         {

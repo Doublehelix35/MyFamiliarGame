@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot1, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot1, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef, false);
                 break;
 
             case 2: // Move slot 2
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot2, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot2, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef, false);
                 break;
 
             case 3: // Move slot 3
@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
                 {
                     giveTypeBoost = true;
                 }
-                element.UseMove(MoveSlot3, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef.transform, transform.position + spawnOffset);
+                element.UseMove(MoveSlot3, giveTypeBoost, Attack, Accuracy, CritChance, PlayerRef, false);
                 break;
 
             default:

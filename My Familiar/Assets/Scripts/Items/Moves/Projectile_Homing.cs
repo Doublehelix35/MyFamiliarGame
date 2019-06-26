@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile_Homing : Item
 {
+    /// NOT USED ANYMORE! (Switched to particle attacks) ///
+
     // Damage is set in Elements as it does the calculations
 
     internal Transform Target;

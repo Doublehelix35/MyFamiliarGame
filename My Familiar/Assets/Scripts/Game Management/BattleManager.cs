@@ -194,7 +194,7 @@ public class BattleManager : MonoBehaviour
                     giveTypeBoost = true;
                 }
                 element.UseMove(charScript.MoveSlots[0], giveTypeBoost, charScript.Attack, charScript.Accuracy,
-                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                                charScript.CritChance, EnemyRef, true);
                 break;
 
             case 2: // Move slot 2
@@ -204,7 +204,7 @@ public class BattleManager : MonoBehaviour
                     giveTypeBoost = true;
                 }
                 element.UseMove(charScript.MoveSlots[1], giveTypeBoost, charScript.Attack, charScript.Accuracy,
-                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                                charScript.CritChance, EnemyRef, true);
                 break;
 
             case 3: // Move slot 3
@@ -214,7 +214,7 @@ public class BattleManager : MonoBehaviour
                     giveTypeBoost = true;
                 }
                 element.UseMove(charScript.MoveSlots[2], giveTypeBoost, charScript.Attack, charScript.Accuracy,
-                                charScript.CritChance, EnemyRef.transform, CharacterRef.transform.position + spawnOffset);
+                                charScript.CritChance, EnemyRef, true);
                 break;
 
             default:

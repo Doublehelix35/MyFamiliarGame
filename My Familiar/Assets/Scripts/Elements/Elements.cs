@@ -13,13 +13,20 @@ public class Elements : MonoBehaviour {
     public enum ElementalMoves { EmptyMoveSlot, AirStrike, EarthQuake, FireBlaze, NaturesWrath, Tackle, WaterBlast } // EmptyMoveSlot must be ignored and shouldnt be used
     public Dictionary<ElementalMoves, ElementType> MoveDictionary;
 
-    // Move prefabs
-    public GameObject AirStrikePrefab;
-    public GameObject EarthQuakePrefab;
-    public GameObject FireBlazePrefab;
-    public GameObject NaturesWrathPrefab;
-    public GameObject TacklePrefab;
-    public GameObject WaterBlastPrefab;
+    // Move particles
+    public ParticleSystem AirStrikeParticleLeft;
+    public ParticleSystem EarthQuakeParticleLeft;
+    public ParticleSystem FireBlazeParticleLeft;
+    public ParticleSystem NaturesWrathParticleLeft;
+    public ParticleSystem TackleParticleLeft;
+    public ParticleSystem WaterBlastParticleLeft;
+
+    public ParticleSystem AirStrikeParticleRight;
+    public ParticleSystem EarthQuakeParticleRight;
+    public ParticleSystem FireBlazeParticleRight;
+    public ParticleSystem NaturesWrathParticleRight;
+    public ParticleSystem TackleParticleRight;
+    public ParticleSystem WaterBlastParticleRight;
 
     // Move power
     float AirStrikeMovePower = 2f;
@@ -28,6 +35,9 @@ public class Elements : MonoBehaviour {
     float NaturesWrathMovePower = 2f;
     float TackleMovePower = 1f;
     float WaterBlastMovePower = 2f;
+
+    float CritPower = 4f;
+    int DamageMin = 1;
 
     // Type relationships
     class TypeRelationship
@@ -106,11 +116,8 @@ public class Elements : MonoBehaviour {
         return moveString;
     }
 
-    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, float attackValue,float accuracy, float critChance, Transform target, Vector3 spawnLocation)
+    public void UseMove(ElementalMoves moveToUse, bool isThereTypeBoost, int attackValue, float accuracy, float critChance, GameObject target, bool isLeft)
     {
-        // Set type boost
-        float typeBoost = isThereTypeBoost ? 1.5f : 1f; 
-
         // Use selected move
         switch (moveToUse)
         {
@@ -119,86 +126,120 @@ public class Elements : MonoBehaviour {
                 break;
 
             case ElementalMoves.AirStrike:
-                // Spawn air strike at spawn location
-                GameObject airStrike = Instantiate(AirStrikePrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                airStrike.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                airStrike.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * AirStrikeMovePower);
-                // Set accuracy
-                airStrike.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                airStrike.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Airstrike
+                if (isLeft) { AirStrikeParticleLeft.Play(); }
+                else { AirStrikeParticleRight.Play(); }
+
                 break;
 
             case ElementalMoves.EarthQuake:
-                // Spawn earthquake at spawn location
-                GameObject earthQuake = Instantiate(EarthQuakePrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                earthQuake.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                earthQuake.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * EarthQuakeMovePower);
-                // Set accuracy
-                earthQuake.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                earthQuake.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Earthquake
+                if (isLeft) { EarthQuakeParticleRight.Play(); }
+                else { EarthQuakeParticleLeft.Play(); }
+
                 break;
 
             case ElementalMoves.FireBlaze:
-                // Spawn fire blaze at spawn location
-                GameObject fireBlaze = Instantiate(FireBlazePrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                fireBlaze.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                fireBlaze.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * FireBlazeMovePower);
-                // Set accuracy
-                fireBlaze.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                fireBlaze.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Fire blaze
+                if (isLeft) { FireBlazeParticleLeft.Play(); }
+                else { FireBlazeParticleRight.Play(); }
+
                 break;
 
             case ElementalMoves.NaturesWrath:
-                // Spawn natures wrath at spawn location
-                GameObject naturesWrath = Instantiate(NaturesWrathPrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                naturesWrath.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                naturesWrath.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * NaturesWrathMovePower);
-                // Set accuracy
-                naturesWrath.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                naturesWrath.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Natures wrath
+                if (isLeft) { NaturesWrathParticleLeft.Play(); }
+                else { NaturesWrathParticleRight.Play(); }
+
                 break;
 
             case ElementalMoves.Tackle:
-                // Spawn tackle at spawn location
-                GameObject tackle = Instantiate(TacklePrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                tackle.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                tackle.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * TackleMovePower);
-                // Set accuracy
-                tackle.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                tackle.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Tackle
+                if (isLeft) { TackleParticleLeft.Play(); }
+                else { TackleParticleRight.Play(); }
+
                 break;
 
             case ElementalMoves.WaterBlast:
-                // Spawn water blast at spawn location
-                GameObject waterBlast = Instantiate(WaterBlastPrefab, spawnLocation, Quaternion.identity);
-                // Set target
-                waterBlast.GetComponent<Projectile_Homing>().Target = target;
-                // Set damage
-                waterBlast.GetComponent<Projectile_Homing>().Damage = (int)(attackValue * typeBoost * WaterBlastMovePower);
-                // Set accuracy
-                waterBlast.GetComponent<Projectile_Homing>().Accuracy = accuracy;
-                // Set crit chance
-                waterBlast.GetComponent<Projectile_Homing>().CritChance = critChance;
+                // Play Water blast
+                if (isLeft) { FireBlazeParticleLeft.Play(); }
+                else { FireBlazeParticleRight.Play(); }
+
                 break;
 
             default:
                 Debug.Log("Error! Move not implemented!");
                 break;
+        }
+
+        // Accuracy check
+        float randAcc = Random.Range(0f, 1f);
+        if (randAcc > accuracy)
+        {
+            // Move misses
+            Debug.Log("Move Missed!");
+            return;
+        }
+
+        // Calculate damage        
+        float typeBoost = isThereTypeBoost ? 1.5f : 1f; // Set type boost
+        int Damage = attackValue;
+        float damageModifier = 1f;
+        float randCrit = Random.Range(0f, 1f);
+        damageModifier = randCrit < critChance ? CritPower : 1f; // Check if attack will deal critical damage
+
+        // Do the same thing for player and enemy but use their own scripts
+        if (target.tag == "Enemy")
+        {
+            Enemy enemyRef = target.GetComponentInChildren<Enemy>();
+
+            // Loop through character types to determine damage modifier
+            foreach (ElementType t in enemyRef.CharactersElementTypes)
+            {
+                if (t == MoveDictionary[moveToUse]) // If they are same type
+                {
+                    // Reduce damage modifier by 50%
+                    damageModifier *= 0.5f;
+                }
+                else if (CheckTypeRelationship(t, MoveDictionary[moveToUse])) // Check for type relationship
+                {
+                    // If item type is stronger than t then deal more damage
+                    if (ReturnStrongTypeInRelationship(t, MoveDictionary[moveToUse]) == MoveDictionary[moveToUse])
+                    {
+                        damageModifier *= 2f;
+                    }
+                }
+            }
+            // Calculate and then deal damage
+            Damage = (int)(Damage * damageModifier); // Damage * modifier
+            Damage = Damage - enemyRef.Defence <= DamageMin ? DamageMin : Damage - enemyRef.Defence; // Damage - defence
+            enemyRef.ChangeHealth(-Damage);
+        }
+        else // Player
+        {
+            Character charRef = target.GetComponentInChildren<Character>();
+
+            // Loop through character types to determine damage modifier
+            foreach (ElementType t in charRef.CharactersElementTypes)
+            {
+                if (t == MoveDictionary[moveToUse]) // If they are same type
+                {
+                    // Reduce damage modifier by 50%
+                    damageModifier *= 0.5f;
+                }
+                else if (CheckTypeRelationship(t, MoveDictionary[moveToUse])) // Check for type relationship
+                {
+                    // If item type is stronger than t then deal more damage
+                    if (ReturnStrongTypeInRelationship(t, MoveDictionary[moveToUse]) == MoveDictionary[moveToUse])
+                    {
+                        damageModifier *= 2f;
+                    }
+                }
+            }
+            // Calculate and then deal damage
+            Damage = (int)(Damage * damageModifier); // Damage * modifier
+            Damage = Damage - charRef.Defence <= DamageMin ? DamageMin : Damage - charRef.Defence; // Damage - defence
+            charRef.ChangeHealth(-Damage); // Deal damage            
         }
     }
 
