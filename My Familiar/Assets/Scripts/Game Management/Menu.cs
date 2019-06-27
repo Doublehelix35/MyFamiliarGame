@@ -5,30 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
-    bool TransitioningScene = false;
+    bool TransitioningSceneIn = true;
+    bool TransitioningSceneOut = false;
 
-    Material TransitionMat;
+    public SimpleBlit TransitionMat;
 
-    IEnumerator coroutine;
+    IEnumerator coroutineOut;
+    IEnumerator coroutineIn;
 
     string SceneString = "";
     int SceneInt;
     bool IsSceneByName;
+    public bool PlayTransition = false;
+    float TransitionSpeed = 0.008f;
 
     void Start()
     {
-        coroutine = Transition();
+        coroutineIn = TransitionIn();
+        coroutineOut = TransitionOut();
+
+        StartCoroutine(coroutineIn); // Transition in effect
     }
 
-    public void LoadScene(string SceneName, bool firstCall = true)
+    // Load with string
+    public void LoadScene(string SceneName)
     {
         // Set SceneString
         SceneString = SceneName;
 
         // Play transiton effects before loading next scene
-        if(firstCall)
+        if(PlayTransition)
         {
             IsSceneByName = true;
+            PlayTransition = false;
             TransitionScene();
             return;
         }
@@ -50,15 +59,17 @@ public class Menu : MonoBehaviour {
         SceneManager.LoadScene(SceneName);
     }
 
-    public void LoadScene(int buildIndex, bool firstCall = true)
+    // Load with int
+    public void LoadScene(int buildIndex)
     {
         // Set SceneInt
         SceneInt = buildIndex;
 
         // Play transiton effects before loading next scene
-        if (firstCall)
+        if (PlayTransition)
         {
             IsSceneByName = false;
+            PlayTransition = false;
             TransitionScene();
             return;
         }
@@ -66,41 +77,66 @@ public class Menu : MonoBehaviour {
         SceneManager.LoadScene(buildIndex);
     }
 
-    public void TransitionScene()
+    // Start transition effect
+    void TransitionScene()
     {
-        TransitioningScene = true;
+        TransitioningSceneOut = true;
 
-        StartCoroutine(coroutine);
+        StartCoroutine(coroutineOut);
     }
 
-    IEnumerator Transition()
+    // Gradually increase screen cutoff
+    IEnumerator TransitionOut()
     {
         float step = 0f;
 
         while (true)
         {
-            // Execute every 0.1 seconds
-            yield return new WaitForSeconds(0.1f);
-            if (TransitioningScene)
+            // Execute every x seconds
+            yield return new WaitForSeconds(TransitionSpeed);
+            if (TransitioningSceneOut)
             {
                 // Increase step
-                step += 0.1f;
-
-                TransitionMat.SetFloat("_Cutoff", step);
+                step += 0.05f;
+                TransitionMat.TransitionMaterial.SetFloat("_Cutoff", step);
 
                 if (step >= 1f)
                 {
                     // Load next scene
                     if (IsSceneByName)
-                    {
-                        LoadScene(SceneString, false);
+                    {                        
+                        LoadScene(SceneString);
                     }
                     else
                     {
-                        LoadScene(SceneInt, false);
+                        LoadScene(SceneInt);
                     }
                 }
             }            
+        }
+    }
+
+    // Gradually decrease screen cutoff
+    IEnumerator TransitionIn()
+    {
+        float step = 1f;
+
+        while (true)
+        {
+            // Execute every x seconds
+            yield return new WaitForSeconds(TransitionSpeed);
+            if (TransitioningSceneIn)
+            {
+                // Increase step
+                step -= 0.05f;
+                TransitionMat.TransitionMaterial.SetFloat("_Cutoff", step);
+
+                if (step <= 0f)
+                {
+                    TransitioningSceneIn = false;
+                    StopCoroutine(coroutineIn); // Exit coroutine
+                }
+            }
         }
     }
 }

@@ -123,7 +123,7 @@ public class Elements : MonoBehaviour {
         {
             case ElementalMoves.EmptyMoveSlot:
                 Debug.Log("No move in this slot!");
-                break;
+                return;
 
             case ElementalMoves.AirStrike:
                 // Play Airstrike

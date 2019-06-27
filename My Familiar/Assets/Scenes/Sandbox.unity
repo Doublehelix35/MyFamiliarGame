@@ -14740,6 +14740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3852e32a88dc2b5479992eeda44f71b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TransitionMat: {fileID: 2146963012}
+  PlayTransition: 1
 --- !u!114 &2106336112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15187,4 +15189,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91d742f3be083418c26878ab8255c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionMaterial: {fileID: 2100000, guid: 7624d611bd330e44b80ef65275598a16, type: 2}
+  TransitionMaterial: {fileID: 2100000, guid: 85f0c81b73a820c4089ef9caf55e415d, type: 2}
