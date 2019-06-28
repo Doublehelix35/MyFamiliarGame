@@ -17,10 +17,10 @@ public class Enemy : MonoBehaviour
     float DamageTakenTime;
 
     // Battle stats
-    internal int Attack = 5; // Damage of an attack
+    internal int Attack = 8; // Damage of an attack
     internal float Accuracy = 1f; // Determines if a move hits or misses
     internal float CritChance = 0.03f; // Chance to get a critical hit
-    internal int Defence = 1; // Amount of damage to ignore
+    internal int Defence = 5; // Amount of damage to ignore
     internal float DodgeChance = 1f; // Chance to dodge an incoming attack
     internal float Speed = 1f; // How quickly the enemy attacks
 
