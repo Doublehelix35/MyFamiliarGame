@@ -446,6 +446,61 @@ public class Load_Character : MonoBehaviour
         return RelativePositionToFace;
     }
 
+    // Delete the saves found in chosen slot
+    public void DeleteSavesBasedOnSlotNum(int slotSaveToDelete)
+    {
+        // Load character name
+        string characterName = Load(slotSaveToDelete);
+
+        // Load Facial Features to delete them
+        if(File.Exists(Application.persistentDataPath + "/" + characterName + "FacialConfig" + ".dat"))
+        {
+            // Delete facial features
+            string[] facialParts = LoadFacialConfig(characterName);
+
+            foreach (string part in facialParts)
+            {
+                if (File.Exists(Application.persistentDataPath + "/" + characterName + part + ".dat"))
+                    File.Delete(Application.persistentDataPath + "/" + characterName + part + ".dat");
+            }
+
+            // Delete facial config
+            File.Delete(Application.persistentDataPath + "/" + characterName + "FacialConfig" + ".dat");
+        }
+
+        // Delete main save
+        if(File.Exists(Application.persistentDataPath + "/" + characterName + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + ".dat");
+
+        // Delete parts
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "Face" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "Face" + ".dat");
+
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "Arm1" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "Arm1" + ".dat");
+
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "Arm2" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "Arm2" + ".dat");
+
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "Leg1" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "Leg1" + ".dat");
+
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "Leg2" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "Leg2" + ".dat");
+        
+        // Delete first time load save
+        if (File.Exists(Application.persistentDataPath + "/" + characterName + "FirstTimeLoading" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + characterName + "FirstTimeLoading" + ".dat");
+
+        // Delete Save slot (Character name)
+        if (File.Exists(Application.persistentDataPath + "/" + "SaveSlot" + slotSaveToDelete + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + "SaveSlot" + slotSaveToDelete + ".dat");
+
+        // Delete current slot save
+        if (File.Exists(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat"))
+            File.Delete(Application.persistentDataPath + "/" + "CurrentSaveSlot" + ".dat");  
+    }
+
     // If first time return true, if not then return false
     internal bool CheckFirstTimeLoad(string CharName)
     {

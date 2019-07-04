@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class SaveSlots : MonoBehaviour
 {
+    // Object refs
     public Load_Character LoadRef;
     public Save_Character SaveRef;
+    public Menu MenuRef;
 
     // Texts
     public Text Slot1Text;
@@ -34,16 +36,24 @@ public class SaveSlots : MonoBehaviour
     public Image CharImage2;
     public Image CharImage3;
 
-
     // Slot status
     bool Slot1HasSave = false;
     bool Slot2HasSave = false;
     bool Slot3HasSave = false;
+
+    // Next scene texts
+    string Scene_CharacterCreator = "Creator_Explanation";
+    string Scene_Sandbox = "Sandbox";
     
     void Start()
     {
+        LoadSlots();
+    }
+
+    public void LoadSlots()
+    {
         // Loop through each slot and update text
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             // Create temp string to store either char name or default text (If slot is empty)
             string tempString;
@@ -91,9 +101,49 @@ public class SaveSlots : MonoBehaviour
         DeleteSave3.gameObject.SetActive(Slot3HasSave);
     }
 
-    // Delete save and reset save slot to empty
-    public void DeleteSave(int saveSlotNum)
+    // Create a new save or load a existing save, and then load next scene
+    public void SaveOrLoadThenLoadScene(int slotNum)
     {
+        // Temp string to store scene string
+        string scene;
+        switch (slotNum)
+        {
+            case 1:
+                // if no save found, create new save
+                if (!Slot1HasSave) { SaveRef.Save(slotNum); }
 
+                // Set current slot
+                SaveRef.SaveCurrentSlot(slotNum);
+
+                // Load next scene
+                scene = Slot1HasSave ? Scene_Sandbox : Scene_CharacterCreator;
+                MenuRef.LoadScene(scene);
+                break;
+            case 2:
+                // if no save found, create new save
+                if (!Slot2HasSave) { SaveRef.Save(slotNum); }
+
+                // Set current slot
+                SaveRef.SaveCurrentSlot(slotNum);
+
+                // Load next scene
+                scene = Slot2HasSave ? Scene_Sandbox : Scene_CharacterCreator;
+                MenuRef.LoadScene(scene);
+                break;
+            case 3:
+                // if no save found, create new save
+                if (!Slot3HasSave) { SaveRef.Save(slotNum); }
+
+                // Set current slot
+                SaveRef.SaveCurrentSlot(slotNum);
+
+                // Load next scene
+                scene = Slot3HasSave ? Scene_Sandbox : Scene_CharacterCreator;
+                MenuRef.LoadScene(scene);
+                break;
+            default:
+                Debug.Log("Slot Num not found");
+                break;
+        }
     }
 }
