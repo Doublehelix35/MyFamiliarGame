@@ -14647,6 +14647,10 @@ MonoBehaviour:
     type: 3}
   MouthPrefab: {fileID: 4723083196380928302, guid: df066b9dbb56c324a8e9ee22a30883f8,
     type: 3}
+  MouthMat: {fileID: 2100000, guid: 2f546d419a53e45489c273acf9989582, type: 2}
+  MouthHappy: {fileID: 2800000, guid: 5132f9b3e12720349ad054e11df8fb71, type: 3}
+  MouthNormal: {fileID: 2800000, guid: bc40edb7de5c09c4299ed171d55a2efb, type: 3}
+  MouthSad: {fileID: 2800000, guid: b94c97d8d09107e49a719f50bdfbbc99, type: 3}
 --- !u!4 &2106336107
 Transform:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: -0.00000015646219
+    - _Cutoff: 1.0000001
     - _Distort: 0
     - _Fade: 1
     m_Colors:

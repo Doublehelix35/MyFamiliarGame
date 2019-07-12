@@ -20,6 +20,12 @@ public class Load_Character : MonoBehaviour
     public GameObject NosePrefab;
     public GameObject MouthPrefab;
 
+    // Mouth
+    public Material MouthMat;
+    public Texture MouthHappy;
+    public Texture MouthNormal;
+    public Texture MouthSad;
+
     float FacialOffset_Z = 0.1f; // Spawn facial features in front of face
     float FacialOffsetDivison = 4f; // How seperated the facial features are
 
@@ -263,6 +269,10 @@ public class Load_Character : MonoBehaviour
 
         // Load Facial Features
         string[] facialParts = LoadFacialConfig(CharacterName);
+
+        // Setup mouth mat and textures
+        charRef.MouthMat = MouthMat; charRef.MouthHappy = MouthHappy;
+        charRef.MouthNormal = MouthNormal; charRef.MouthSad = MouthSad;
 
         // Loop through, spawn each facial feature, set the face as parent to all facial features
         foreach(string part in facialParts)

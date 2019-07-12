@@ -13,7 +13,7 @@ public class Character : Subject
 
     // Object Refs
     GameObject GameManagerRef;
-    
+        
     public bool ThisCharacterIsActive = true;
     public bool InBattleMode = false;
 
@@ -45,6 +45,11 @@ public class Character : Subject
     public float FullnessTickFrequency = 5f; // How often fullness decreases
     public int FullnessTickPower = 1; // How much to remove from fullness every tick
 
+    // Mouth
+    internal Material MouthMat;
+    internal Texture MouthHappy;
+    internal Texture MouthNormal;
+    internal Texture MouthSad;
 
     // Leveling
     public int Level = 1;
@@ -92,6 +97,7 @@ public class Character : Subject
         DamageTakenTime = Time.time;
         ExpToLevelUp = ExpNeededForNextLevel();
         FullnessLastTickTime = Time.time;
+        MouthMat.mainTexture = MouthNormal;
 
         // Init Element typing
         if(CharactersElementTypes.Count >= 0) // no element type found
@@ -197,7 +203,25 @@ public class Character : Subject
         // Clamp happiness between zero and happiness max
         Happiness = Mathf.Clamp(Happiness, 0, HappinessMax);
 
+        // Notify that happiness is max
         if (Happiness == HappinessMax) { Notify(gameObject, Observer.Events.HappinessMax); }
+
+        // Update facial features
+        if (Happiness <= 25)
+        {
+            // Sad
+            MouthMat.mainTexture = MouthSad;
+        }
+        else if (Happiness >= 75)
+        {
+            // Happy
+            MouthMat.mainTexture = MouthHappy;
+        }
+        else
+        {
+            // Normal
+            MouthMat.mainTexture = MouthNormal;
+        }
 
         // Update ui
         if (!InBattleMode)
