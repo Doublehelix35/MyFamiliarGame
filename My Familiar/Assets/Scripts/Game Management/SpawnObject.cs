@@ -9,6 +9,7 @@ public class SpawnObject : MonoBehaviour {
 
     // Observers
     public Observer QuestObserver;
+    public Observer SoundObserver;
 
     public bool IsObservable;
 
@@ -21,6 +22,7 @@ public class SpawnObject : MonoBehaviour {
         if (IsObservable)
         {
             GO.GetComponent<Subject>().AddObserver(QuestObserver);
+            GO.GetComponent<Subject>().AddObserver(SoundObserver);
         }
     }
 
@@ -34,10 +36,12 @@ public class SpawnObject : MonoBehaviour {
             if (GO.name.Contains("Water")) // Waterfall exception
             {
                 GO.GetComponentInChildren<Subject>().AddObserver(QuestObserver);
+                GO.GetComponent<Subject>().AddObserver(SoundObserver);
             }
             else
             {
                 GO.GetComponent<Subject>().AddObserver(QuestObserver);
+                GO.GetComponent<Subject>().AddObserver(SoundObserver);
             }            
         }
     }
@@ -50,6 +54,7 @@ public class SpawnObject : MonoBehaviour {
         if (IsObservable)
         {
             GO.GetComponent<Subject>().AddObserver(QuestObserver);
+            GO.GetComponent<Subject>().AddObserver(SoundObserver);
         }
     }
 

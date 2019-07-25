@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Subject
 {
     // Object refs
     public Save_Character SaveRef;
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     GameObject CharacterRef; // This is the parent object
     public GameObject CameraRef;
     public Observer QuestObserver;
-    public AudioSource TapSound; // Object holding the tap sound
+    public Observer SoundObserver;
 
     // UI
     public UIFlashing Happiness_DownArrow; // Flashes down when happiness lost
@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
 
     void Awake ()
     {
+        // Setup observers
+        AddObserver(QuestObserver);
+        AddObserver(SoundObserver);
+
         // Will either spawn egg (1st time spawn) or reload character from file
         if (LoadRef.CheckFirstTimeLoad(LoadRef.Load(LoadRef.LoadCurrentSlot())))
         {
@@ -83,7 +87,7 @@ public class GameManager : MonoBehaviour
             if (touch.phase == TouchPhase.Began) // Check for the first touch
             {
                 // Tap sound
-                TapSound.Play();
+                Notify(gameObject, Observer.Events.Tap);
 
                 // Cast a ray
                 Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -194,6 +198,7 @@ public class GameManager : MonoBehaviour
 
         // Add observer to character subject
         CharacterRef.GetComponentInChildren<Subject>().AddObserver(QuestObserver);
+        CharacterRef.GetComponentInChildren<Subject>().AddObserver(SoundObserver);
     }
 
     internal void SpawnEgg()

@@ -34,13 +34,13 @@ public class Item_Balloon : Item
 
         // Give Happiness value
         player.GetComponent<Character>().ChangeHappiness(HappinessChangeValue);
-
-        // Notify observers
-        Notify(gameObject, Observer.Events.ItemUsed);
-
+        
         // Destroy self
         if (Uses <= 0)
         {
+            // Play pop
+            Notify(gameObject, Observer.Events.ItemUsed);
+
             // Remove object from character's list
             player.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
 
@@ -121,7 +121,10 @@ public class Item_Balloon : Item
             if (PlayerRef != null)
             {
                 PlayerRef.GetComponent<Character>().AttachedBalloonObjects.Remove(gameObject);
-            }            
+            }
+
+            // Play pop
+            Notify(gameObject, Observer.Events.ItemUsed);
 
             // Destroy self
             Destroy(gameObject);
