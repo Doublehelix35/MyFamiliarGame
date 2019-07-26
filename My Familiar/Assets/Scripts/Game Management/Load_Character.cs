@@ -13,7 +13,9 @@ public class Load_Character : MonoBehaviour
     public Material FireMat;
     public Material NatureMat;
     public Material WaterMat;
-    Material MatToApply;
+    //Material MatToApply;
+    Material[] MatsToApply; // 0 = face, 1 = body, 2 = left arm, 3= right arm, 4 = left leg, 5 = right leg
+    int NumOfParts = 6;
 
     // Facial prefabs
     public GameObject EyePrefab;
@@ -162,47 +164,56 @@ public class Load_Character : MonoBehaviour
         // Adjust scale multiplier and seperation multiplier to factor in evolution
         if(data.EvolutionCount > 0)
         {
-            ScaleMultiplier *= (EvolutionModifier + ((float)data.EvolutionCount / EvolutionCountDivision));
-            SeperationMultipler *= (EvolutionModifier + ((float)data.EvolutionCount / EvolutionCountDivision));
-        }
-        else // Hasnt evolved yet
-        {
-
+            ScaleMultiplier *= EvolutionModifier + data.EvolutionCount / EvolutionCountDivision;
+            SeperationMultipler *= EvolutionModifier + data.EvolutionCount / EvolutionCountDivision;
         }
 
         // Load character types from the int array
+        MatsToApply = new Material[NumOfParts];
+
         for(int i = 0; i < data.CharacterTypes.Length; i++)
         {
             switch (data.CharacterTypes[i])
             {
                 case 0: // Non-elemental
                     charRef.CharactersElementTypes.Add(Elements.ElementType.NonElemental);
-                    MatToApply = NonElementalMat; // Set material
+                    MatsToApply[i] = NonElementalMat; // Set material
                     break;
                 case 1: // Air
                     charRef.CharactersElementTypes.Add(Elements.ElementType.Air);
-                    MatToApply = AirMat; // Set material
+                    MatsToApply[i] = AirMat; // Set material
                     break;
                 case 2: // Earth
                     charRef.CharactersElementTypes.Add(Elements.ElementType.Earth);
-                    MatToApply = EarthMat; // Set material
+                    MatsToApply[i] = EarthMat; // Set material
                     break;
                 case 3: // Fire
                     charRef.CharactersElementTypes.Add(Elements.ElementType.Fire);
-                    MatToApply = FireMat; // Set material
+                    MatsToApply[i] = FireMat; // Set material
                     break;
                 case 4: // Nature
                     charRef.CharactersElementTypes.Add(Elements.ElementType.Nature);
-                    MatToApply = NatureMat; // Set material
+                    MatsToApply[i] = NatureMat; // Set material
                     break;
                 case 5: // Water
                     charRef.CharactersElementTypes.Add(Elements.ElementType.Water);
-                    MatToApply = WaterMat; // Set material
+                    MatsToApply[i] = WaterMat; // Set material
                     break;
                 default:
                     break;
             }            
         }
+        // Finish setting up mats to apply
+        // Asign mats to each array position
+        if (MatsToApply[0] != null) { MatsToApply[3] = MatsToApply[0]; }
+        else { MatsToApply[0] = NonElementalMat; MatsToApply[3] = NonElementalMat; }
+
+        if (MatsToApply[1] != null) { MatsToApply[4] = MatsToApply[1]; }
+        else { MatsToApply[1] = MatsToApply[0]; MatsToApply[4] = MatsToApply[0]; }
+
+        if (MatsToApply[2] != null) { MatsToApply[5] = MatsToApply[2]; }
+        else { MatsToApply[2] = MatsToApply[0]; MatsToApply[5] = MatsToApply[1]; }
+
 
         // Load character moves from the int array
         for(int i = 0; i < data.CharacterMoves.Length; i++)
@@ -237,7 +248,7 @@ public class Load_Character : MonoBehaviour
         }
 
         // Set body mat
-        Body.GetComponent<MeshRenderer>().material = MatToApply;
+        Body.GetComponent<MeshRenderer>().material = MatsToApply[1];
 
         // Define Part seperation offset
         Vector3 baseSize = Body.GetComponent<Renderer>().bounds.size;
@@ -398,9 +409,38 @@ public class Load_Character : MonoBehaviour
             GameObjectToReturn = new GameObject(CharacterPart, typeof(MeshFilter), typeof(MeshRenderer));
             GameObjectToReturn.GetComponent<MeshFilter>().mesh = newMesh;
 
-            // Load material
-            GameObjectToReturn.GetComponent<MeshRenderer>().material = MatToApply;
+            // Load material (Body mat doesnt get assigned here)
+            switch (CharacterPart)
+            {
+                case "Face":
+                    // Fix null issue if occurs
+                    if(MatsToApply == null)
+                    {
+                        MatsToApply = new Material[6];
+                        MatsToApply[0] = NonElementalMat;
+                    }
+                    GameObjectToReturn.GetComponent<MeshRenderer>().material = MatsToApply[0];
+                    break;
 
+                case "Arm1":
+                    GameObjectToReturn.GetComponent<MeshRenderer>().material = MatsToApply[2];
+                    break;
+
+                case "Arm2":
+                    GameObjectToReturn.GetComponent<MeshRenderer>().material = MatsToApply[3];
+                    break;
+
+                case "Leg1":
+                    GameObjectToReturn.GetComponent<MeshRenderer>().material = MatsToApply[4];
+                    break;
+
+                case "Leg2":
+                    GameObjectToReturn.GetComponent<MeshRenderer>().material = MatsToApply[5];
+                    break;
+
+                default:
+                    break;
+            }        
         }
         else // File not found
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Observer : MonoBehaviour
 {
     // Enum of events of interest
-    public enum Events { ItemUsed, LevelUp, Evolve, EnergyFull, HappinessMax, BattleWon, LogIn, Tap};
+    public enum Events { BattleWon, CharacterHurt, EnergyFull, Evolve, HappinessMax, ItemUsed, LevelUp, LogIn, Tap};
 
     // Subject calls this to notify observer of certain event
     public virtual void OnNotify(GameObject GO, Events _event) { }

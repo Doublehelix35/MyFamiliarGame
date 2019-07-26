@@ -100,7 +100,7 @@ public class Character : Subject
         MouthMat.mainTexture = MouthNormal;
 
         // Init Element typing
-        if(CharactersElementTypes.Count >= 0) // no element type found
+        if(CharactersElementTypes.Count == 0) // no element type found
         {
             CharactersElementTypes.Add(Elements.ElementType.NonElemental);
         }
@@ -154,7 +154,7 @@ public class Character : Subject
         }
     }
 
-    // To gain health pass in positive value, to lose health pass in negative value
+    // To gain health pass in positive value. To lose health pass in negative value
     public void ChangeHealth(int value)
     {
         // Exit if invicible
@@ -181,6 +181,7 @@ public class Character : Subject
         if (value < 0) // Damage was taken
         {
             DamageTakenTime = Time.time;
+            Notify(gameObject, Observer.Events.CharacterHurt);
         }
 
         // Update ui
@@ -347,7 +348,12 @@ public class Character : Subject
                     DetachFromAllBalloons();
 
                     // Increase count of evolutions
-                    CurrentEvolutionStage++; 
+                    CurrentEvolutionStage++;
+
+                    if (CurrentEvolutionStage == 1) // First evolution
+                    {
+                        CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
+                    }
 
                     // Add new type based on spec points
                     Elements.ElementType newType = CalculateNewTypeForEvolution();
@@ -398,12 +404,7 @@ public class Character : Subject
                         default:
                             Debug.Log("Error adding new move to move slot");
                             break;
-                    }
-
-                    if(CurrentEvolutionStage == 1) // First evolution
-                    {
-                        CharactersElementTypes.Remove(Elements.ElementType.NonElemental); // Remove non-elemental
-                    }
+                    }                   
 
                     // Reset spec points
                     AirPoints = 0; EarthPoints = 0; FirePoints = 0;
