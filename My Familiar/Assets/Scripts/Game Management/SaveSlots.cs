@@ -109,6 +109,9 @@ public class SaveSlots : MonoBehaviour
         switch (slotNum)
         {
             case 1:
+                // Return if nothing in input field
+                if(Input1.text == "" && !Slot1HasSave) { return; }
+                
                 // if no save found, create new save
                 if (!Slot1HasSave) { SaveRef.Save(slotNum); }
 
@@ -120,6 +123,9 @@ public class SaveSlots : MonoBehaviour
                 MenuRef.LoadScene(scene);
                 break;
             case 2:
+                // Return if nothing in input field
+                if (Input2.text == "" && !Slot2HasSave) { return; }
+
                 // if no save found, create new save
                 if (!Slot2HasSave) { SaveRef.Save(slotNum); }
 
@@ -131,6 +137,9 @@ public class SaveSlots : MonoBehaviour
                 MenuRef.LoadScene(scene);
                 break;
             case 3:
+                // Return if nothing in input field
+                if (Input3.text == "" && !Slot3HasSave) { return; }
+
                 // if no save found, create new save
                 if (!Slot3HasSave) { SaveRef.Save(slotNum); }
 

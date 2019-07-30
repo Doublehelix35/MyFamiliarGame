@@ -40,7 +40,7 @@ public class SoundManager : Observer
                 }
                 else if (GO.name.Contains("Apple")) // Eating
                 {
-                    BounceSource.Play();
+                    EatingSource.Play();
                 }
                 else if (GO.name.Contains("Football")) // Football
                 {
