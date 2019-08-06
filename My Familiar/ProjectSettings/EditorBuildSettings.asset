@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleMode.unity
     guid: 2dc69b65991a30c4b88d3e8ba794be2e
+  - enabled: 1
+    path: Assets/Scenes/ElementalStorm.unity
+    guid: bb878ee6eb841404e8fbb67547a28741
   m_configObjects: {}
