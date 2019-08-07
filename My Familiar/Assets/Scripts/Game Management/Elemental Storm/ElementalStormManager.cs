@@ -28,12 +28,6 @@ public class ElementalStormManager : MonoBehaviour
     float FollowStopDistance = 0.05f;
     float RagdollMaxDist = 10f;
 
-    void Awake()
-    {
-        // Init objects
-        ReloadCharacter();
-    }
-
     void Update()
     {
         // Move object with touch //
@@ -107,6 +101,7 @@ public class ElementalStormManager : MonoBehaviour
 
         // Player scene setup
         CharacterRef.transform.position += PlayerSpawnOffset; // Spawn above ground and to the left
+        CharacterRef.transform.localScale *= 0.5f; // Half the size of the character
         CharacterRef.GetComponentInChildren<Character>().enabled = false; // Turn off char script
         CharacterRef.GetComponentInChildren<Character_AI>().enabled = false; // Turn off char ai script
 
@@ -129,8 +124,16 @@ public class ElementalStormManager : MonoBehaviour
         SaveRef.Save(LoadRef.Load(LoadRef.LoadCurrentSlot()), ObjectToSave); // Load name from current slot to ensure names line up for saving and loading
     }
 
+    // Call to spawn character and hazards
+    public void StartGame()
+    {
+        // Init objects
+        ReloadCharacter();
+
+        // Start hazard spawner
+    }
     
-    // Call when enemy is defeated
+    // Call when player is defeated
     public void GameOver()
     {
         // Give exp and gold
