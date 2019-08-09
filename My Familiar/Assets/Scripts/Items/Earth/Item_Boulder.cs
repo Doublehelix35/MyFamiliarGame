@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item_Boulder : Item
 {
-    public Vector3 sizeModifier = new Vector3( 0.5f, 0.2f, 0.5f );
+    public Vector3 sizeModifier = new Vector3( 0.5f, 0.5f, 0.5f );
 
     // Player calls this when character is thrown agaisnt boulder
     public override void Interact(GameObject player)

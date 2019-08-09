@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
     // Texts
     public Text CharacterNameText;
     public Text HealthText;
+    public Text LevelText;
     public Text MoveButtonText1;
     public Text MoveButtonText2;
     public Text MoveButtonText3;
@@ -147,6 +148,7 @@ public class BattleManager : MonoBehaviour
 
         // Update UI and give camera new ref
         UpdateText_CharacterName(CharacterRef.name);
+        UpdateText_Level(CharTemp.Level.ToString());
 
         // Update move slot buttons (Looks at char ref's children to find character script)
         UpdateText_Moves(1, CharTemp.MoveSlots[0]); // Move 1
@@ -284,5 +286,9 @@ public class BattleManager : MonoBehaviour
                 Debug.Log("Move slot num not recognized: " + moveSlotNum);
                 break;
         }
+    }
+    void UpdateText_Level(string currentLevel)
+    {
+        LevelText.text = currentLevel;
     }
 }

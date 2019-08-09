@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
 
     // Texts
     public Text EnemyHealthText;
+    public Text EnemyLevelText;
 
     // Construction variables
     string EnemyName = "Enemy_Fire";
@@ -64,7 +65,10 @@ public class EnemyManager : MonoBehaviour
         gameObject.GetComponent<BattleManager>().SetEnemyRef(EnemyRef);
 
         // Set anchor
-        EnemyAnchorRef.GetComponent<SpringJoint>().connectedBody = EnemyRef.GetComponentInChildren<Rigidbody>();        
+        EnemyAnchorRef.GetComponent<SpringJoint>().connectedBody = EnemyRef.GetComponentInChildren<Rigidbody>();
+
+        // Update text
+        UpdateText_EnemyLevel(EnemyRef.GetComponentInChildren<Enemy>().Level.ToString());
     }
     
     internal void BuildEnemy()
@@ -89,7 +93,9 @@ public class EnemyManager : MonoBehaviour
 
         // Set Enemy Stats
         int EvolutionCount = 1;
-        
+        Body.GetComponent<Enemy>().Level = 1;
+
+
         Body.GetComponent<Enemy>().CharactersElementTypes.Add(EnemyType);
 
         // Adjust scale multiplier and seperation multiplier to factor in evolution
@@ -338,5 +344,10 @@ public class EnemyManager : MonoBehaviour
     {
         EnemyHealthText.text = currentEnemyHealth;
     }
-    
+
+    void UpdateText_EnemyLevel(string currentLevel)
+    {
+        EnemyLevelText.text = currentLevel;
+    }
+
 }
