@@ -20,11 +20,13 @@ public class GameManager : Subject
     public UIFlashing Fullness_UpArrow; // Flashes up when fullness gained
     public UIFlashing LevelUpFlash; // Flashes on level up
     public UIFlashing EvolvedFlash; // Flashes on evolution
+    public UIFlashing InsufficentGoldFlash; // Flashes when not enough gold to buy item
     
     // Texts
     public Text CharacterNameText;
     public Text LevelText;
     public Text HealthText;
+    public Text GoldText;
 
     // Spec point Texts
     public Text AirText;
@@ -201,9 +203,47 @@ public class GameManager : Subject
         CharacterRef.GetComponentInChildren<Subject>().AddObserver(SoundObserver);
     }
 
+    // Spawn the egg
     internal void SpawnEgg()
     {
         Instantiate(EggPrefab, EggSpawnPos, Quaternion.identity);
+    }
+
+    // Buy item
+    public void BuyItem(GameObject item)
+    {
+        if (item.name.Contains("Water")) // Waterfall exception
+        {
+            if (CharacterRef.GetComponentInChildren<Character>().Gold >= item.GetComponentInChildren<Item>().Cost)
+            {
+                // Spawn item
+                GetComponent<SpawnObject>().Spawn(item.gameObject);
+
+                // Pay cost
+                CharacterRef.GetComponentInChildren<Character>().ChangeGold(-item.GetComponentInChildren<Item>().Cost);
+            }
+            else
+            {
+                // Fail to buy item
+                InsufficentGoldFlash.Flash();
+            }
+        }
+        else // Every other item
+        {
+            if (CharacterRef.GetComponentInChildren<Character>().Gold >= item.GetComponent<Item>().Cost)
+            {
+                // Spawn item
+                GetComponent<SpawnObject>().Spawn(item.gameObject);
+
+                // Pay cost
+                CharacterRef.GetComponentInChildren<Character>().ChangeGold(-item.GetComponent<Item>().Cost);
+            }
+            else
+            {
+                // Fail to buy item
+                InsufficentGoldFlash.Flash();
+            }
+        }            
     }
 
     // Reward for completing quest
@@ -270,6 +310,11 @@ public class GameManager : Subject
     {
         HealthText.text = currentHealth;
     }    
+
+    public void UpdateText_Gold(string gold)
+    {
+        GoldText.text = gold;
+    }
 
     // Updates element spec texts
     public void UpdateText_AllElements(string currentAirPoints, string currentEarthPoints, string currentFirePoints, string currentNaturePoints, string currentWaterPoints)

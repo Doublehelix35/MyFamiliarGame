@@ -34,12 +34,12 @@ public class Quests : Observer
     bool UsedFireball = false;
 
     // Enum of quests
-    public enum QuestEnum { Empty, UseFireball, UseBoulder, UseVines, UseStormOrb, UseWaterfall, UseBalloon, UseTrampoline, UseFood, MakeHappy, MakeFull, WinBattle, Evolve }
+    public enum QuestEnum { Empty, UseFireball, UseBoulder, UseVines, UseStormOrb, UseWaterfall, UseFootball, UseBalloon, UseTrampoline, UseFood, MakeHappy, MakeFull, WinBattle, Evolve }
     List<QuestEnum> AllQuests = new List<QuestEnum> { }; // Stores all quests (except empty)
 
     // Quest texts
     string[] QuestStrings = { "", "Train with a Fireball", "Train with a Boulder", "Train with Vines", "Train with a Storm Orb",
-                                  "Train with the Waterfall", "Play with a Balloon", "Play with a Trampoline", "Give an Apple",
+                                  "Train with the Waterfall", "Play with a Football", "Play with a Balloon", "Play with a Trampoline", "Give an Apple",
                                   "Reach max happiness", "Reach max energy", "Win a battle", "Evolve your Familiar"};
 
     // Dictionary to bind quests to their texts
@@ -74,13 +74,14 @@ public class Quests : Observer
             {QuestEnum.UseVines, QuestStrings[3] },
             {QuestEnum.UseStormOrb, QuestStrings[4] },
             {QuestEnum.UseWaterfall, QuestStrings[5] },
-            {QuestEnum.UseBalloon, QuestStrings[6] },
-            {QuestEnum.UseTrampoline, QuestStrings[7] },
-            {QuestEnum.UseFood, QuestStrings[8] },
-            {QuestEnum.MakeHappy, QuestStrings[9] },
-            {QuestEnum.MakeFull, QuestStrings[10] },
-            {QuestEnum.WinBattle, QuestStrings[11] },
-            {QuestEnum.Evolve, QuestStrings[12] }
+            {QuestEnum.UseFootball, QuestStrings[6] },
+            {QuestEnum.UseBalloon, QuestStrings[7] },
+            {QuestEnum.UseTrampoline, QuestStrings[8] },
+            {QuestEnum.UseFood, QuestStrings[9] },
+            {QuestEnum.MakeHappy, QuestStrings[10] },
+            {QuestEnum.MakeFull, QuestStrings[11] },
+            {QuestEnum.WinBattle, QuestStrings[12] },
+            {QuestEnum.Evolve, QuestStrings[13] }
         };
 
         // Set quests
@@ -176,6 +177,12 @@ public class Quests : Observer
                 {
                     // Used Waterfall
                     TriggerQuest(QuestEnum.UseWaterfall);
+
+                }
+                else if (GO.name.Contains("Football"))
+                {
+                    // Used Football
+                    TriggerQuest(QuestEnum.UseFootball);
                 }
                 else if (GO.name.Contains("Balloon"))
                 {

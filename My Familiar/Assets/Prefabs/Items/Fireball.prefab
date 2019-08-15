@@ -128,4 +128,6 @@ MonoBehaviour:
   SpecPointsGiven: 3
   HappinessChangeValue: -3
   LifeSpan: 5
+  GoldToGive: 3
+  Cost: 5
   itemType: 3

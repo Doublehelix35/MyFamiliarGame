@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!135 &1220581188
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2456018069868015347}
-  m_Material: {fileID: 13400000, guid: 0df7a9e84b928954787ecef7d5ae5bd8, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.79999995
-  m_Center: {x: -0.00000008940697, y: 0, z: -0.00000017881393}
 --- !u!54 &1220581187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!135 &1220581188
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456018069868015347}
+  m_Material: {fileID: 13400000, guid: 0df7a9e84b928954787ecef7d5ae5bd8, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.79999995
+  m_Center: {x: -0.00000008940697, y: 0, z: -0.00000017881393}
 --- !u!114 &1220581189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +48,8 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 1
   LifeSpan: 5
+  GoldToGive: 3
+  Cost: 8
   itemType: 0
 --- !u!1001 &2456018069868111955
 PrefabInstance:

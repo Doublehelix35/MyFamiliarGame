@@ -144,11 +144,21 @@ public class Load_Character : MonoBehaviour
         // Add character AI script to body
         Body.AddComponent<Character_AI>();
 
+        // Setup mouth mat and textures
+        charRef.MouthMat = MouthMat; charRef.MouthHappy = MouthHappy;
+        charRef.MouthNormal = MouthNormal; charRef.MouthSad = MouthSad;
+
         // Load general stats
         charRef.Level = data.Level; charRef.Experience = data.Experience;
-        charRef.Health = data.Health < 0 ? 0 : data.Health; // Make sure health isnt below 0
-        charRef.Happiness = data.Happiness;
-        charRef.CurrentFullness = data.Fullness;
+        int tempHealth = data.Health < 1 ? 1 : data.Health; // Make sure health isnt below 1
+        charRef.ChangeHealth(tempHealth); // Add health from save (default on char should be zero)
+        charRef.ChangeHappiness(data.Happiness); // Add happiness from save
+        charRef.ChangeFullness(data.Fullness); // Add fullness from save
+
+        // Temp until gold is saved to file
+        charRef.ChangeGold(50);
+        // ********************
+
         charRef.CurrentEvolutionStage = data.EvolutionCount;
 
         // Load battle stats
@@ -280,10 +290,6 @@ public class Load_Character : MonoBehaviour
 
         // Load Facial Features
         string[] facialParts = LoadFacialConfig(CharacterName);
-
-        // Setup mouth mat and textures
-        charRef.MouthMat = MouthMat; charRef.MouthHappy = MouthHappy;
-        charRef.MouthNormal = MouthNormal; charRef.MouthSad = MouthSad;
 
         // Loop through, spawn each facial feature, set the face as parent to all facial features
         foreach(string part in facialParts)

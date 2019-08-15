@@ -598,7 +598,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Apple (L)
+  m_Text: 'Apple (L)
+
+    (12 Gold)'
 --- !u!222 &64087969
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1638,18 +1640,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 7276898017262645222, guid: fd994ff8ec3464549bf0dc7f778eab63,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 290157733}
         m_MethodName: SetActive
         m_Mode: 6
@@ -1694,6 +1684,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7276898017262645222, guid: fd994ff8ec3464549bf0dc7f778eab63,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &217635275
@@ -1709,7 +1711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8066038, g: 0.9713487, b: 1, a: 0.88235295}
+  m_Color: {r: 1, g: 0.9678926, b: 0.92156863, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1809,7 +1811,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Balloon
+  m_Text: 'Balloon
+
+    (12 Gold)'
 --- !u!222 &219077211
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1897,18 +1901,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2829392521483535903, guid: 7afa6a8ff380f8847831e000879b377b,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 768801271}
         m_MethodName: SetActive
         m_Mode: 6
@@ -1948,6 +1940,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2829392521483535903, guid: 7afa6a8ff380f8847831e000879b377b,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2109,7 +2113,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fireball
+  m_Text: 'Fireball
+
+    (5 Gold)'
 --- !u!222 &235255550
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2534,8 +2540,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2456018069868015347, guid: b7fd33d9f7fa0ee43b8239b0496ce67c,
@@ -2738,18 +2744,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2158348131541536088, guid: 9eb676f6953c7ab4d8974548f26465f9,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 290157733}
         m_MethodName: SetActive
         m_Mode: 6
@@ -2794,6 +2788,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2158348131541536088, guid: 9eb676f6953c7ab4d8974548f26465f9,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &282035332
@@ -2809,7 +2815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8066038, g: 0.9713487, b: 1, a: 0.88235295}
+  m_Color: {r: 0.92156863, g: 1, b: 0.9234021, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2966,7 +2972,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vines
+  m_Text: 'Vines
+
+    (5 Gold)'
 --- !u!222 &288516528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3045,7 +3053,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Boulder
+  m_Text: 'Boulder
+
+    (5 Gold)'
 --- !u!222 &289897178
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3443,7 +3453,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Waterfall
+  m_Text: 'Waterfall
+
+    (5 Gold)'
 --- !u!222 &354950803
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4212,18 +4224,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2829392521483535903, guid: 50ed563e1fc7cee44bdbae8af3393893,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 768801271}
         m_MethodName: SetActive
         m_Mode: 6
@@ -4263,6 +4263,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2829392521483535903, guid: 50ed563e1fc7cee44bdbae8af3393893,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4485,7 +4497,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Apple (S)
+  m_Text: 'Apple (S)
+
+    (5 Gold)'
 --- !u!222 &519913900
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4576,7 +4590,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Storm Orb
+  m_Text: 'Storm Orb
+
+    (5 Gold)'
 --- !u!222 &539239869
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4719,8 +4735,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3149020287695644717, guid: 8e8029585d3582a4297f936981ed06ab,
@@ -5435,18 +5451,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 6114790218902321205, guid: e560213015625494e9787810d312278c,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 290157733}
         m_MethodName: SetActive
         m_Mode: 6
@@ -5491,6 +5495,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6114790218902321205, guid: e560213015625494e9787810d312278c,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &656726812
@@ -5506,7 +5522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8066038, g: 0.9713487, b: 1, a: 0.88235295}
+  m_Color: {r: 0.92156863, g: 0.9365524, b: 1, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5657,6 +5673,7 @@ RectTransform:
   - {fileID: 241377306}
   - {fileID: 166567157}
   - {fileID: 780901655}
+  - {fileID: 1030439392}
   m_Father: {fileID: 2009977669}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7114,18 +7131,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2829392521483535903, guid: 21508dd4acdf45e45a8e4db1b328afb1,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 768801271}
         m_MethodName: SetActive
         m_Mode: 6
@@ -7165,6 +7170,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2829392521483535903, guid: 21508dd4acdf45e45a8e4db1b328afb1,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7659,7 +7676,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trampoline
+  m_Text: 'Trampoline
+
+    (15 Gold)'
 --- !u!222 &921598655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8086,6 +8105,118 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1030434560}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1030439391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1030439392}
+  - component: {fileID: 1030439396}
+  - component: {fileID: 1030439395}
+  - component: {fileID: 1030439394}
+  - component: {fileID: 1030439393}
+  m_Layer: 5
+  m_Name: InsufficentGold_txt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1030439392
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030439391}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 693427844}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -195.1}
+  m_SizeDelta: {x: 429.3, y: 48.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1030439393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030439391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fdd8ea6d974c9458d70fbbc267ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlashMax: 4
+  FlashDelay: 2
+  StartDelay: 4
+  isImageNotText: 0
+--- !u!114 &1030439394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030439391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1030439395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030439391}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.9397922, b: 0.042452812, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 60
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Not enough gold!
+--- !u!222 &1030439396
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030439391}
+  m_CullTransparentMesh: 0
 --- !u!1 &1052521643
 GameObject:
   m_ObjectHideFlags: 0
@@ -9354,18 +9485,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8964777436287552560, guid: 656510d16f447854da299d61b7c5efad,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 290157733}
         m_MethodName: SetActive
         m_Mode: 6
@@ -9410,6 +9529,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8964777436287552560, guid: 656510d16f447854da299d61b7c5efad,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1144730407
@@ -9425,7 +9556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8066038, g: 0.9713487, b: 1, a: 0.88235295}
+  m_Color: {r: 0.8666667, g: 0.98039216, b: 0.97260857, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10096,7 +10227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -111.4}
+  m_AnchoredPosition: {x: -50, y: -111.400024}
   m_SizeDelta: {x: 74.68, y: 72.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1249275864
@@ -11804,7 +11935,7 @@ GameObject:
   - component: {fileID: 1420238672}
   - component: {fileID: 1420238671}
   m_Layer: 5
-  m_Name: ShowBottom_btn
+  m_Name: Options_btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12167,7 +12298,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Football
+  m_Text: 'Football
+
+    (8 Gold)'
 --- !u!222 &1468615067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12598,8 +12731,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23.7, y: -12.8}
-  m_SizeDelta: {x: 55.29, y: 21.5}
+  m_AnchoredPosition: {x: 25.14, y: -12.8}
+  m_SizeDelta: {x: 53, y: 21.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1585394553
 MonoBehaviour:
@@ -12649,7 +12782,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 00000
 --- !u!222 &1585394555
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13360,18 +13493,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1782742706741780, guid: 4442bf0252630d84586fe92f52b5a724,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 290157733}
         m_MethodName: SetActive
         m_Mode: 6
@@ -13416,6 +13537,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1782742706741780, guid: 4442bf0252630d84586fe92f52b5a724,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1652740153
@@ -13431,7 +13564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8066038, g: 0.9713487, b: 1, a: 0.88235295}
+  m_Color: {r: 1, g: 0.9198113, b: 0.92150325, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -14688,8 +14821,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2106336109}
-        m_MethodName: Spawn
+      - m_Target: {fileID: 2106336108}
+        m_MethodName: BuyItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4976965907187661758, guid: 3559e104d6bd5754c91c8a66e2c0b7ec,
@@ -15825,7 +15958,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Apple (M)
+  m_Text: 'Apple (M)
+
+    (8 Gold)'
 --- !u!222 &2103124227
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15888,6 +16023,7 @@ GameObject:
   - component: {fileID: 2106336114}
   - component: {fileID: 2106336109}
   - component: {fileID: 2106336111}
+  - component: {fileID: 2106336116}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -15960,9 +16096,11 @@ MonoBehaviour:
   Fullness_UpArrow: {fileID: 410989245}
   LevelUpFlash: {fileID: 241377307}
   EvolvedFlash: {fileID: 166567158}
+  InsufficentGoldFlash: {fileID: 1030439393}
   CharacterNameText: {fileID: 1651399370}
   LevelText: {fileID: 1084305464}
   HealthText: {fileID: 1411108084}
+  GoldText: {fileID: 1585394554}
   AirText: {fileID: 1098651892}
   EarthText: {fileID: 2119662587}
   FireText: {fileID: 646922802}
@@ -15991,6 +16129,7 @@ MonoBehaviour:
   SpawnLocation: {fileID: 495413313}
   QuestObserver: {fileID: 2106336114}
   SoundObserver: {fileID: 2106336115}
+  GoldObserver: {fileID: 2106336116}
   IsObservable: 1
 --- !u!114 &2106336110
 MonoBehaviour:
@@ -16101,6 +16240,25 @@ MonoBehaviour:
   LevelUpSource: {fileID: 738362670}
   QuestCompleteSource: {fileID: 644678755}
   TapSource: {fileID: 533453638}
+--- !u!114 &2106336116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106336105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1190e9b23d39e44eb2d3994236f6f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManagerRef: {fileID: 2106336108}
+  CoinPrefab: {fileID: 8341722928158693116, guid: 03bfa3045bd5fc94ebe691a8ffbb9d48,
+    type: 3}
+  EvolutionGoldReward: 10
+  BattleWinGoldReward: 8
+  LevelUpGoldReward: 6
+  LogInGoldReward: 4
 --- !u!1 &2109426905
 GameObject:
   m_ObjectHideFlags: 0

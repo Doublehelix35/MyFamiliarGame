@@ -129,6 +129,8 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 5
   LifeSpan: 5
+  GoldToGive: 5
+  Cost: 15
   itemType: 0
   BounceMagnitude: 100
 --- !u!1001 &813080818234137060

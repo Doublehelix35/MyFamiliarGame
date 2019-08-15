@@ -14,6 +14,9 @@ public abstract class Item : Subject
     public int SpecPointsGiven = 0;
     public int HappinessChangeValue = 0;
     public float LifeSpan = 5f;
+    public int GoldToGive = 0;
+
+    public int Cost = 0;
 
     // Item type
     public Elements.ElementType itemType;

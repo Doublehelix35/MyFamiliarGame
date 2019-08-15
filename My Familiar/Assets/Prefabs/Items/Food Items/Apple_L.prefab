@@ -16,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!65 &909561162255164446
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829392521483535903}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.950309, y: 1.1403172, z: 0.9343105}
+  m_Center: {x: -0.0061652064, y: 0.16244736, z: -0.000000059604645}
 --- !u!114 &7799662014931435643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,21 +48,9 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 7
   LifeSpan: 5
+  Cost: 12
   itemType: 0
   FullnessChangeValue: 60
---- !u!65 &909561162255164446
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2829392521483535903}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.950309, y: 1.1403172, z: 0.9343105}
-  m_Center: {x: -0.0061652064, y: 0.16244736, z: -0.000000059604645}
 --- !u!1001 &2829392521483632831
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,9 +10,9 @@ public class SpawnObject : MonoBehaviour {
     // Observers
     public Observer QuestObserver;
     public Observer SoundObserver;
+    public Observer GoldObserver;
 
     public bool IsObservable;
-
 	
     // Use both spawnable object and spawn location
     public void Spawn()
@@ -23,6 +23,7 @@ public class SpawnObject : MonoBehaviour {
         {
             GO.GetComponent<Subject>().AddObserver(QuestObserver);
             GO.GetComponent<Subject>().AddObserver(SoundObserver);
+            GO.GetComponent<Subject>().AddObserver(GoldObserver);
         }
     }
 
@@ -37,11 +38,13 @@ public class SpawnObject : MonoBehaviour {
             {
                 GO.GetComponentInChildren<Subject>().AddObserver(QuestObserver);
                 GO.GetComponentInChildren<Subject>().AddObserver(SoundObserver);
+                GO.GetComponentInChildren<Subject>().AddObserver(GoldObserver);
             }
             else
             {
                 GO.GetComponent<Subject>().AddObserver(QuestObserver);
                 GO.GetComponent<Subject>().AddObserver(SoundObserver);
+                GO.GetComponent<Subject>().AddObserver(GoldObserver);
             }            
         }
     }
@@ -55,6 +58,7 @@ public class SpawnObject : MonoBehaviour {
         {
             GO.GetComponent<Subject>().AddObserver(QuestObserver);
             GO.GetComponent<Subject>().AddObserver(SoundObserver);
+            GO.GetComponent<Subject>().AddObserver(GoldObserver);
         }
     }
 

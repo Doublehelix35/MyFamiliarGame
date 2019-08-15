@@ -48,6 +48,7 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 1
   LifeSpan: 5
+  Cost: 5
   itemType: 0
   FullnessChangeValue: 10
 --- !u!1001 &2829392521483632831

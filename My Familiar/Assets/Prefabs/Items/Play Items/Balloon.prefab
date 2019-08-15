@@ -130,6 +130,8 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 5
   LifeSpan: 5
+  GoldToGive: 4
+  Cost: 12
   itemType: 0
   FloatForce: 1800
   AttachedObjectForceModifierMax: 2.2

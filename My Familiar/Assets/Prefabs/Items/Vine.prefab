@@ -132,6 +132,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348130909758939
@@ -301,6 +303,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131095937408
@@ -470,6 +474,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131398353684
@@ -639,6 +645,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348131416229263
@@ -805,6 +813,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 3
+  Cost: 5
   itemType: 4
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!1 &2158348132360083027
@@ -939,6 +949,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132360083117
@@ -1108,6 +1120,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132466298167
@@ -1277,6 +1291,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &2158348132787607980
@@ -1446,6 +1462,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &3129819639828452136
@@ -1614,6 +1632,8 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
+  GoldToGive: 0
+  Cost: 0
   itemType: 0
   HighestParentVine: {fileID: 2158348131541536088}
 --- !u!59 &5484278279955858353

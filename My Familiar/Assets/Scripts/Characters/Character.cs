@@ -23,9 +23,17 @@ public class Character : Subject
 
     // Stats
     internal int HealthMax = 60; // Health maximum
-    internal int Health = 0; // Current health
-    internal int Happiness = 50; // 0 min, start at 50, max 100
+    int health = 0; // Current health
+    internal int Health
+    {
+        get { return health; }
+    }
+    int happiness = 0; // 0 min, start at 50, max 100
     internal int HappinessMax = 100;
+    internal int Happiness
+    {
+        get { return happiness; }
+    }
     float InvincibilityTimer = 0.5f;
     float DamageTakenTime;
 
@@ -37,13 +45,26 @@ public class Character : Subject
     internal float DodgeChance; // Chance to dodge an incoming attack
     internal float Speed; // How quickly the character attacks
 
+    // Gold
+    int gold = 0;
+    int GoldMax = 99999;
+    int GoldMin = 0;
+    internal int Gold
+    {
+        get { return gold; }
+    }
+
     // Stomach/Fullness (%)
-    internal int CurrentFullness = 50;
-    int MinFullness = 0;
-    int MaxFullness = 100;
+    int currentFullness = 0;
+    int FullnessMin = 0;
+    int FullnessMax = 100;
     float FullnessLastTickTime; // Time of the last tick
     public float FullnessTickFrequency = 5f; // How often fullness decreases
     public int FullnessTickPower = 1; // How much to remove from fullness every tick
+    internal int CurrentFullness
+    {
+        get { return currentFullness; }
+    }
 
     // Mouth
     internal Material MouthMat;
@@ -70,14 +91,6 @@ public class Character : Subject
 
     // Moves known
     internal Elements.ElementalMoves[] MoveSlots; // Max 3 moves
-
-    // Constructor
-    internal Character()
-    {
-        // Most construction is done externally during loading.
-        // Stats and other data that is used throughout the lifespan of
-        // the character should be passed in to be handled internally
-    }
 
     void Awake()
     {
@@ -109,15 +122,17 @@ public class Character : Subject
         // Init UI texts
         if (InBattleMode)
         {
-            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(Health.ToString());
+            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(health.ToString()); // Health
         }
         else
         {
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString());
-            GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp);
-            GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, true);
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
-            GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, true);
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Level(Level.ToString()); // Level
+            GameManagerRef.GetComponent<GameManager>().Update_Exp(Experience, ExpToLevelUp); // Exp
+            GameManagerRef.GetComponent<GameManager>().Update_Happiness(happiness, HappinessMax, true); // Happiness
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(health.ToString()); // Health
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Gold(gold.ToString()); // Gold
+            GameManagerRef.GetComponent<GameManager>().Update_Fullness(currentFullness, FullnessMax, true); // Fullness
+            // All spec points
             GameManagerRef.GetComponent<GameManager>().UpdateText_AllElements(AirPoints.ToString(), EarthPoints.ToString(), FirePoints.ToString(), NaturePoints.ToString(), WaterPoints.ToString());
         }
     }
@@ -161,13 +176,13 @@ public class Character : Subject
         if(DamageTakenTime >= Time.time - InvincibilityTimer) { return; }
 
         // Change health based on value
-        Health += value;        
+        health += value;        
 
-        if(Health > HealthMax)
+        if(health > HealthMax)
         {
-            Health = HealthMax;
+            health = HealthMax;
         }
-        else if (Health <= 0)
+        else if (health <= 0)
         {
             // Player dead or exhausted
             //Destroy(gameObject.transform.parent.gameObject); // Temporary test code
@@ -187,11 +202,11 @@ public class Character : Subject
         // Update ui
         if (InBattleMode)
         {
-            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(Health.ToString());
+            GameManagerRef.GetComponent<BattleManager>().UpdateText_Health(health.ToString());
         }
         else
         {
-            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(Health.ToString());
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Health(health.ToString());
         }
         
     }
@@ -199,21 +214,22 @@ public class Character : Subject
     // To gain happiness pass in positive value, to lose happiness pass in negative value
     public void ChangeHappiness(int value)
     {
-        Happiness += value;
+        // Add value
+        happiness += value;
 
         // Clamp happiness between zero and happiness max
-        Happiness = Mathf.Clamp(Happiness, 0, HappinessMax);
+        happiness = Mathf.Clamp(happiness, 0, HappinessMax);
 
         // Notify that happiness is max
-        if (Happiness == HappinessMax) { Notify(gameObject, Observer.Events.HappinessMax); }
+        if (happiness == HappinessMax) { Notify(gameObject, Observer.Events.HappinessMax); }
 
         // Update facial features
-        if (Happiness <= 25)
+        if (happiness <= 25)
         {
             // Sad
             MouthMat.mainTexture = MouthSad;
         }
-        else if (Happiness >= 75)
+        else if (happiness >= 75)
         {
             // Happy
             MouthMat.mainTexture = MouthHappy;
@@ -231,12 +247,12 @@ public class Character : Subject
             if(value > 0)
             {
                 // Update happiness and flash up arrow
-                GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, true);
+                GameManagerRef.GetComponent<GameManager>().Update_Happiness(happiness, HappinessMax, true);
             }
             else
             {
                 // Update happiness and flash down arrow
-                GameManagerRef.GetComponent<GameManager>().Update_Happiness(Happiness, HappinessMax, false);
+                GameManagerRef.GetComponent<GameManager>().Update_Happiness(happiness, HappinessMax, false);
             }
         }        
     } 
@@ -244,26 +260,44 @@ public class Character : Subject
     // To gain fullness pass in positive value, to lose fullness pass in negative value
     public void ChangeFullness(int value)
     {
-        CurrentFullness += value;
+        // Add value
+        currentFullness += value;
 
         // Clamp current fullness between min and max
-        CurrentFullness = Mathf.Clamp(CurrentFullness, MinFullness, MaxFullness);
+        currentFullness = Mathf.Clamp(currentFullness, FullnessMin, FullnessMax);
 
-        if (CurrentFullness == MaxFullness) { Notify(gameObject, Observer.Events.EnergyFull); }
+        // Notify that fullness is max
+        if (currentFullness == FullnessMax) { Notify(gameObject, Observer.Events.EnergyFull); }
 
         // Update ui 
         if (!InBattleMode)
         {
             if(value > 0)
             {
-                GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, true);
+                GameManagerRef.GetComponent<GameManager>().Update_Fullness(currentFullness, FullnessMax, true);
             }
             else
             {
-                GameManagerRef.GetComponent<GameManager>().Update_Fullness(CurrentFullness, MaxFullness, false);
+                GameManagerRef.GetComponent<GameManager>().Update_Fullness(currentFullness, FullnessMax, false);
             }
             
         }        
+    }
+
+    // To gain gold pass in positive value, to lose gold pass in negative value
+    public void ChangeGold(int value)
+    {
+        // Add value
+        gold += value;
+
+        // Clamp gold between min and max
+        gold = Mathf.Clamp(gold, GoldMin, GoldMax);
+
+        // Update ui
+        if (!InBattleMode)
+        {
+            GameManagerRef.GetComponent<GameManager>().UpdateText_Gold(gold.ToString());
+        }
     }
 
     public void GainElementSpecPoints(Elements.ElementType ElementToGainPoints, int pointValue)
