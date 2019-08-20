@@ -813,7 +813,7 @@ MonoBehaviour:
   SpecPointsGiven: 1
   HappinessChangeValue: -1
   LifeSpan: 5
-  GoldToGive: 3
+  GoldToGive: 1
   Cost: 5
   itemType: 4
   HighestParentVine: {fileID: 2158348131541536088}

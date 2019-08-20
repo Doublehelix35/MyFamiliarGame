@@ -42,13 +42,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  Uses: 20
+  Uses: 5
   Damage: 0
   ExpPointsGiven: 0
   SpecPointsGiven: 0
   HappinessChangeValue: 1
   LifeSpan: 5
-  GoldToGive: 3
+  GoldToGive: 1
   Cost: 8
   itemType: 0
 --- !u!1001 &2456018069868111955

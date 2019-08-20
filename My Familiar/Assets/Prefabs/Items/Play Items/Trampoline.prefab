@@ -129,7 +129,7 @@ MonoBehaviour:
   SpecPointsGiven: 0
   HappinessChangeValue: 5
   LifeSpan: 5
-  GoldToGive: 5
+  GoldToGive: 1
   Cost: 15
   itemType: 0
   BounceMagnitude: 100

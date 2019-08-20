@@ -68,7 +68,7 @@ public class Item_WaterFall : Item
         if(GunRef != gameObject) // Only water projectile should do this
         {
             // Notify observers
-            Notify(gameObject, Observer.Events.ItemUsed);
+            GunRef.GetComponent<Item_WaterFall>().Notify(gameObject, Observer.Events.ItemUsed);
 
             // Destroy self if collison detected
             Destroy(gameObject);
