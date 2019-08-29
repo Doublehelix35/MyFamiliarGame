@@ -25,6 +25,7 @@ public class Item_Egg : Item
         {
             // Spawn player
             GM.GetComponent<GameManager>().ReloadCharacter();
+            GM.GetComponent<GameManager>().HideNest();
 
             // Destroy self
             Destroy(gameObject);

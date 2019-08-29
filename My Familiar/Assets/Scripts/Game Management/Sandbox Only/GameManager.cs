@@ -21,6 +21,7 @@ public class GameManager : Subject
     public UIFlashing LevelUpFlash; // Flashes on level up
     public UIFlashing EvolvedFlash; // Flashes on evolution
     public UIFlashing InsufficentGoldFlash; // Flashes when not enough gold to buy item
+    public GameObject TutorialPanel; // Ref to turn panel on/off
     
     // Texts
     public Text CharacterNameText;
@@ -55,6 +56,7 @@ public class GameManager : Subject
 
     // Egg Spawning
     public GameObject EggPrefab;
+    public GameObject NestRef; // Ref to nest object
     Vector3 EggSpawnPos = new Vector3(0f, 5f, 0f);
     bool EggActive = false;
 
@@ -71,6 +73,8 @@ public class GameManager : Subject
             gameObject.GetComponent<GameManager>().SpawnEgg();
             EggActive = true;
             ShowButton.interactable = false;
+            TutorialPanel.SetActive(true); // Show tutorial panel
+            NestRef.SetActive(true); // Show nest
         }
         else
         {
@@ -207,6 +211,11 @@ public class GameManager : Subject
     internal void SpawnEgg()
     {
         Instantiate(EggPrefab, EggSpawnPos, Quaternion.identity);
+    }
+
+    internal void HideNest()
+    {
+        NestRef.SetActive(false);
     }
 
     // Buy item

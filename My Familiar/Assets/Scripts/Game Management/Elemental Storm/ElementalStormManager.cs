@@ -13,7 +13,6 @@ public class ElementalStormManager : MonoBehaviour
     public string SandboxSceneName;
 
     // Texts
-    public Text CharacterNameText;
     public Text HealthText;
     
     // Spawn offset
@@ -150,11 +149,7 @@ public class ElementalStormManager : MonoBehaviour
     }
 
     // Text update methods
-    public void UpdateText_CharacterName(string name)
-    {
-        CharacterNameText.text = name;
-    }
-
+    
     public void UpdateText_Health(string currentHealth)
     {
         HealthText.text = currentHealth;
