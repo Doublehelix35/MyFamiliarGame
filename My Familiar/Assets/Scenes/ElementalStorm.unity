@@ -1449,7 +1449,7 @@ GameObject:
   - component: {fileID: 503223973}
   - component: {fileID: 503223972}
   m_Layer: 5
-  m_Name: Column1 (1)
+  m_Name: Column2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2233,7 +2233,7 @@ GameObject:
   - component: {fileID: 711193050}
   - component: {fileID: 711193049}
   m_Layer: 5
-  m_Name: Column1 (2)
+  m_Name: Column3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5426,7 +5426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1904733677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5891,6 +5891,39 @@ MonoBehaviour:
   LoadRef: {fileID: 2091637650}
   SandboxSceneName: Sandbox
   HealthText: {fileID: 448437766}
+  Air_Hazard: {fileID: 0}
+  Earth_Hazard: {fileID: 0}
+  Fire_Hazard: {fileID: 0}
+  Nature_Hazard: {fileID: 0}
+  Water_Hazard: {fileID: 0}
+  Lane_Row1: {fileID: 2069710858}
+  Lane_Row2: {fileID: 569053801}
+  Lane_Row3: {fileID: 1587081344}
+  Lane_Row4: {fileID: 774498009}
+  Lane_Column1: {fileID: 148087792}
+  Lane_Column2: {fileID: 503223970}
+  Lane_Column3: {fileID: 711193047}
+  Lane_Column4: {fileID: 2128977187}
+  Arrow_1T: {fileID: 849867599}
+  Arrow_2T: {fileID: 853080748}
+  Arrow_3T: {fileID: 489860830}
+  Arrow_4T: {fileID: 163413934}
+  Arrow_AL: {fileID: 220439249}
+  Arrow_BL: {fileID: 1865096191}
+  Arrow_CL: {fileID: 695043166}
+  Arrow_DL: {fileID: 1812590541}
+  Arrow_1B: {fileID: 1363440786}
+  Arrow_2B: {fileID: 1262330098}
+  Arrow_3B: {fileID: 745103688}
+  Arrow_4B: {fileID: 42330951}
+  Arrow_AR: {fileID: 1379732586}
+  Arrow_BR: {fileID: 245527042}
+  Arrow_CR: {fileID: 1486763261}
+  Arrow_DR: {fileID: 443915261}
+  ArrowFlashDelay: 0.2
+  ArrowFlashCount: 3
+  SpawnDelay: 0.5
+  TimeTilNextSpawn: 2
 --- !u!114 &2091637652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6008,7 +6041,7 @@ GameObject:
   - component: {fileID: 2128977190}
   - component: {fileID: 2128977189}
   m_Layer: 5
-  m_Name: Column1 (3)
+  m_Name: Column4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

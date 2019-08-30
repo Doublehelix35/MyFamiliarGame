@@ -27,6 +27,100 @@ public class ElementalStormManager : MonoBehaviour
     float FollowStopDistance = 0.05f;
     float RagdollMaxDist = 10f;
 
+    // Hazard prefabs
+    public GameObject Air_Hazard;
+    public GameObject Earth_Hazard;
+    public GameObject Fire_Hazard;
+    public GameObject Nature_Hazard;
+    public GameObject Water_Hazard;
+
+    // Warning UI
+
+    // UI Colours
+    Color UIColour_Air = new Color(0.508f, 0.886f, 0.971f);
+    Color UIColour_Earth = new Color(0.972f, 0.678f, 0.509f);
+    Color UIColour_Fire = new Color(1f, 0.391f, 0.431f);
+    Color UIColour_Nature = new Color(0.392f, 1f, 0.451f);
+    Color UIColour_Water = new Color(0.443f, 0.392f, 1f);
+
+    // Lanes (Rows start from the top, columns start from the left)
+    public GameObject Lane_Row1;
+    public GameObject Lane_Row2;
+    public GameObject Lane_Row3;
+    public GameObject Lane_Row4;
+    public GameObject Lane_Column1;
+    public GameObject Lane_Column2;
+    public GameObject Lane_Column3;
+    public GameObject Lane_Column4;
+
+    // Arrows
+
+    // Top Arrows ( Left to right order)
+    public GameObject Arrow_1T; // 1st top arrow
+    public GameObject Arrow_2T; // 2nd top arrow
+    public GameObject Arrow_3T; // 3rd top arrow
+    public GameObject Arrow_4T; // 4th top arrow
+
+    // Left Arrows ( Top to bottom order)
+    public GameObject Arrow_AL; // 1st left arrow
+    public GameObject Arrow_BL; // 2nd left arrow
+    public GameObject Arrow_CL; // 3rd left arrow
+    public GameObject Arrow_DL; // 4th left arrow
+
+    // Bottom Arrows ( Left to right order)
+    public GameObject Arrow_1B; // 1st bottom arrow
+    public GameObject Arrow_2B; // 2nd bottom arrow
+    public GameObject Arrow_3B; // 3rd bottom arrow
+    public GameObject Arrow_4B; // 4th bottom arrow
+
+    // Right Arrows ( Top to bottom order)
+    public GameObject Arrow_AR; // 1st right arrow
+    public GameObject Arrow_BR; // 2nd right arrow
+    public GameObject Arrow_CR; // 3rd right arrow
+    public GameObject Arrow_DR; // 4th right arrow
+
+    // Ui Flashing
+    IEnumerator coroutine;
+    public float ArrowFlashDelay = 0.1f; // Delay inbetween arrow flashes
+    public int ArrowFlashCount = 2; // How many times an arrow flashes
+    public float SpawnDelay = 0.5f; // How long after last arrow flash do hazards spawn
+    public float TimeTilNextSpawn = 2f; // How long after hazard is spawned does the process repeat
+
+    
+    // Flash Ui warnings and spawn hazards
+    IEnumerator UIFlashWarnings()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(TimeTilNextSpawn);
+
+            // Turn on warning lane
+            Lane_Row1.SetActive(true); // Temp
+
+            for(int i = 0; i < ArrowFlashCount; i++)
+            {
+                // Arrow on
+                Arrow_AL.SetActive(true); // Temp
+
+                // Wait
+                yield return new WaitForSeconds(ArrowFlashDelay);
+
+                // Arrow off
+                Arrow_AL.SetActive(false); // Temp
+
+                // Wait
+                yield return new WaitForSeconds(ArrowFlashDelay);
+            }
+            
+            yield return new WaitForSeconds(SpawnDelay);
+
+            // Spawn hazard
+
+            // Turn off warning lane
+            Lane_Row1.SetActive(false); // Temp
+        }
+    }
+
     void Update()
     {
         // Move object with touch //
@@ -127,9 +221,11 @@ public class ElementalStormManager : MonoBehaviour
     public void StartGame()
     {
         // Init objects
-        ReloadCharacter();
+        //ReloadCharacter();
 
         // Start hazard spawner
+        coroutine = UIFlashWarnings();
+        StartCoroutine(coroutine);
     }
     
     // Call when player is defeated
