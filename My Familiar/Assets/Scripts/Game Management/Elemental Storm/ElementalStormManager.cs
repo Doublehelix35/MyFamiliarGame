@@ -34,6 +34,8 @@ public class ElementalStormManager : MonoBehaviour
     public GameObject Nature_Hazard;
     public GameObject Water_Hazard;
 
+    int NumOfHazards = 5; // How many hazard prefabs there are
+
     // Warning UI
 
     // UI Colours
@@ -52,8 +54,6 @@ public class ElementalStormManager : MonoBehaviour
     public GameObject Lane_Column2;
     public GameObject Lane_Column3;
     public GameObject Lane_Column4;
-
-    // Arrows
 
     // Top Arrows ( Left to right order)
     public GameObject Arrow_1T; // 1st top arrow
@@ -79,6 +79,33 @@ public class ElementalStormManager : MonoBehaviour
     public GameObject Arrow_CR; // 3rd right arrow
     public GameObject Arrow_DR; // 4th right arrow
 
+    // Array of lane and arrow combos for spawning
+    private enum LaneArrows
+    {
+        // Easy (Top only)
+        Lane_Column1_Arrow_1T, Lane_Column2_Arrow_2T,
+        Lane_Column3_Arrow_3T, Lane_Column4_Arrow_4T,
+
+        // Medium (Top + Bottom)
+        Lane_Column1_Arrow_1B, Lane_Column2_Arrow_2B,
+        Lane_Column3_Arrow_3B, Lane_Column4_Arrow_4B,
+
+        // Hard (Top + Bottom + Left)
+        Lane_Row1_Arrow_AL, Lane_Row2_Arrow_BL,
+        Lane_Row3_Arrow_CL, Lane_Row4_Arrow_DL,
+
+        // Extreme (All)
+        Lane_Row1_Arrow_AR, Lane_Row2_Arrow_BR,
+        Lane_Row3_Arrow_CR, Lane_Row4_Arrow_DR
+    };
+
+    // Difficulty ints (how many arrows to spawn from)
+    int CurrentDifficulty; // init at start of game and change as game progresses
+    const int EasyDifficulty = 4;
+    const int MediumDifficulty = 8;
+    const int HardDifficulty = 12;
+    const int ExtremeDifficulty = 16;
+
     // Ui Flashing
     IEnumerator coroutine;
     public float ArrowFlashDelay = 0.1f; // Delay inbetween arrow flashes
@@ -90,34 +117,157 @@ public class ElementalStormManager : MonoBehaviour
     // Flash Ui warnings and spawn hazards
     IEnumerator UIFlashWarnings()
     {
+        // Temp arrow and lane objects
+        GameObject selectedArrow = new GameObject();
+        GameObject selectedLane = new GameObject();
+        GameObject selectedHazard = new GameObject();
+        Color selectedColour = new Color();
+
+
         while (true)
         {
             yield return new WaitForSeconds(TimeTilNextSpawn);
 
-            // Turn on warning lane
-            Lane_Row1.SetActive(true); // Temp
+            // Select element
+            int randElement = Random.Range(0, NumOfHazards);
+            switch (randElement)
+            {
+                case 0: // Air
+                    selectedHazard = Air_Hazard;
+                    selectedColour = UIColour_Air;
+                    break;
 
+                case 1: // Earth
+                    selectedHazard = Earth_Hazard;
+                    selectedColour = UIColour_Earth;
+                    break;
+
+                case 2: // Fire
+                    selectedHazard = Fire_Hazard;
+                    selectedColour = UIColour_Fire;
+                    break;
+
+                case 3: // Nature
+                    selectedHazard = Nature_Hazard;
+                    selectedColour = UIColour_Nature;
+                    break;
+
+                case 4: // Water
+                    selectedHazard = Water_Hazard;
+                    selectedColour = UIColour_Water;
+                    break;
+
+                default:
+                    Debug.Log("Random element not found. Rand = " + randElement);
+                    break;
+            }    
+
+            // Select lane and arrow (randomly based on difficulty)
+            int randArrow = Random.Range(0, CurrentDifficulty);
+            switch (randArrow)
+            {
+                // Easy
+                case 0: // Column1_Arrow_1T
+                    selectedArrow = Arrow_1T;
+                    selectedLane = Lane_Column1;
+                    break;
+                case 1: // Column2_Arrow_2T
+                    selectedArrow = Arrow_2T;
+                    selectedLane = Lane_Column2;
+                    break;
+                case 2: // Column3_Arrow_3T
+                    selectedArrow = Arrow_3T;
+                    selectedLane = Lane_Column3;
+                    break;
+                case 3: // Column4_Arrow_4T
+                    selectedArrow = Arrow_4T;
+                    selectedLane = Lane_Column4;
+                    break;
+                    
+                // Medium
+                case 4: // Column1_Arrow_1B
+                    selectedArrow = Arrow_1B;
+                    selectedLane = Lane_Column1;
+                    break;
+                case 5: // Column2_Arrow_2B
+                    selectedArrow = Arrow_2B;
+                    selectedLane = Lane_Column2;
+                    break;
+                case 6: // Column3_Arrow_3B
+                    selectedArrow = Arrow_3B;
+                    selectedLane = Lane_Column3;
+                    break;
+                case 7: // Column4_Arrow_4B
+                    selectedArrow = Arrow_4B;
+                    selectedLane = Lane_Column4;
+                    break;
+
+                // Hard
+                case 8: // Row1_Arrow_AL
+                    selectedArrow = Arrow_AL;
+                    selectedLane = Lane_Row1;
+                    break;
+                case 9: // Row2_Arrow_BL
+                    selectedArrow = Arrow_BL;
+                    selectedLane = Lane_Row2;
+                    break;
+                case 10: // Row3_Arrow_CL
+                    selectedArrow = Arrow_CL;
+                    selectedLane = Lane_Row3;
+                    break;
+                case 11: // Row4_Arrow_DL
+                    selectedArrow = Arrow_DL;
+                    selectedLane = Lane_Row4;
+                    break;
+
+                // Extreme
+                case 12: // Row1_Arrow_AR
+                    selectedArrow = Arrow_AR;
+                    selectedLane = Lane_Row1;
+                    break;
+                case 13: // Row2_Arrow_BR
+                    selectedArrow = Arrow_BR;
+                    selectedLane = Lane_Row2;
+                    break;
+                case 14: // Row3_Arrow_CR
+                    selectedArrow = Arrow_CR;
+                    selectedLane = Lane_Row3;
+                    break;
+                case 15: // Row4_Arrow_DR
+                    selectedArrow = Arrow_DR;
+                    selectedLane = Lane_Row4;
+                    break;
+                default:
+                    Debug.Log("Random Arrow/Lane not found. Rand = " + randArrow);
+                    break;
+            }
+
+            // Turn on warning lane
+            selectedLane.SetActive(true);
+
+            // Flash arrow
             for(int i = 0; i < ArrowFlashCount; i++)
             {
                 // Arrow on
-                Arrow_AL.SetActive(true); // Temp
+                selectedArrow.SetActive(true);
 
                 // Wait
                 yield return new WaitForSeconds(ArrowFlashDelay);
 
                 // Arrow off
-                Arrow_AL.SetActive(false); // Temp
+                selectedArrow.SetActive(false);
 
                 // Wait
                 yield return new WaitForSeconds(ArrowFlashDelay);
             }
             
+            // Wait then spawn hazard
             yield return new WaitForSeconds(SpawnDelay);
 
             // Spawn hazard
 
             // Turn off warning lane
-            Lane_Row1.SetActive(false); // Temp
+            selectedLane.SetActive(false);
         }
     }
 
@@ -222,6 +372,9 @@ public class ElementalStormManager : MonoBehaviour
     {
         // Init objects
         //ReloadCharacter();
+
+        // Set difficulty
+        CurrentDifficulty = ExtremeDifficulty;
 
         // Start hazard spawner
         coroutine = UIFlashWarnings();
